@@ -524,11 +524,12 @@
   #fileList li {
     margin: 5px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     background: #fff;
     padding: 5px 10px;
     border-radius: 5px;
+    gap: 10px;
   }
 
   .btn {
@@ -545,7 +546,10 @@
 
   .publish-btn {
     background-color: #2ecc71;
-    margin-left: 10px;
+  }
+
+  .download-btn {
+    background-color: #3498db;
   }
 </style>
 
@@ -556,16 +560,34 @@
 
   fileInput.addEventListener('change', () => {
     for (let i = 0; i < fileInput.files.length; i++) {
-      filesArray.push(fileInput.files[i]);
+      filesArray.push({ file: fileInput.files[i], published: false });
     }
     renderFiles();
   });
 
   function renderFiles() {
     fileList.innerHTML = '';
-    filesArray.forEach((file, index) => {
+    filesArray.forEach((item, index) => {
       const li = document.createElement('li');
-      li.textContent = file.name;
+      li.textContent = item.file.name;
+
+      if (!item.published) {
+        const publishBtn = document.createElement('button');
+        publishBtn.textContent = 'Publier';
+        publishBtn.className = 'btn publish-btn';
+        publishBtn.onclick = () => {
+          item.published = true;
+          renderFiles();
+        };
+        li.appendChild(publishBtn);
+      } else {
+        const downloadBtn = document.createElement('a');
+        downloadBtn.textContent = 'Télécharger';
+        downloadBtn.className = 'btn download-btn';
+        downloadBtn.href = URL.createObjectURL(item.file);
+        downloadBtn.download = item.file.name;
+        li.appendChild(downloadBtn);
+      }
 
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'Supprimer';
@@ -574,16 +596,8 @@
         filesArray.splice(index, 1);
         renderFiles();
       };
-
-      const publishBtn = document.createElement('button');
-      publishBtn.textContent = 'Publier';
-      publishBtn.className = 'btn publish-btn';
-      publishBtn.onclick = () => {
-        alert(`Fichier "${file.name}" publié !`);
-      };
-
-      li.appendChild(publishBtn);
       li.appendChild(deleteBtn);
+
       fileList.appendChild(li);
     });
   }
@@ -862,6 +876,7 @@
     </script>
 </body>
 </html>
+
 
 
 
