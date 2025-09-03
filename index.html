@@ -523,21 +523,70 @@
 
   #fileList li {
     margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .delete-btn {
+    background-color: #e74c3c;
+  }
+
+  .publish-btn {
+    background-color: #2ecc71;
+    margin-left: 10px;
   }
 </style>
 
 <script>
   const fileInput = document.getElementById('fileInput');
   const fileList = document.getElementById('fileList');
+  let filesArray = [];
 
   fileInput.addEventListener('change', () => {
-    fileList.innerHTML = '';
     for (let i = 0; i < fileInput.files.length; i++) {
-      const li = document.createElement('li');
-      li.textContent = fileInput.files[i].name;
-      fileList.appendChild(li);
+      filesArray.push(fileInput.files[i]);
     }
+    renderFiles();
   });
+
+  function renderFiles() {
+    fileList.innerHTML = '';
+    filesArray.forEach((file, index) => {
+      const li = document.createElement('li');
+      li.textContent = file.name;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Supprimer';
+      deleteBtn.className = 'btn delete-btn';
+      deleteBtn.onclick = () => {
+        filesArray.splice(index, 1);
+        renderFiles();
+      };
+
+      const publishBtn = document.createElement('button');
+      publishBtn.textContent = 'Publier';
+      publishBtn.className = 'btn publish-btn';
+      publishBtn.onclick = () => {
+        alert(`Fichier "${file.name}" publié !`);
+      };
+
+      li.appendChild(publishBtn);
+      li.appendChild(deleteBtn);
+      fileList.appendChild(li);
+    });
+  }
 </script>
 
     <!-- Projects Section -->
@@ -813,6 +862,7 @@
     </script>
 </body>
 </html>
+
 
 
 
