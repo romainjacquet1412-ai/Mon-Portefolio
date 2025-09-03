@@ -494,62 +494,45 @@
         </div>
     </section>
 
-    <!-- Compte rendu Section simple -->
+   <!-- Compte rendu Section simple -->
 <section id="compte-rendu" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="section-title mb-4">Compte rendu</h2>
+  <div class="container">
+    <h2 class="section-title mb-4">Compte rendu</h2>
 
-        <?php
-        // Mot de passe admin
-        $adminPassword = "monSuperMotDePasse"; // 🔑 à changer
-        session_start();
+    <p>Seul l’administrateur peut ajouter ou supprimer des fichiers en modifiant le tableau ci-dessous dans le code.</p>
 
-        // Connexion admin
-        if (isset($_POST['password']) && $_POST['password'] === $adminPassword) {
-            $_SESSION['isAdmin'] = true;
-        }
-        $isAdmin = isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === true;
+    <ul id="fileList" class="list-group mb-4"></ul>
+  </div>
+</section>
 
-        // Upload fichier
-        if ($isAdmin && isset($_FILES['file'])) {
-            $dir = __DIR__ . "/fichiers/";
-            if (!is_dir($dir)) mkdir($dir, 0755, true);
+<script>
+  // === Tableau des fichiers à télécharger ===
+  // Pour ajouter un fichier, copie-colle un objet {name: "Nom du fichier", url: "Lien direct de téléchargement"}
+  const files = [
+    { name: "Compte_Rendu_Stage.pdf", url: "https://drive.google.com/uc?export=download&id=TON_ID_DRIVE" },
+    { name: "Projet_VLAN.docx", url: "https://drive.google.com/uc?export=download&id=TON_ID_DRIVE" }
+  ];
 
-            $file = basename($_FILES["file"]["name"]);
-            move_uploaded_file($_FILES["file"]["tmp_name"], $dir . $file);
-        }
+  const fileList = document.getElementById("fileList");
 
-        // Supprimer fichier
-        if ($isAdmin && isset($_GET['delete'])) {
-            $fileDel = __DIR__ . "/fichiers/" . basename($_GET['delete']);
-            if (file_exists($fileDel)) unlink($fileDel);
-            header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
-            exit;
-        }
-        ?>
+  files.forEach(file => {
+    const li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between align-items-center";
 
-        <?php if ($isAdmin): ?>
-            <!-- Upload Form simple -->
-            <form action="" method="post" enctype="multipart/form-data" class="mb-3 d-flex gap-2">
-                <input type="file" name="file" class="form-control" required>
-                <button type="submit" class="btn btn-success">Déposer</button>
-            </form>
-        <?php else: ?>
-            <!-- Login simple -->
-            <form method="post" class="mb-3 d-flex gap-2">
-                <input type="password" name="password" class="form-control" placeholder="Mot de passe admin" required>
-                <button type="submit" class="btn btn-primary">Connexion</button>
-            </form>
-        <?php endif; ?>
+    const span = document.createElement("span");
+    span.textContent = file.name;
 
-        <!-- Liste fichiers -->
-        <ul class="list-group">
-            <?php
-            $dir = __DIR__ . "/fichiers/";
-            if (is_dir($dir)) {
-                $files = array_diff(scandir($dir), ['.','..']);
-                foreach ($files as $f): ?>
+    const link = document.createElement("a");
+    link.href = file.url;
+    link.className = "btn btn-primary btn-sm";
+    link.textContent = "Télécharger";
+    link.target = "_blank";
 
+    li.appendChild(span);
+    li.appendChild(link);
+    fileList.appendChild(li);
+  });
+</script>
 
 
     <!-- Projects Section -->
@@ -825,5 +808,6 @@
     </script>
 </body>
 </html>
+
 
 
