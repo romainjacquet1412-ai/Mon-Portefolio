@@ -527,19 +527,22 @@
 </style>
 
 <script>
-const PASSWORD = "Poligny21"; 
+const PASSWORD = "Poligny21";
 const passwordInput = document.getElementById('passwordInput');
 const loginBtn = document.getElementById('loginBtn');
 const adminPanel = document.getElementById('adminPanel');
 const fileInput = document.getElementById('fileInput');
 const fileList = document.getElementById('fileList');
 
+let isAdmin = false;
 let filesArray = JSON.parse(localStorage.getItem('compteRenduFiles')) || [];
 
 loginBtn.addEventListener('click', () => {
   if(passwordInput.value === PASSWORD){
+    isAdmin = true;
     adminPanel.style.display = 'block';
     document.getElementById('auth').style.display = 'none';
+    renderFiles();
   } else {
     alert("Mot de passe incorrect");
   }
@@ -564,33 +567,33 @@ function saveAndRender(){
 }
 
 function renderFiles(){
-  fileList.innerHTML='';
+  fileList.innerHTML = '';
   filesArray.forEach((item,index)=>{
-    const li=document.createElement('li');
-    li.textContent=item.name;
+    const li = document.createElement('li');
+    li.textContent = item.name;
 
     if(item.published){
-      const downloadBtn=document.createElement('a');
-      downloadBtn.textContent='Télécharger';
-      downloadBtn.className='btn download-btn';
-      downloadBtn.href=item.data;
-      downloadBtn.download=item.name;
+      const downloadBtn = document.createElement('a');
+      downloadBtn.textContent = 'Télécharger';
+      downloadBtn.className = 'btn download-btn';
+      downloadBtn.href = item.data;
+      downloadBtn.download = item.name;
       li.appendChild(downloadBtn);
     }
 
-    if(adminPanel.style.display==='block'){
+    if(isAdmin){
       if(!item.published){
-        const publishBtn=document.createElement('button');
-        publishBtn.textContent='Publier';
-        publishBtn.className='btn publish-btn';
-        publishBtn.onclick=()=>{ item.published=true; saveAndRender(); };
+        const publishBtn = document.createElement('button');
+        publishBtn.textContent = 'Publier';
+        publishBtn.className = 'btn publish-btn';
+        publishBtn.onclick = () => { item.published = true; saveAndRender(); };
         li.appendChild(publishBtn);
       }
 
-      const deleteBtn=document.createElement('button');
-      deleteBtn.textContent='Supprimer';
-      deleteBtn.className='btn delete-btn';
-      deleteBtn.onclick=()=>{ filesArray.splice(index,1); saveAndRender(); };
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Supprimer';
+      deleteBtn.className = 'btn delete-btn';
+      deleteBtn.onclick = () => { filesArray.splice(index,1); saveAndRender(); };
       li.appendChild(deleteBtn);
     }
 
@@ -874,6 +877,7 @@ renderFiles();
     </script>
 </body>
 </html>
+
 
 
 
