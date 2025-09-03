@@ -492,9 +492,60 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section
 
- 
+        <!-- Compte Rendu Section -->
+<section id="reports" class="reports">
+    <div class="container">
+        <h2 class="section-title">Compte rendu</h2>
+
+        <?php
+        // --- Paramètres ---
+        $uploadsDir = "uploads/";
+        if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0755);
+
+        // --- Dépôt de fichier (visible seulement pour admin) ---
+        if (isset($_GET['admin']) && $_GET['admin'] === 'true' && isset($_FILES['reportFile'])) {
+            $targetFile = $uploadsDir . basename($_FILES["reportFile"]["name"]);
+            if (move_uploaded_file($_FILES["reportFile"]["tmp_name"], $targetFile)) {
+                echo "<div class='alert alert-success'>Fichier uploadé avec succès !</div>";
+            } else {
+                echo "<div class='alert alert-danger'>Erreur lors de l'upload du fichier.</div>";
+            }
+        }
+
+        // --- Suppression de fichier (admin seulement) ---
+        if (isset($_GET['admin']) && $_GET['admin'] === 'true' && isset($_GET['delete'])) {
+            $fileToDelete = $uploadsDir . basename($_GET['delete']);
+            if (file_exists($fileToDelete)) unlink($fileToDelete);
+        }
+
+        // --- Formulaire upload (admin) ---
+        if (isset($_GET['admin']) && $_GET['admin'] === 'true') {
+            echo '
+            <form action="" method="post" enctype="multipart/form-data" class="mb-4">
+                <input type="file" name="reportFile" required>
+                <button type="submit" class="btn btn-download">Déposer le fichier</button>
+            </form>
+            ';
+        }
+
+        // --- Liste des fichiers ---
+        echo "<ul>";
+        $files = glob($uploadsDir . "*");
+        foreach ($files as $file) {
+            $fileName = basename($file);
+            echo "<li>";
+            echo "<a href='$file' download>$fileName</a>";
+            if (isset($_GET['admin']) && $_GET['admin'] === 'true') {
+                echo " <a href='?admin=true&delete=$fileName' class='btn btn-sm btn-outline-danger'>Supprimer</a>";
+            }
+            echo "</li>";
+        }
+        echo "</ul>";
+        ?>
+    </div>
+</section>
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
@@ -769,6 +820,7 @@
     </script>
 </body>
 </html>
+
 
 
 
