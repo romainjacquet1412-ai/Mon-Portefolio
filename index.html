@@ -183,6 +183,27 @@
             padding: 20px;
         }
         
+        /* Compte Rendu Section */
+        .compterendu {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+
+        #uploadForm {
+            background-color: #fff;
+            border-radius: 15px;
+        }
+
+        #uploadedFiles li {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: #f1f3f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         /* Experience Section */
         .experience {
             padding: 100px 0;
@@ -370,24 +391,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">À propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills">Compétences</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#experience">Expérience</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#compterendu">Compte rendu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Expérience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -452,42 +462,22 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Application des procédures</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%"></div>
-                        </div>
+                        <div class="skill-info"><span>Application des procédures</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Adaptation</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%"></div>
-                        </div>
+                        <div class="skill-info"><span>Adaptation</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Organisation</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80%"></div>
-                        </div>
+                        <div class="skill-info"><span>Organisation</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Autonomie</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%"></div>
-                        </div>
+                        <div class="skill-info"><span>Autonomie</span><span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
                     </div>
                 </div>
             </div>
@@ -513,10 +503,10 @@
                 <!-- Project 2 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Préparation de poste" class="project-img img-fluid">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Migration PC" class="project-img img-fluid">
                         <div class="project-content">
-                            <h4>Préparation de poste</h4>
-                            <p>Préparation et configuration de postes informatiques lors de mon stage chez ACI.</p>
+                            <h4>Migration PC</h4>
+                            <p>Préparation et migration de postes sous Windows 7 vers Windows 10 chez Arcelor Mittal à Saint-Chély.</p>
                             <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#projectModal2">Voir plus</button>
                         </div>
                     </div>
@@ -524,12 +514,36 @@
                 <!-- Project 3 -->
                 <div class="col-md-6 col-lg-4">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Maintenance informatique" class="project-img img-fluid">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Création de PC Bureautique" class="project-img img-fluid">
                         <div class="project-content">
-                            <h4>Maintenance informatique</h4>
-                            <p>Maintenance et dépannage informatique lors de mes stages chez ACI et Sun Valley Systems.</p>
+                            <h4>Création de PC Bureautique</h4>
+                            <p>Assemblage et configuration de postes de travail bureautiques à partir de composants neufs.</p>
                             <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#projectModal3">Voir plus</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compte Rendu Section -->
+    <section id="compterendu" class="compterendu">
+        <div class="container">
+            <h2 class="section-title">Compte rendu</h2>
+            <p class="text-center mb-5">Déposez vos cours et documents directement ici.</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!-- Upload Form -->
+                    <form id="uploadForm" class="text-center p-4 border rounded shadow-sm bg-white">
+                        <input type="file" id="fileInput" class="form-control mb-3" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" required>
+                        <button type="submit" class="btn btn-download">Déposer le fichier</button>
+                    </form>
+
+                    <!-- Uploaded Files List -->
+                    <div id="fileList" class="mt-4">
+                        <h5 class="mb-3">Mes documents déposés :</h5>
+                        <ul class="list-group" id="uploadedFiles"></ul>
                     </div>
                 </div>
             </div>
@@ -541,44 +555,25 @@
         <div class="container">
             <h2 class="section-title">Mon expérience</h2>
             <div class="timeline">
-                <!-- Experience 1 -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h4>Lycée Saint Joseph - Gap</h4>
-                        <p class="text-primary">Décembre 2024</p>
-                        <p>Création de VLANs sur Switch (Tagged-Untagged)</p>
+                        <h4>Stage - Lycée Saint Joseph (Gap)</h4>
+                        <small>Novembre 2022</small>
+                        <p>Configuration de VLANs et maintenance informatique sur le réseau du lycée.</p>
                     </div>
                 </div>
-                <!-- Experience 2 -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <h4>ACI - Gap</h4>
-                        <p class="text-primary">Septembre - Octobre 2024</p>
-                        <p>Préparation de poste (PC), Réseau Téléphonie</p>
+                        <h4>Stage - Arcelor Mittal (Saint-Chély)</h4>
+                        <small>Janvier 2023</small>
+                        <p>Migration de postes Windows 7 vers Windows 10 et assistance aux utilisateurs.</p>
                     </div>
                 </div>
-                <!-- Experience 3 -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h4>ACI - Gap</h4>
-                        <p class="text-primary">Juin - Juillet 2024</p>
-                        <p>Maintenance informatique, Réseau, Téléphonie, Dépannage à domicile</p>
-                    </div>
-                </div>
-                <!-- Experience 4 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h4>Sun Valley Systems - Gap</h4>
-                        <p class="text-primary">Mai - Juin 2023 & Septembre - Octobre 2023</p>
-                        <p>Maintenance informatique, Soudure à l'étain sur composant informatique</p>
-                    </div>
-                </div>
-                <!-- Experience 5 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h4>In Store Solutions</h4>
-                        <p class="text-primary">Décembre 2021</p>
-                        <p>Stage d'observation de 3ème: Programmation</p>
+                        <h4>Stage - Entreprise locale</h4>
+                        <small>Mars 2023</small>
+                        <p>Assemblage et configuration de postes de travail bureautiques.</p>
                     </div>
                 </div>
             </div>
@@ -590,180 +585,85 @@
         <div class="container">
             <h2 class="section-title">Contactez-moi</h2>
             <div class="row">
-                <div class="col-lg-5">
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone contact-icon"></i> 06.31.57.22.39</p>
-                        <p><i class="fas fa-envelope contact-icon"></i> romain.jacquet1412@orange.fr</p>
-                        <p><i class="fas fa-map-marker-alt contact-icon"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</p>
-                    </div>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+                <div class="col-md-4 contact-info">
+                    <p><i class="fas fa-envelope contact-icon"></i> romain.jacquet1412@orange.fr</p>
                 </div>
-                <div class="col-lg-7">
-                    <form id="contactForm">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Votre nom" required>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" placeholder="Votre email" required>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Sujet" required>
-                        <textarea class="form-control" rows="5" placeholder="Votre message" required></textarea>
-                        <button type="submit" class="btn btn-download">Envoyer le message</button>
-                    </form>
+                <div class="col-md-4 contact-info">
+                    <p><i class="fas fa-phone contact-icon"></i> 06.31.57.22.39</p>
+                </div>
+                <div class="col-md-4 contact-info">
+                    <p><i class="fas fa-map-marker-alt contact-icon"></i> Poligny, 05500</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container text-center">
+    <footer class="text-center">
+        <div class="container">
             <div class="social-icons">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
-            <p>&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
+            <p>&copy; 2024 Romain Jacquet. Tous droits réservés.</p>
         </div>
     </footer>
 
-    <!-- Project Modals -->
-    <!-- Modal 1 -->
-    <div class="modal fade" id="projectModal1" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Création de VLAN</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1563207153-f403bf289096?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" class="img-fluid mb-4" alt="Création de VLAN">
-                    <p>Lors de mon stage au Lycée Saint Joseph à Gap en décembre 2024, j'ai travaillé sur la création et la configuration de VLANs sur des switches réseau.</p>
-                    <p>Mes responsabilités comprenaient :</p>
-                    <ul>
-                        <li>Configuration de VLANs tagged et untagged</li>
-                        <li>Gestion des priorités de trafic</li>
-                        <li>Test et validation de la connectivité entre VLANs</li>
-                        <li>Documentation des configurations mises en place</li>
-                    </ul>
-                    <p>Ce projet m'a permis de développer mes compétences en réseaux et en gestion de configurations complexes.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 2 -->
-    <div class="modal fade" id="projectModal2" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Préparation de poste</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Préparation de poste">
-                    <p>Durant mon stage chez ACI à Gap en septembre-octobre 2024, j'ai été responsable de la préparation et de la configuration de postes informatiques.</p>
-                    <p>Mes missions comprenaient :</p>
-                    <ul>
-                        <li>Installation et configuration de systèmes d'exploitation</li>
-                        <li>Installation de logiciels et applications nécessaires</li>
-                        <li>Configuration réseau et téléphonie IP</li>
-                        <li>Tests de fonctionnement et résolution des problèmes</li>
-                        <li>Préparation de documentation utilisateur</li>
-                    </ul>
-                    <p>Cette expérience m'a permis d'approfondir mes connaissances en administration système et en support utilisateur.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 3 -->
-    <div class="modal fade" id="projectModal3" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Maintenance informatique</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Maintenance informatique">
-                    <p>Lors de mes stages chez ACI et Sun Valley Systems à Gap, j'ai effectué diverses missions de maintenance informatique.</p>
-                    <p>Mes activités comprenaient :</p>
-                    <ul>
-                        <li>Diagnostic et résolution de pannes matérielles et logicielles</li>
-                        <li>Maintenance préventive et corrective sur équipements informatiques</li>
-                        <li>Réparation par soudure de composants électroniques</li>
-                        <li>Dépannage à domicile pour les clients particuliers</li>
-                        <li>Gestion de parc informatique et inventaire</li>
-                    </ul>
-                    <p>Ces expériences m'ont permis de développer une solide expertise technique et un bon relationnel client.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap & JavaScript -->
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Animation for skill bars
+        // Animation des barres de compétences
         document.addEventListener('DOMContentLoaded', function() {
-            const skillBars = document.querySelectorAll('.skill-progress');
-            
-            // Function to animate skill bars when they come into view
-            function animateSkillBars() {
-                skillBars.forEach(bar => {
-                    const rect = bar.getBoundingClientRect();
-                    const isInViewport = rect.top <= (window.innerHeight || document.documentElement.clientHeight) && 
-                                        rect.bottom >= 0;
-                    
-                    if (isInViewport) {
-                        bar.style.width = bar.getAttribute('data-width');
-                    }
-                });
-            }
-            
-            // Initial check and then on scroll
-            animateSkillBars();
-            window.addEventListener('scroll', animateSkillBars);
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a.nav-link').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // CV Download functionality
-            document.getElementById('downloadCV').addEventListener('click', function() {
-                // Create a temporary link element
-                const link = document.createElement('a');
-                link.href = 'CV Rom.pdf'; // This should point to your actual CV file
-                link.download = 'CV_Romain_Jacquet.pdf';
-                
-                // Simulate click to trigger download
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
-            
-            // Form submission
-            document.getElementById('contactForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Merci pour votre message ! Je vous répondrai très rapidement.');
-                this.reset();
+            const skillProgress = document.querySelectorAll('.skill-progress');
+            skillProgress.forEach(skill => {
+                skill.style.width = skill.getAttribute('data-width');
             });
         });
+
+        // Gestion du téléchargement du CV
+        document.getElementById('downloadCV').addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.href = 'cv_romain_jacquet.pdf'; // Mets le bon chemin vers ton CV
+            link.download = 'CV_Romain_Jacquet.pdf';
+            link.click();
+        });
+
+        // Gestion de l'upload Compte Rendu (localStorage simulation)
+        const uploadForm = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+        const uploadedFilesList = document.getElementById('uploadedFiles');
+
+        function loadFiles() {
+            const files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            uploadedFilesList.innerHTML = '';
+            files.forEach((file, index) => {
+                const li = document.createElement('li');
+                li.classList.add('list-group-item');
+                li.innerHTML = `
+                    <span><i class="fas fa-file-alt me-2"></i>${file.name}</span>
+                    <a href="${file.url}" download="${file.name}" class="btn btn-sm btn-outline-primary">Télécharger</a>
+                `;
+                uploadedFilesList.appendChild(li);
+            });
+        }
+
+        uploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    let files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+                    files.push({ name: file.name, url: event.target.result });
+                    localStorage.setItem('uploadedFiles', JSON.stringify(files));
+                    loadFiles();
+                    fileInput.value = '';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', loadFiles);
     </script>
 </body>
 </html>
