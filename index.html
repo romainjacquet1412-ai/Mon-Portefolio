@@ -443,7 +443,74 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section
+
+        // CompteRendu.js
+import { useState, useEffect } from "react";
+
+// Section front-end
+export default function CompteRendu() {
+  const [files, setFiles] = useState([]);
+  const [fileToUpload, setFileToUpload] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false); // à adapter avec Netlify Identity
+
+  // Récupérer la liste des fichiers
+  useEffect(() => {
+    fetch("/.netlify/functions/compte-rendu?action=list")
+      .then(res => res.json())
+      .then(data => setFiles(data.files));
+  }, []);
+
+  const handleUpload = async () => {
+    if (!fileToUpload) return;
+    const formData = new FormData();
+    formData.append("file", fileToUpload);
+
+    await fetch("/.netlify/functions/compte-rendu?action=upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const res = await fetch("/.netlify/functions/compte-rendu?action=list");
+    const data = await res.json();
+    setFiles(data.files);
+  };
+
+  const handleDelete = async (filename) => {
+    await fetch("/.netlify/functions/compte-rendu?action=delete&filename=" + filename, {
+      method: "DELETE",
+    });
+    setFiles(files.filter(f => f !== filename));
+  };
+
+  return (
+    <div className="compte-rendu">
+      <h2>Compte Rendu</h2>
+
+      {isAdmin && (
+        <div>
+          <input type="file" onChange={e => setFileToUpload(e.target.files[0])} />
+          <button onClick={handleUpload}>Uploader</button>
+        </div>
+      )}
+
+      <ul>
+        {files.map(file => (
+          <li key={file}>
+            <a
+              href={`/.netlify/functions/compte-rendu?action=download&filename=${file}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {file}
+            </a>
+            {isAdmin && <button onClick={() => handleDelete(file)}>Supprimer</button>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
     <!-- Skills Section -->
     <section id="skills" class="skills">
@@ -769,6 +836,7 @@
     </script>
 </body>
 </html>
+
 
 
 
