@@ -445,45 +445,7 @@
             </div>
         </div>
     </section
-
-<!-- Authentification simple -->
-<div id="auth-section">
-  <h3>Connexion</h3>
-  <input type="password" id="password" placeholder="Mot de passe">
-  <button onclick="checkPassword()">Se connecter</button>
-  <p id="auth-msg" style="color:red;"></p>
-</div>
-
-<script>
-  const PASSWORD = "monmotdepasse"; // change-le par ton mot de passe
-
-  function checkPassword() {
-    const input = document.getElementById("password").value;
-    if(input === PASSWORD) {
-      document.getElementById("auth-section").style.display = "none";
-      document.getElementById("compte-rendu").style.display = "block";
-    } else {
-      document.getElementById("auth-msg").innerText = "Mot de passe incorrect!";
-    }
-  }
-
-  function uploadCours() {
-    const files = document.getElementById("cours-file").files;
-    const status = document.getElementById("upload-status");
-
-    if(files.length === 0) {
-      status.innerText = "Veuillez sélectionner un fichier.";
-      return;
-    }
-
-    // Ici tu peux intégrer l'upload vers Netlify Functions ou GitHub
-    // Exemple simplifié :
-    Array.from(files).forEach(file => {
-      status.innerText = `Fichier ${file.name} prêt à être uploadé (à compléter côté serveur).`;
-    });
-  }
-</script>
-
+        
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
@@ -806,6 +768,7 @@
     </script>
 </body>
 </html>
+
 
 
 
