@@ -495,6 +495,75 @@
         </div>
     </section
 
+        <section id="compte-rendu">
+  <h2>Compte Rendu</h2>
+  <input type="file" id="fileInput" multiple>
+  <ul id="fileList"></ul>
+  <div class="file-links">
+    <a href="https://github.com/votre-utilisateur/votre-repo" target="_blank" class="btn">Voir sur GitHub</a>
+    <a href="https://votre-site.netlify.app" target="_blank" class="btn">Voir sur Netlify</a>
+  </div>
+</section>
+
+<style>
+  #compte-rendu {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  #compte-rendu h2 {
+    margin-bottom: 10px;
+  }
+
+  .file-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #005bb5;
+  }
+
+  #fileList {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+  }
+
+  #fileList li {
+    margin: 5px 0;
+  }
+</style>
+
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const fileList = document.getElementById('fileList');
+
+  fileInput.addEventListener('change', () => {
+    fileList.innerHTML = '';
+    for (let i = 0; i < fileInput.files.length; i++) {
+      const li = document.createElement('li');
+      li.textContent = fileInput.files[i].name;
+      fileList.appendChild(li);
+    }
+  });
+</script>
+
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
@@ -768,6 +837,7 @@
     </script>
 </body>
 </html>
+
 
 
 
