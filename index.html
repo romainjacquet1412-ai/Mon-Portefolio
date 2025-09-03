@@ -497,7 +497,16 @@
 
         <section id="compte-rendu">
   <h2>Compte Rendu</h2>
-  <input type="file" id="fileInput" multiple>
+
+  <div id="auth">
+    <input type="password" id="passwordInput" placeholder="Mot de passe admin">
+    <button id="loginBtn">Se connecter</button>
+  </div>
+
+  <div id="adminPanel" style="display:none;">
+    <input type="file" id="fileInput" multiple>
+  </div>
+
   <div id="folder">
     <h3>Dossier: Compte Rendu</h3>
     <ul id="fileList"></ul>
@@ -505,125 +514,91 @@
 </section>
 
 <style>
-  #compte-rendu {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: 20px auto;
-  }
-
-  #compte-rendu h2 {
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  #folder {
-    border: 2px solid #ccc;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-  }
-
-  #folder h3 {
-    margin-top: 0;
-    text-align: center;
-  }
-
-  #fileList {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-  }
-
-  #fileList li {
-    margin: 5px 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    gap: 10px;
-  }
-
-  .btn {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-  }
-
-  .delete-btn { background-color: #e74c3c; }
-  .publish-btn { background-color: #2ecc71; }
-  .download-btn { background-color: #3498db; }
+#compte-rendu { padding:20px; max-width:600px; margin:20px auto; background:#f9f9f9; border-radius:10px; }
+#compte-rendu h2 { text-align:center; }
+#folder { border:2px solid #ccc; padding:15px; border-radius:10px; background:#f0f0f0; }
+#folder h3 { text-align:center; margin-top:0; }
+#fileList { list-style:none; padding:0; margin-top:10px; }
+#fileList li { display:flex; align-items:center; justify-content:flex-start; background:#fff; padding:5px 10px; border-radius:5px; gap:10px; margin:5px 0; }
+.btn { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; color:white; }
+.delete-btn { background-color:#e74c3c; }
+.publish-btn { background-color:#2ecc71; }
+.download-btn { background-color:#3498db; }
 </style>
 
 <script>
-  const fileInput = document.getElementById('fileInput');
-  const fileList = document.getElementById('fileList');
+const PASSWORD = "Poligny21"; 
+const passwordInput = document.getElementById('passwordInput');
+const loginBtn = document.getElementById('loginBtn');
+const adminPanel = document.getElementById('adminPanel');
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
 
-  let filesArray = JSON.parse(localStorage.getItem('compteRenduFiles')) || [];
+let filesArray = JSON.parse(localStorage.getItem('compteRenduFiles')) || [];
 
-  fileInput.addEventListener('change', () => {
-    const files = Array.from(fileInput.files);
-    const readers = files.map(file => {
-      return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = () => resolve({ name: file.name, data: reader.result, published: false });
-        reader.readAsDataURL(file);
-      });
-    });
-    Promise.all(readers).then(results => {
-      filesArray = filesArray.concat(results);
-      saveAndRender();
-    });
-  });
-
-  function saveAndRender() {
-    localStorage.setItem('compteRenduFiles', JSON.stringify(filesArray));
-    renderFiles();
+loginBtn.addEventListener('click', () => {
+  if(passwordInput.value === PASSWORD){
+    adminPanel.style.display = 'block';
+    document.getElementById('auth').style.display = 'none';
+  } else {
+    alert("Mot de passe incorrect");
   }
+});
 
-  function renderFiles() {
-    fileList.innerHTML = '';
-    filesArray.forEach((item, index) => {
-      const li = document.createElement('li');
-      li.textContent = item.name;
+fileInput.addEventListener('change', () => {
+  const files = Array.from(fileInput.files);
+  const readers = files.map(file => new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({ name:file.name, data:reader.result, published:false });
+    reader.readAsDataURL(file);
+  }));
+  Promise.all(readers).then(results => {
+    filesArray = filesArray.concat(results);
+    saveAndRender();
+  });
+});
 
-      if (!item.published) {
-        const publishBtn = document.createElement('button');
-        publishBtn.textContent = 'Publier';
-        publishBtn.className = 'btn publish-btn';
-        publishBtn.onclick = () => {
-          item.published = true;
-          saveAndRender();
-        };
+function saveAndRender(){
+  localStorage.setItem('compteRenduFiles', JSON.stringify(filesArray));
+  renderFiles();
+}
+
+function renderFiles(){
+  fileList.innerHTML='';
+  filesArray.forEach((item,index)=>{
+    const li=document.createElement('li');
+    li.textContent=item.name;
+
+    if(item.published){
+      const downloadBtn=document.createElement('a');
+      downloadBtn.textContent='Télécharger';
+      downloadBtn.className='btn download-btn';
+      downloadBtn.href=item.data;
+      downloadBtn.download=item.name;
+      li.appendChild(downloadBtn);
+    }
+
+    if(adminPanel.style.display==='block'){
+      if(!item.published){
+        const publishBtn=document.createElement('button');
+        publishBtn.textContent='Publier';
+        publishBtn.className='btn publish-btn';
+        publishBtn.onclick=()=>{ item.published=true; saveAndRender(); };
         li.appendChild(publishBtn);
-      } else {
-        const downloadBtn = document.createElement('a');
-        downloadBtn.textContent = 'Télécharger';
-        downloadBtn.className = 'btn download-btn';
-        downloadBtn.href = item.data;
-        downloadBtn.download = item.name;
-        li.appendChild(downloadBtn);
       }
 
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Supprimer';
-      deleteBtn.className = 'btn delete-btn';
-      deleteBtn.onclick = () => {
-        filesArray.splice(index, 1);
-        saveAndRender();
-      };
-
+      const deleteBtn=document.createElement('button');
+      deleteBtn.textContent='Supprimer';
+      deleteBtn.className='btn delete-btn';
+      deleteBtn.onclick=()=>{ filesArray.splice(index,1); saveAndRender(); };
       li.appendChild(deleteBtn);
-      fileList.appendChild(li);
-    });
-  }
+    }
 
-  renderFiles();
+    fileList.appendChild(li);
+  });
+}
+
+renderFiles();
 </script>
 
     <!-- Projects Section -->
@@ -899,6 +874,7 @@
     </script>
 </body>
 </html>
+
 
 
 
