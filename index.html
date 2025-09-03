@@ -500,11 +500,10 @@
         <h2 class="section-title">Compte rendu</h2>
 
         <?php
-        // --- Paramètres ---
         $uploadsDir = "uploads/";
         if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0755);
 
-        // --- Dépôt de fichier (visible seulement pour admin) ---
+        // --- Dépôt de fichier ---
         if (isset($_GET['admin']) && $_GET['admin'] === 'true' && isset($_FILES['reportFile'])) {
             $targetFile = $uploadsDir . basename($_FILES["reportFile"]["name"]);
             if (move_uploaded_file($_FILES["reportFile"]["tmp_name"], $targetFile)) {
@@ -514,13 +513,13 @@
             }
         }
 
-        // --- Suppression de fichier (admin seulement) ---
+        // --- Suppression de fichier ---
         if (isset($_GET['admin']) && $_GET['admin'] === 'true' && isset($_GET['delete'])) {
             $fileToDelete = $uploadsDir . basename($_GET['delete']);
             if (file_exists($fileToDelete)) unlink($fileToDelete);
         }
 
-        // --- Formulaire upload (admin) ---
+        // --- Formulaire upload (admin seulement) ---
         if (isset($_GET['admin']) && $_GET['admin'] === 'true') {
             echo '
             <form action="" method="post" enctype="multipart/form-data" class="mb-4">
@@ -531,11 +530,11 @@
         }
 
         // --- Liste des fichiers ---
-        echo "<ul>";
+        echo "<ul class='list-unstyled'>";
         $files = glob($uploadsDir . "*");
         foreach ($files as $file) {
             $fileName = basename($file);
-            echo "<li>";
+            echo "<li class='mb-2'>";
             echo "<a href='$file' download>$fileName</a>";
             if (isset($_GET['admin']) && $_GET['admin'] === 'true') {
                 echo " <a href='?admin=true&delete=$fileName' class='btn btn-sm btn-outline-danger'>Supprimer</a>";
@@ -820,6 +819,7 @@
     </script>
 </body>
 </html>
+
 
 
 
