@@ -494,46 +494,7 @@
         </div>
     </section>
 
-   <!-- Compte rendu Section simple -->
-<section id="compte-rendu" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="section-title mb-4">Compte rendu</h2>
-
-    <p>Seul l’administrateur peut ajouter ou supprimer des fichiers en modifiant le tableau ci-dessous dans le code.</p>
-
-    <ul id="fileList" class="list-group mb-4"></ul>
-  </div>
-</section>
-
-<script>
-  // === Tableau des fichiers à télécharger ===
-  // Pour ajouter un fichier, copie-colle un objet {name: "Nom du fichier", url: "Lien direct de téléchargement"}
-  const files = [
-    { name: "Compte_Rendu_Stage.pdf", url: "https://drive.google.com/uc?export=download&id=TON_ID_DRIVE" },
-    { name: "Projet_VLAN.docx", url: "https://drive.google.com/uc?export=download&id=TON_ID_DRIVE" }
-  ];
-
-  const fileList = document.getElementById("fileList");
-
-  files.forEach(file => {
-    const li = document.createElement("li");
-    li.className = "list-group-item d-flex justify-content-between align-items-center";
-
-    const span = document.createElement("span");
-    span.textContent = file.name;
-
-    const link = document.createElement("a");
-    link.href = file.url;
-    link.className = "btn btn-primary btn-sm";
-    link.textContent = "Télécharger";
-    link.target = "_blank";
-
-    li.appendChild(span);
-    li.appendChild(link);
-    fileList.appendChild(li);
-  });
-</script>
-
+ 
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
@@ -808,6 +769,7 @@
     </script>
 </body>
 </html>
+
 
 
 
