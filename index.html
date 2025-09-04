@@ -75,13 +75,13 @@
         }
         
         .hero-img {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid var(--accent-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transform: rotate(90deg);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: rotate(90deg);
         }
         
         .btn-download {
@@ -272,6 +272,104 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
+        /* Compte Rendu Section */
+        .compte-rendu {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .compte-rendu-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .compte-rendu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .compte-rendu-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-color);
+        }
+        
+        .compte-rendu-content {
+            padding: 20px;
+        }
+        
+        .compte-rendu-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .compte-rendu-card p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .compte-rendu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .compte-rendu-btn:hover {
+            background: #2980b9;
+        }
+        
+        .file-info {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+        
+        /* Indication visuelle pour le téléchargement */
+        .download-indicator {
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .download-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: downloadShine 2s infinite;
+        }
+        
+        @keyframes downloadShine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
         /* Contact Section */
         .contact {
             padding: 100px 0;
@@ -358,6 +456,10 @@
             .right {
                 left: 0;
             }
+            
+            .compte-rendu-card {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -385,6 +487,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#experience">Expérience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#compte-rendu">Compte Rendu</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -444,7 +549,7 @@
                 </div>
             </div>
         </div>
-    </section
+    </section>
         
     <!-- Skills Section -->
     <section id="skills" class="skills">
@@ -493,174 +598,7 @@
                 </div>
             </div>
         </div>
-    </section
-
-        <section id="compte-rendu">
-  <h2>Compte Rendu</h2>
-
-  <div id="auth">
-    <input type="password" id="passwordInput" placeholder="Mot de passe admin">
-    <button id="loginBtn">Se connecter</button>
-  </div>
-
-  <div id="adminPanel" style="display:none;">
-    <input type="file" id="fileInput" multiple>
-  </div>
-
-  <div id="folder">
-    <h3>Dossier: Compte Rendu</h3>
-    <ul id="fileList"></ul>
-  </div>
-</section>
-
-<style>
-#compte-rendu { 
-  padding:20px; 
-  max-width:700px; 
-  margin:30px auto; 
-  background:#f9f9f9; 
-  border-radius:12px; 
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-  font-family: Arial, sans-serif;
-}
-
-#compte-rendu h2 { text-align:center; margin-bottom:20px; }
-
-#folder { 
-  max-width:600px;
-  margin:0 auto;
-  border:2px solid #007acc; 
-  padding:20px; 
-  border-radius:12px; 
-  background:#cce6ff; 
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-#folder h3 { text-align:center; margin-top:0; margin-bottom:15px; color:#003366; }
-
-#fileList { list-style:none; padding:0; margin-top:10px; }
-
-#fileList li { 
-  display:flex; 
-  align-items:center; 
-  justify-content:flex-start; 
-  background:#fff3c6; 
-  padding:8px 12px; 
-  border-radius:8px; 
-  gap:10px; 
-  margin:6px 0; 
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-#fileList li.published { background:#d4f4dd; }
-
-#fileList li:hover { 
-  transform: translateY(-2px); 
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
-
-.btn { 
-  padding:5px 12px; 
-  border:none; 
-  border-radius:6px; 
-  cursor:pointer; 
-  color:white; 
-  font-weight:bold; 
-  transition: background 0.2s; 
-}
-
-.delete-btn { background-color:#e74c3c; }
-.delete-btn:hover { background-color:#c0392b; }
-
-.publish-btn { background-color:#2ecc71; }
-.publish-btn:hover { background-color:#27ae60; }
-
-.download-btn { background-color:#3498db; }
-.download-btn:hover { background-color:#217dbb; }
-
-#auth input { padding:6px 10px; border-radius:6px; border:1px solid #ccc; margin-right:8px; }
-#auth button { padding:6px 12px; border-radius:6px; border:none; background:#0070f3; color:white; cursor:pointer; transition: background 0.2s; }
-#auth button:hover { background:#005bb5; }
-</style>
-
-<script>
-const PASSWORD = "Poligny21";
-const passwordInput = document.getElementById('passwordInput');
-const loginBtn = document.getElementById('loginBtn');
-const adminPanel = document.getElementById('adminPanel');
-const fileInput = document.getElementById('fileInput');
-const fileList = document.getElementById('fileList');
-
-let isAdmin = false;
-let filesArray = JSON.parse(localStorage.getItem('compteRenduFiles')) || [];
-
-loginBtn.addEventListener('click', () => {
-  if(passwordInput.value === PASSWORD){
-    isAdmin = true;
-    adminPanel.style.display = 'block';
-    document.getElementById('auth').style.display = 'none';
-    renderFiles();
-  } else {
-    alert("Mot de passe incorrect");
-  }
-});
-
-fileInput.addEventListener('change', () => {
-  const files = Array.from(fileInput.files);
-  const readers = files.map(file => new Promise(resolve => {
-    const reader = new FileReader();
-    reader.onload = () => resolve({ name:file.name, data:reader.result, published:false });
-    reader.readAsDataURL(file);
-  }));
-  Promise.all(readers).then(results => {
-    filesArray = filesArray.concat(results);
-    saveAndRender();
-  });
-});
-
-function saveAndRender(){
-  localStorage.setItem('compteRenduFiles', JSON.stringify(filesArray));
-  renderFiles();
-}
-
-function renderFiles(){
-  fileList.innerHTML = '';
-  filesArray.forEach((item,index)=>{
-    const li = document.createElement('li');
-    li.textContent = item.name;
-
-    if(item.published){
-      li.classList.add('published');
-      const downloadBtn = document.createElement('a');
-      downloadBtn.textContent = 'Télécharger';
-      downloadBtn.className = 'btn download-btn';
-      downloadBtn.href = item.data;
-      downloadBtn.download = item.name;
-      li.appendChild(downloadBtn);
-    }
-
-    if(isAdmin){
-      if(!item.published){
-        const publishBtn = document.createElement('button');
-        publishBtn.textContent = 'Publier';
-        publishBtn.className = 'btn publish-btn';
-        publishBtn.onclick = () => { item.published = true; saveAndRender(); };
-        li.appendChild(publishBtn);
-      }
-
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Supprimer';
-      deleteBtn.className = 'btn delete-btn';
-      deleteBtn.onclick = () => { filesArray.splice(index,1); saveAndRender(); };
-      li.appendChild(deleteBtn);
-    }
-
-    fileList.appendChild(li);
-  });
-}
-
-renderFiles();
-</script>
+    </section>
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
@@ -753,6 +691,62 @@ renderFiles();
         </div>
     </section>
 
+  <!-- Compte Rendu Section -->
+    <section id="compte-rendu" class="compte-rendu">
+        <div class="container">
+            <h2 class="section-title">Mes comptes rendus</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="compte-rendu-card">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="compte-rendu-img" alt="Compte rendu algorithmes">
+                        <div class="compte-rendu-content">
+                            <h3>Algorithmes</h3>
+                            <p>Apprentissage des concepts fondamentaux des algorithmes</p>
+                            <a class="download-indicator" href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
+                                <button class="compte-rendu-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 1.2 Mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="compte-rendu-card">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="compte-rendu-img" alt="Compte rendu réseaux">
+                        <div class="compte-rendu-content">
+                            <h3>Réseaux</h3>
+                            <p>Configuration d'un environnement réseau viable</p>
+                            <a class="download-indicator" href="documents/tp-reseaux.pdf" download>
+                                <button class="compte-rendu-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 0.9 Mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="compte-rendu-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" class="compte-rendu-img" alt="Compte rendu portfolio">
+                        <div class="compte-rendu-content">
+                            <h3>Portfolio</h3>
+                            <p>Création d'un portfolio professionnel</p>
+                            <a class="download-indicator" href="documents/tp-portfolio.pdf" download>
+                                <button class="compte-rendu-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 1.5 Mo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -798,6 +792,7 @@ renderFiles();
             <p>&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
         </div>
     </footer>
+
 
     <!-- Project Modals -->
     <!-- Modal 1 -->
@@ -935,32 +930,3 @@ renderFiles();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
