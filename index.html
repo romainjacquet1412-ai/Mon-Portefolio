@@ -272,69 +272,140 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* Compte Rendu Section */
+        /* Compte Rendu Section - MODIFIÉ */
         .compte-rendu {
             padding: 100px 0;
             background-color: var(--light-bg);
         }
         
-        .compte-rendu-card {
+        .teacher-section {
+            margin-bottom: 50px;
+        }
+        
+        .teacher-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
             background: white;
             border-radius: 12px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .compte-rendu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        .teacher-header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
-        .compte-rendu-img {
-            width: 100%;
-            height: 200px;
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             object-fit: cover;
-            border-bottom: 4px solid var(--primary-color);
+            margin-right: 20px;
+            border: 3px solid var(--primary-color);
         }
         
-        .compte-rendu-content {
-            padding: 20px;
+        .teacher-info {
+            flex-grow: 1;
         }
         
-        .compte-rendu-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+        .teacher-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
             color: var(--secondary-color);
         }
         
-        .compte-rendu-card p {
+        .teacher-subject {
             color: #7f8c8d;
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 10px;
         }
         
-        .compte-rendu-btn {
+        .consult-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .consult-btn:hover {
+            background: #2980b9;
+        }
+        
+        .documents-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .document-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .document-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .document-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .document-content {
+            padding: 15px;
+        }
+        
+        .document-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .document-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 12px;
+            padding: 8px;
             background: var(--primary-color);
             color: white;
             border: none;
             border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.9rem;
+            font-weight: 500;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         
-        .compte-rendu-btn:hover {
+        .download-btn:hover {
             background: #2980b9;
         }
         
@@ -457,8 +528,18 @@
                 left: 0;
             }
             
-            .compte-rendu-card {
-                max-width: 100%;
+            .teacher-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .teacher-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .documents-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -623,7 +704,7 @@
                         <div class="project-content">
                             <h4>Préparation de poste</h4>
                             <p>Préparation et configuration de postes informatiques lors de mon stage chez ACI.</p>
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#projectModal2">Voir plus</button>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#projectModal2">Voir mais</button>
                         </div>
                     </div>
                 </div>
@@ -691,55 +772,134 @@
         </div>
     </section>
 
-  <!-- Compte Rendu Section -->
+    <!-- Compte Rendu Section MODIFIÉE -->
     <section id="compte-rendu" class="compte-rendu">
         <div class="container">
             <h2 class="section-title">Mes comptes rendus</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <div class="compte-rendu-card">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="compte-rendu-img" alt="Compte rendu algorithmes">
-                        <div class="compte-rendu-content">
-                            <h3>Algorithmes</h3>
-                            <p>Apprentissage des concepts fondamentaux des algorithmes</p>
-                            <a class="download-indicator" href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
-                                <button class="compte-rendu-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 1.2 Mo</span>
+            
+            <!-- Enseignant 1: Mme Beauvallet -->
+            <div class="teacher-section">
+                <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Mme Beauvallet" class="teacher-avatar">
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">Mme Beauvallet</h3>
+                        <p class="teacher-subject">Algorithmes et programmation</p>
+                        <p>Consultez tous les comptes rendus d'algorithmes et programmation</p>
+                    </div>
+                    <button class="consult-btn">
+                        <i class="fas fa-folder-open"></i> Consulter
+                    </button>
+                </div>
+                
+                <div id="beauvallet-documents" class="documents-container">
+                    <div class="documents-grid">
+                        <!-- Document 1 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
+                            <div class="document-content">
+                                <h4 class="document-title">Algorithmes Fondamentaux</h4>
+                                <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
+                                <a href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 1.2 Mo</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Document 2 (exemple supplémentaire) -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Programmation Python">
+                            <div class="document-content">
+                                <h4 class="document-title">Programmation Python</h4>
+                                <p class="document-desc">Notions avancées de programmation en Python</p>
+                                <a href="documents/python-avance.pdf" download>
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 2.1 Mo</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Document 3 (exemple supplémentaire) -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" class="document-img" alt="Structures de données">
+                            <div class="document-content">
+                                <h4 class="document-title">Structures de Données</h4>
+                                <p class="document-desc">Implémentation des structures de données complexes</p>
+                                <a href="documents/structures-donnees.pdf" download>
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 1.8 Mo</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="compte-rendu-card">
-                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="compte-rendu-img" alt="Compte rendu réseaux">
-                        <div class="compte-rendu-content">
-                            <h3>Réseaux</h3>
-                            <p>Configuration d'un environnement réseau viable</p>
-                            <a class="download-indicator" href="documents/tp-reseaux.pdf" download>
-                                <button class="compte-rendu-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 0.9 Mo</span>
-                        </div>
+            </div>
+            
+            <!-- Enseignant 2: M. Sotoca -->
+            <div class="teacher-section">
+                <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="M. Sotoca" class="teacher-avatar">
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">M. Sotoca</h3>
+                        <p class="teacher-subject">Réseaux et télécommunications</p>
+                        <p>Consultez tous les comptes rendus de réseaux et télécommunications</p>
                     </div>
+                    <button class="consult-btn">
+                        <i class="fas fa-folder-open"></i> Consulter
+                    </button>
                 </div>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="compte-rendu-card">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" class="compte-rendu-img" alt="Compte rendu portfolio">
-                        <div class="compte-rendu-content">
-                            <h3>Portfolio</h3>
-                            <p>Création d'un portfolio professionnel</p>
-                            <a class="download-indicator" href="documents/tp-portfolio.pdf" download>
-                                <button class="compte-rendu-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 1.5 Mo</span>
+                <div id="sotoca-documents" class="documents-container">
+                    <div class="documents-grid">
+                        <!-- Document 1 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                            <div class="document-content">
+                                <h4 class="document-title">Configuration VLAN</h4>
+                                <p class="document-desc">Mise en place et configuration de VLANs</p>
+                                <a href="documents/configuration-vlan.pdf" download>
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 1.5 Mo</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Document 2 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Sécurité Réseau">
+                            <div class="document-content">
+                                <h4 class="document-title">Sécurité Réseau</h4>
+                                <p class="document-desc">Protocoles et méthodes de sécurisation réseau</p>
+                                <a href="documents/securite-reseau.pdf" download>
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 2.3 Mo</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Document 3 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" class="document-img" alt="Routage IP">
+                            <div class="document-content">
+                                <h4 class="document-title">Routage IP</h4>
+                                <p class="document-desc">Principes et configuration du routage IP</p>
+                                <a href="documents/routage-ip.pdf" download>
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 1.7 Mo</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -926,8 +1086,20 @@
                 alert('Merci pour votre message ! Je vous répondrai très rapidement.');
                 this.reset();
             });
+            
+            // Fonction pour afficher/masquer les documents
+            function toggleDocuments(id) {
+                const element = document.getElementById(id);
+                if (element.style.display === 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block';
+                }
+            }
+            
+            // Exposer la fonction globalement
+            window.toggleDocuments = toggleDocuments;
         });
     </script>
 </body>
 </html>
-
