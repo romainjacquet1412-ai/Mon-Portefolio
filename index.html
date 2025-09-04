@@ -272,6 +272,104 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
+        /* Compte Rendu Section */
+        .compte-rendu {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .compte-rendu-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .compte-rendu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .compte-rendu-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-color);
+        }
+        
+        .compte-rendu-content {
+            padding: 20px;
+        }
+        
+        .compte-rendu-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .compte-rendu-card p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .compte-rendu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .compte-rendu-btn:hover {
+            background: #2980b9;
+        }
+        
+        .file-info {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+        
+        /* Indication visuelle pour le téléchargement */
+        .download-indicator {
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .download-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: downloadShine 2s infinite;
+        }
+        
+        @keyframes downloadShine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
         /* Contact Section */
         .contact {
             padding: 100px 0;
@@ -324,104 +422,6 @@
             transform: translateY(-5px);
         }
         
-        /* Téléchargements Section */
-        .downloads {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .download-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 30px;
-        }
-        
-        .download-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .download-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 4px solid var(--primary-color);
-        }
-        
-        .download-content {
-            padding: 20px;
-        }
-        
-        .download-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .download-card p {
-            color: #7f8c8d;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-        
-        .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .download-btn:hover {
-            background: #2980b9;
-        }
-        
-        .file-info {
-            display: block;
-            text-align: center;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #95a5a6;
-        }
-        
-        /* Indication visuelle pour le téléchargement */
-        .download-indicator {
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-        }
-        
-        .download-indicator::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: downloadShine 2s infinite;
-        }
-        
-        @keyframes downloadShine {
-            0% { left: -100%; }
-            20% { left: 100%; }
-            100% { left: 100%; }
-        }
-        
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .hero h1 {
@@ -457,7 +457,7 @@
                 left: 0;
             }
             
-            .download-card {
+            .compte-rendu-card {
                 max-width: 100%;
             }
         }
@@ -489,7 +489,7 @@
                         <a class="nav-link" href="#experience">Expérience</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#downloads">Téléchargements</a>
+                        <a class="nav-link" href="#compte-rendu">Compte Rendu</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -691,20 +691,20 @@
         </div>
     </section>
 
-    <!-- Downloads Section -->
-    <section id="downloads" class="downloads">
+    <!-- Compte Rendu Section -->
+    <section id="compte-rendu" class="compte-rendu">
         <div class="container">
-            <h2 class="section-title">Mes travaux pratiques</h2>
+            <h2 class="section-title">Mes comptes rendus</h2>
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
-                    <div class="download-card">
-                        <img src="TP/images/6.png" class="download-img" alt="Projet Développement Web">
-                        <div class="download-content">
-                            <h3>TP-studio.code.org</h3>
-                            <p>Apprendre les algorithmes</p>
-                            <a class="download-indicator" href="TP/TP-Algorithme-NattanMAISONNEUVEFLEURY.pdf" download>
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger le TP
+                    <div class="compte-rendu-card">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="compte-rendu-img" alt="Compte rendu algorithmes">
+                        <div class="compte-rendu-content">
+                            <h3>Algorithmes</h3>
+                            <p>Apprentissage des concepts fondamentaux des algorithmes</p>
+                            <a class="download-indicator" href="chemin/vers/votre/fichier1.pdf" download>
+                                <button class="compte-rendu-btn">
+                                    <i class="fas fa-download"></i> Télécharger
                                 </button>
                             </a>
                             <span class="file-info">PDF - 1.2 Mo</span>
@@ -713,14 +713,14 @@
                 </div>
                 
                 <div class="col-md-6 col-lg-4">
-                    <div class="download-card">
-                        <img src="TP/images/Installer_baie_de_brassage_maison.jpg" class="download-img" alt="Projet Réseaux">
-                        <div class="download-content">
-                            <h3>TP-Réseaux</h3>
-                            <p>Rendre un environnement de travail viable</p>
-                            <a class="download-indicator" href="3.pdf" download>
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger le TP
+                    <div class="compte-rendu-card">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="compte-rendu-img" alt="Compte rendu réseaux">
+                        <div class="compte-rendu-content">
+                            <h3>Réseaux</h3>
+                            <p>Configuration d'un environnement réseau viable</p>
+                            <a class="download-indicator" href="chemin/vers/votre/fichier2.pdf" download>
+                                <button class="compte-rendu-btn">
+                                    <i class="fas fa-download"></i> Télécharger
                                 </button>
                             </a>
                             <span class="file-info">PDF - 0.9 Mo</span>
@@ -729,14 +729,14 @@
                 </div>
                 
                 <div class="col-md-6 col-lg-4">
-                    <div class="download-card">
-                        <img src="TP/images/7.png" class="download-img" alt="Projet Portfolio">
-                        <div class="download-content">
-                            <h3>TP-Portfolio</h3>
-                            <p>Créer un portfolio</p>
-                            <a class="download-indicator" href="TP/TP-Portfolio-NattanMAISONNEUVEFLEURY.pdf" download>
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger le TP
+                    <div class="compte-rendu-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" class="compte-rendu-img" alt="Compte rendu portfolio">
+                        <div class="compte-rendu-content">
+                            <h3>Portfolio</h3>
+                            <p>Création d'un portfolio professionnel</p>
+                            <a class="download-indicator" href="chemin/vers/votre/fichier3.pdf" download>
+                                <button class="compte-rendu-btn">
+                                    <i class="fas fa-download"></i> Télécharger
                                 </button>
                             </a>
                             <span class="file-info">PDF - 1.5 Mo</span>
