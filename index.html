@@ -272,232 +272,72 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* Compte Rendu Section */
-        .compte-rendu {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .compte-rendu-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 30px;
-        }
-        
-        .compte-rendu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .compte-rendu-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 4px solid var(--primary-color);
-        }
-        
-        .compte-rendu-content {
-            padding: 20px;
-        }
-        
-        .compte-rendu-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .compte-rendu-card p {
-            color: #7f8c8d;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-        
-        .compte-rendu-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .compte-rendu-btn:hover {
-            background: #2980b9;
-        }
-        
-        .file-info {
-            display: block;
-            text-align: center;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #95a5a6;
-        }
-        
-        /* Indication visuelle pour le téléchargement */
-        .download-indicator {
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-        }
-        
-        .download-indicator::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: downloadShine 2s infinite;
-        }
-        
-        @keyframes downloadShine {
-            0% { left: -100%; }
-            20% { left: 100%; }
-            100% { left: 100%; }
-        }
-        
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .contact-info {
-            margin-bottom: 30px;
-        }
-        
-        .contact-icon {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-right: 15px;
-        }
-        
-        .form-control {
-            border: none;
-            border-bottom: 2px solid #e9ecef;
-            border-radius: 0;
-            padding: 15px 0;
-            margin-bottom: 30px;
-        }
-        
-        .form-control:focus {
-            box-shadow: none;
-            border-bottom-color: var(--primary-color);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .social-icons {
-            margin-bottom: 20px;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 24px;
-            margin: 0 15px;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            color: var(--accent-color);
-            transform: translateY(-5px);
-        }
-        
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+        <!-- Compte Rendu Section -->
+<section id="compte-rendu" class="compte-rendu">
+    <div class="container">
+        <h2 class="section-title">Mes comptes rendus</h2>
+        <div class="row justify-content-center">
             
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item::before {
-                left: 60px;
-                border: medium solid var(--primary-color);
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--primary-color) transparent transparent;
-            }
-            
-            .left::after, .right::after {
-                left: 18px;
-            }
-            
-            .right {
-                left: 0;
-            }
-            
-            .compte-rendu-card {
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-<body data-bs-spy="scroll" data-bs-target="#navbar">
-    <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Romain Jacquet</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">À propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills">Compétences</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#experience">Expérience</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#compte-rendu">Compte Rendu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
+            <!-- Bloc 1 : TP code.org -->
+            <div class="col-md-6 col-lg-4">
+                <div class="compte-rendu-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" 
+                         class="compte-rendu-img" 
+                         alt="Romain Jacquet Compte rendu TP code.org">
+                    <div class="compte-rendu-content">
+                        <h3>Romain Jacquet Compte rendu TP code.org</h3>
+                        <p>Apprentissage et mise en pratique sur la plateforme code.org</p>
+                        <a class="download-indicator" href="https://raw.githubusercontent.com/ton-compte/ton-repo/main/documents/tp-codeorg.pdf" download>
+                            <button class="compte-rendu-btn">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </a>
+                        <span class="file-info">PDF - 1.2 Mo</span>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Bloc 2 : Réseaux -->
+            <div class="col-md-6 col-lg-4">
+                <div class="compte-rendu-card">
+                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" 
+                         class="compte-rendu-img" 
+                         alt="Compte rendu réseaux">
+                    <div class="compte-rendu-content">
+                        <h3>Réseaux</h3>
+                        <p>Configuration d'un environnement réseau viable</p>
+                        <a class="download-indicator" href="https://raw.githubusercontent.com/ton-compte/ton-repo/main/documents/tp-reseaux.pdf" download>
+                            <button class="compte-rendu-btn">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </a>
+                        <span class="file-info">PDF - 0.9 Mo</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bloc 3 : Portfolio -->
+            <div class="col-md-6 col-lg-4">
+                <div class="compte-rendu-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1115&q=80" 
+                         class="compte-rendu-img" 
+                         alt="Compte rendu portfolio">
+                    <div class="compte-rendu-content">
+                        <h3>Portfolio</h3>
+                        <p>Création d'un portfolio professionnel</p>
+                        <a class="download-indicator" href="https://raw.githubusercontent.com/ton-compte/ton-repo/main/documents/tp-portfolio.pdf" download>
+                            <button class="compte-rendu-btn">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </a>
+                        <span class="file-info">PDF - 1.5 Mo</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </nav>
+    </div>
+</section>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -930,3 +770,4 @@
     </script>
 </body>
 </html>
+
