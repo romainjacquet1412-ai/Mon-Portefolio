@@ -493,6 +493,16 @@
             transform: translateY(-5px);
         }
         
+        /* Anonymous avatar style */
+        .anonymous-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ddd;
+            color: #777;
+            font-size: 2rem;
+        }
+        
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .hero h1 {
@@ -677,7 +687,7 @@
                         </div>
                         <h4>Brevet des Collèges</h4>
                         <p class="text-primary">2022 - Collège de Saint Bonnet</p>
-                        <p>Diplôme national du brevet</p>
+                        <p>Diplôme national du bremet</p>
                     </div>
                 </div>
             </div>
@@ -837,7 +847,9 @@
             <!-- Enseignant 1: Mme Beauvallet -->
             <div class="teacher-section">
                 <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Mme Beauvallet" class="teacher-avatar">
+                    <div class="teacher-avatar anonymous-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
                     <div class="teacher-info">
                         <h3 class="teacher-name">Mme Beauvallet</h3>
                         <p class="teacher-subject">Programmation</p>
@@ -901,7 +913,9 @@
             <!-- Enseignant 2: M. Sotoca -->
             <div class="teacher-section">
                 <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="M. Sotoca" class="teacher-avatar">
+                    <div class="teacher-avatar anonymous-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
                     <div class="teacher-info">
                         <h3 class="teacher-name">M. Sotoca</h3>
                         <p class="teacher-subject">Réseaux </p>
@@ -1169,15 +1183,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
