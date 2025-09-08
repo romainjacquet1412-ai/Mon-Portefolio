@@ -442,107 +442,123 @@
         }
         
         /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .contact-info {
-            margin-bottom: 30px;
-        }
-        
-        .contact-icon {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-right: 15px;
-        }
-        
-        .form-control {
-            border: none;
-            border-bottom: 2px solid #e9ecef;
-            border-radius: 0;
-            padding: 15px 0;
-            margin-bottom: 30px;
-        }
-        
-        .form-control:focus {
-            box-shadow: none;
-            border-bottom-color: var(--primary-color);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .social-icons {
-            margin-bottom: 20px;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 24px;
-            margin: 0 15px;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            color: var(--accent-color);
-            transform: translateY(-5px);
-        }
-        
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item::before {
-                left: 60px;
-                border: medium solid var(--primary-color);
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--primary-color) transparent transparent;
-            }
-            
-            .left::after, .right::after {
-                left: 18px;
-            }
-            
-            .right {
-                left: 0;
-            }
-            
-            .teacher-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .teacher-avatar {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+.contact {
+    padding: 100px 0;
+    background-color: var(--light-bg);
+}
+
+.contact-info {
+    margin-bottom: 30px;
+}
+
+.contact-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+
+.form-control {
+    border: none;
+    border-bottom: 2px solid #e9ecef;
+    border-radius: 0;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-bottom-color: var(--primary-color);
+}
+
+/* Styles pour les messages d'alerte */
+.contact-alert {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-bg);
+    color: white;
+    padding: 50px 0 20px;
+}
+
+.social-icons {
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 24px;
+    margin: 0 15px;
+    transition: all 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    
+    .timeline-item::before {
+        left: 60px;
+        border: medium solid var(--primary-color);
+        border-width: 10px 10px 10px 0;
+        border-color: transparent var(--primary-color) transparent transparent;
+    }
+    
+    .left::after, .right::after {
+        left: 18px;
+    }
+    
+    .right {
+        left: 0;
+    }
+    
+    .teacher-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .teacher-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Responsive pour la section contact */
+    .contact .row {
+        flex-direction: column;
+    }
+    
+    .contact-info {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+}
+</style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar">
     <!-- Navigation -->
@@ -583,6 +599,44 @@
         </div>
     </nav>
 
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="text-center mb-5">Contactez-moi</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt contact-icon"></i> Paris, France</p>
+                        <p><i class="fas fa-phone contact-icon"></i> +33 6 12 34 56 78</p>
+                        <p><i class="fas fa-envelope contact-icon"></i> romain.jacquet@example.com</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form id="contactForm" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" placeholder="Votre nom" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Votre email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="subject" placeholder="Sujet" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Votre message" required></textarea>
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                    <div id="successAlert" class="alert alert-success contact-alert mt-3" role="alert">
+                        Votre message a été envoyé avec succès! Je vous répondrai très rapidement.
+                    </div>
+                    <div id="errorAlert" class="alert alert-danger contact-alert mt-3" role="alert">
+                        Une erreur s'est produite. Veuillez réessayer ou me contacter directement par email.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
@@ -1169,6 +1223,7 @@
     </script>
 </body>
 </html>
+
 
 
 
