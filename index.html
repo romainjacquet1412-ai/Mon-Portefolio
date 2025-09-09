@@ -840,115 +840,144 @@
     </section>
 
     <!-- Compte Rendu Section -->
-<section id="compte-rendu" class="compte-rendu">
-    <div class="container">
-        <h2 class="section-title">Mes comptes rendus</h2>
-        
-        <!-- Section des documents -->
-        <section>
+    <section id="compte-rendu" class="compte-rendu">
+        <div class="container">
+            <h2 class="section-title">Mes comptes rendus</h2>
+            
             <!-- Enseignant 1: Mme Beauvallet -->
-            <div id="beauvallet-documents" class="documents-container">
-                <div class="documents-grid">
-                    <!-- Document 1 -->
-                    <div class="document-card">
-                        <img src="https://www.sciencebuddies.org/e3IE8SyNdvVyhdazHMqMHMwX82s=/600x420/-/https/www.sciencebuddies.org/cdn/blog/graphics/2014-blog-cs-Hour-of-Code-sampler_500.png" class="document-img" alt="Algorithmes">
-                        <div class="document-content">
-                            <h4 class="document-title">Compte rendu TP code.org</h4>
-                            <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
-                            <a href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 384 Ko</span>
-                        </div>
+            <div class="teacher-section">
+                <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
+                    <div class="teacher-avatar anonymous-avatar">
+                        <i class="fas fa-user"></i>
                     </div>
-
-                    <!-- Document 2 -->
-                    <div class="document-card">
-                        <img src="https://foad.cnam.fr/medias/photo/actu-f-barthelemy-programme-java_1631089851851-jpg" class="document-img" alt="Algorithmes">
-                        <div class="document-content">
-                            <h4 class="document-title">Compte rendu TP Mes premiers pas en Java</h4>
-                            <p class="document-desc">Premiers pas en Java</p>
-                            <a href="Compte rendu TP Mes premiers pas en Java.pdf" download="Compte rendu TP Mes premiers pas en Java.pdf">
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 319 Ko</span>
-                        </div>
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">Mme Beauvallet</h3>
+                        <p class="teacher-subject">Programmation</p>
+                        <p>Consultez tous les comptes rendus des Tp réalisé avec Mme Beauvallet</p>
                     </div>
-
-                    <!-- Document 3 -->
-                    <div class="document-card">
-                        <img src="https://i.etsystatic.com/20116942/r/il/ebb4be/6607106719/il_fullxfull.6607106719_ha19.jpg" class="document-img" alt="Programmation Python">
-                        <div class="document-content">
-                            <h4 class="document-title">Compte rendu TP Création du PortFolio</h4>
-                            <p class="document-desc">Création d'un portfolio</p>
-                            <a href="Compte rendu TP Création du PortFolio.pdf" download="Compte rendu TP Création du PortFolio.pdf">
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 668 Ko</span>
+                    <button class="consult-btn">
+                        <i class="fas fa-folder-open"></i> Consulter
+                    </button>
+                </div>
+                
+                <div id="beauvallet-documents" class="documents-container">
+                    <div class="documents-grid">
+                        <!-- Document 1 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
+                            <div class="document-content">
+                                <h4 class="document-title"> Compte rendu TP code.org</h4>
+                                <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
+                                <a href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 384 Ko</span>
+                            </div>
+                        </div>
+                        
+                         <!-- Document 2 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
+                            <div class="document-content">
+                                <h4 class="document-title"> Compte rendu TP Mes premiers pas en Java</h4>
+                                <p class="document-desc">Premiers pas en Java</p>
+                                <a href="Compte rendu TP Mes premiers pas en Java.pdf" download="Compte rendu TP Mes premiers pas en Java.pdf">
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 319 Ko</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Document 3  -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Programmation Python">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu TP Création du PortFolio</h4>
+                                <p class="document-desc">Création d'un portfolio</p>
+                                <a href="Compte rendu TP Création du PortFolio.pdf" download="Compte rendu TP Création du PortFolio.pdf">
+                                   <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 668 Ko</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
             <!-- Enseignant 2: M. Sotoca -->
-            <div id="sotoca-documents" class="documents-container">
-                <div class="documents-grid">
-                    <!-- Document 1 -->
-                    <div class="document-card">
-                        <img src="https://m.media-amazon.com/images/I/61QAG7444QL.jpg" class="document-img" alt="Configuration VLAN">
-                        <div class="document-content">
-                            <h4 class="document-title">Compte rendu du TP B1 Paramétrage du matériel informatiques</h4>
-                            <p class="document-desc">Test réseau</p>
-                            <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf">
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 930 Ko</span>
-                        </div>
+            <div class="teacher-section">
+                <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
+                    <div class="teacher-avatar anonymous-avatar">
+                        <i class="fas fa-user"></i>
                     </div>
-
-                    <!-- Document 2 -->
-                    <div class="document-card">
-                        <img src="https://blog.kiatoo.com/wp-content/uploads/2022/08/diagnostiquer-son-pc-logiciels-gratuits-kiatoo-e1660579847180.png" class="document-img" alt="Configuration VLAN">
-                        <div class="document-content">
-                            <h4 class="document-title">Compte rendu TP les logiciels de diagnostic</h4>
-                            <p class="document-desc">Test Logiciels diagnostic</p>
-                            <a href="Compte rendu TP les logiciels de diagnostic.pdf" download="Compte rendu TP les logiciels de diagnostic.pdf">
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 930 Ko</span>
-                        </div>
+                    <div class="teacher-info">
+                        <h3 class="teacher-name">M. Sotoca</h3>
+                        <p class="teacher-subject">Réseaux </p>
+                        <p>Consultez tous les comptes rendus de Tp réalisé avec M Sotoca</p>
                     </div>
+                    <button class="consult-btn">
+                        <i class="fas fa-folder-open"></i> Consulter
+                    </button>
+                </div>
+                
+                <div id="sotoca-documents" class="documents-container">
+                    <div class="documents-grid">
+                        <!-- Document 1 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu du TP B1 Paramétrage du matériel informatiques</h4>
+                                <p class="document-desc">Test réseau</p>
+                                <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf">
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 930 Ko</span>
+                            </div>
+                        </div>
 
-                    <!-- Document 3 -->
-                    <div class="document-card">
-                        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Sécurité Réseau">
-                        <div class="document-content">
-                            <h4 class="document-title">Prochainement⌛</h4>
-                            <p class="document-desc">Prochain compte rendu disponible</p>
-                            <a href="#" class="disabled-link">
-                                <button class="download-btn" disabled>
-                                    <i class="fas fa-download"></i> Télécharger
-                                </button>
-                            </a>
-                            <span class="file-info">PDF - 2.3 Mo</span>
+                        <!-- Document 2 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu TP les logiciels de diagnostic</h4>
+                                <p class="document-desc">Test Logiciels diagnostic</p>
+                                <a href="Compte rendu TP les logiciels de diagnostic.pdf" download="Compte rendu TP les logiciels de diagnostic.pdf">
+                                    <button class="download-btn">
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 2,2 Mo</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Document 3 -->
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Sécurité Réseau">
+                            <div class="document-content">
+                                <h4 class="document-title">Prochainement⌛</h4>
+                                <p class="document-desc">Prochain compte rendu disponible</p>
+                                <a href="#" class="disabled-link">
+                                    <button class="download-btn" disabled>
+                                        <i class="fas fa-download"></i> Télécharger
+                                    </button>
+                                </a>
+                                <span class="file-info">PDF - 2.3 Mo</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-</section>
-    
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -1169,7 +1198,6 @@
     </script>
 </body>
 </html>
-
 
 
 
