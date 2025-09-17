@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -242,7 +242,7 @@
             z-index: 1;
             right: 30px;
             border: medium solid var(--primary-color);
-            border-width: 10px 极 10px 10px;
+            border-width: 10px 0 10px 10px;
             border-color: transparent transparent transparent var(--primary-color);
         }
         
@@ -268,7 +268,7 @@
             background-color: white;
             position: relative;
             border-radius: 6px;
-            box-shadow: 0 5极 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         /* Diplomas Section */
@@ -320,7 +320,7 @@
         
         .teacher-header:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 极.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .teacher-avatar {
@@ -371,10 +371,9 @@
         }
         
         .documents-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
-            justify-content: flex-start;
         }
         
         .document-card {
@@ -383,8 +382,6 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
-            width: calc(33.333% - 20px);
-            margin-bottom: 20px;
         }
         
         .document-card:hover {
@@ -468,7 +465,7 @@
             margin-bottom: 30px;
         }
         
-        .form-control:极ocus {
+        .form-control:focus {
             box-shadow: none;
             border-bottom-color: var(--primary-color);
         }
@@ -478,7 +475,6 @@
             background-color: var(--dark-bg);
             color: white;
             padding: 50px 0 20px;
-            text-align: center;
         }
         
         .social-icons {
@@ -508,12 +504,6 @@
         }
         
         /* Responsive Adjustments */
-        @media (max-width: 992px) {
-            .document-card {
-                width: calc(50% - 20px);
-            }
-        }
-        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -558,8 +548,8 @@
                 margin-bottom: 15px;
             }
             
-            .document-card {
-                width: 100%;
+            .documents-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -584,7 +574,7 @@
                         <a class="nav-link" href="#diplomas">Diplômes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#skills">Compétences</极>
+                        <a class="nav-link" href="#skills">Compétences</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#projects">Projets</a>
@@ -673,7 +663,7 @@
                 <div class="col-md-6">
                     <div class="diploma-card">
                         <div class="diploma-icon">
-                            <极 class="fas fa-certificate"></i>
+                            <i class="fas fa-certificate"></i>
                         </div>
                         <h4>SST (Sauveteur Secouriste du Travail)</h4>
                         <p class="text-primary">2023 - Lycée Poutrain</p>
@@ -692,7 +682,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="diploma-card">
-                        <div class="极iploma-icon">
+                        <div class="diploma-icon">
                             <i class="fas fa-school"></i>
                         </div>
                         <h4>Brevet des Collèges</h4>
@@ -730,13 +720,13 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <极 class="skill-item">
+                    <div class="skill-item">
                         <div class="skill-info">
                             <span>Organisation</span>
                             <span>80%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" data-width="80极"></div>
+                            <div class="skill-progress" data-width="80%"></div>
                         </div>
                     </div>
                     <div class="skill-item">
@@ -744,7 +734,7 @@
                             <span>Autonomie</span>
                             <span>95%</span>
                         </div>
-                        <div class极"skill-bar">
+                        <div class="skill-bar">
                             <div class="skill-progress" data-width="95%"></div>
                         </div>
                     </div>
@@ -809,9 +799,9 @@
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <h4>Lycée Saint Joseph - Gap</h4>
-                        <p class="text-primary">Décembre 极4</p>
+                        <p class="text-primary">Décembre 2024</p>
                         <p>Création de VLANs sur Switch (Tagged-Untagged)</p>
-                    </极>
+                    </div>
                 </div>
                 <!-- Experience 3 -->
                 <div class="timeline-item left">
@@ -834,13 +824,13 @@
                     <div class="timeline-content">
                         <h4>Sun Valley Systems - Gap</h4>
                         <p class="text-primary">Mai - Juin 2023 & Septembre - Octobre 2023</p>
-                        <p>Maintenance informatique, Soudure à l'étain sur composant informat极</p>
+                        <p>Maintenance informatique, Soudure à l'étain sur composant informatique</p>
                     </div>
                 </div>
                 <!-- Experience 6 -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <h4>In Store Solutions</极>
+                        <h4>In Store Solutions</h4>
                         <p class="text-primary">Stage de 3ème</p>
                         <p>Stage d'observation: Programmation</p>
                     </div>
@@ -849,159 +839,160 @@
         </div>
     </section>
 
-    <!-- Compte Rendu Section -->
-    <section id="compte-rendu" class="compte-rendu">
-        <div class="container">
-            <h2 class="section-title">Mes comptes rendus</h2>
-            
-            <!-- Enseignant 1: Mme Beauvallet -->
-            <div class="teacher-section">
-                <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
-                    <div class="teacher-avatar anonymous-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">Mme Beauvallet</h3>
-                        <p class="teacher-subject">Programmation</p>
-                        <p>Consultez tous les comptes rendus des TP réalisés avec Mme Beauvallet</p>
-                    </div>
-                    <button class="consult-btn">
-                        <i class="fas fa-folder-open"></i> Consulter
-                    </button>
+   <!-- Compte Rendu Section -->
+<section id="compte-rendu" class="compte-rendu">
+    <div class="container">
+        <h2 class="section-title">Mes comptes rendus</h2>
+        
+        <!-- Enseignant 1: Mme Beauvallet -->
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
+                <div class="teacher-avatar anonymous-avatar">
+                    <i class="fas fa-user"></i>
                 </div>
-                
-                <div id="beauvallet-documents" class="documents-container">
-                    <div class="documents-grid">
-                        <!-- Document 1 -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP code.org</h4>
-                                <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
-                                <a href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></i> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 384 Ko</span>
-                            </div>
-                        </div>
-
-                        <!-- Document 2 -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Mes premiers pas en Java</h4>
-                                <p class="document-desc">Premiers pas en Java</p>
-                                <a href="Compte rendu TP Mes premiers pas en Java.pdf" download="极ompte rendu TP Mes premiers pas en Java.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></极> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 319 Ko</span>
-                            </div>
-                        </div>
-
-                        <!-- Document 3 -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Portfolio">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Création du Portfolio</h4>
-                                <p class="document-desc">Création d'un portfolio</p>
-                                <a href="Compte rendu TP Création du PortFolio.pdf" download="Compte rendu TP Création du PortFolio.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></i> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 668 Ko</span>
-                            </div>
-                        </div>
-
-                        <!-- Document 4 - Ce document passera automatiquement à la ligne -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP HTML</h4>
-                                <p class="document-desc">Premiers pas en HTML</p>
-                                <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></i> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 818 Ko</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="teacher-info">
+                    <h3 class="teacher-name">Mme Beauvallet</h3>
+                    <p class="teacher-subject">Programmation</p>
+                    <p>Consultez tous les comptes rendus des TP réalisés avec Mme Beauvallet</p>
                 </div>
+                <button class="consult-btn">
+                    <i class="fas fa-folder-open"></i> Consulter
+                </button>
             </div>
-
-            <!-- Enseignant 2: M. Sotoca -->
-            <div class="teacher-section">
-                <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
-                    <div class="teacher-avatar anonymous-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">M. Sotoca</h3>
-                        <p class="teacher-subject">Réseaux</p>
-                        <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
-                    </div>
-                    <button class="consult-btn">
-                        <i class="fas fa-folder-open"></i> Consulter
-                    </button>
-                </div>
-                
-                <div id="sotoca-documents" class="documents-container">
-                    <div class="documents-grid">
-                        <!-- Document 1 -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu du TP B1 Paramétrage du matériel informatique</h4>
-                                <p class="document-desc">Test réseau</p>
-                                <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></i> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 1,1 Mo</span>
-                            </div>
+            
+            <div id="beauvallet-documents" class="documents-container">
+                <div class="documents-grid">
+                    <!-- Document 1 -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu TP code.org</h4>
+                            <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
+                            <a href="Romain Jacquet Compte rendu TP code.org.pdf" download="Romain Jacquet Compte rendu TP code.org.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 384 Ko</span>
                         </div>
+                    </div>
 
-                        <!-- Document 2 -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&极=80" class="document-img" alt="Logiciels diagnostic">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP les logiciels de diagnostic</h4>
-                                <p class="document-desc">Test Logiciels diagnostic</p>
-                                <a href="Compte rendu TP les logiciels de diagnostic.pdf" download="Compte rendu TP les logiciels de diagnostic.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></i> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 2,2 Mo</span>
-                            </div>
+                    <!-- Document 2 -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu TP Mes premiers pas en Java</h4>
+                            <p class="document-desc">Premiers pas en Java</p>
+                            <a href="Compte rendu TP Mes premiers pas en Java.pdf" download="Compte rendu TP Mes premiers pas en Java.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 319 Ko</span>
                         </div>
+                    </div>
 
-                        <!-- Document 3 -->
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Prochainement">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Création d'une documentation avec captures d'écran</h4>
-                                <p class="document-desc">Logiciels de captures d'écran</p>
-                                <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf">
-                                    <button class="download-btn">
-                                        <i class="fas fa-download"></i> Télécharger
-                                    </button>
-                                </a>
-                                <span class="file-info">PDF - 287 Ko</span>
-                            </div>
+                    <!-- Document 3 -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Portfolio">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu TP Création du Portfolio</h4>
+                            <p class="document-desc">Création d'un portfolio</p>
+                            <a href="Compte rendu TP Création du PortFolio.pdf" download="Compte rendu TP Création du PortFolio.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 668 Ko</span>
+                        </div>
+                    </div>
+
+                    <!-- Document 4 -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu TP HTML</h4>
+                            <p class="document-desc">Premiers pas en HTML</p>
+                            <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 818 Ko</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- Enseignant 2: M. Sotoca -->
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
+                <div class="teacher-avatar anonymous-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="teacher-info">
+                    <h3 class="teacher-name">M. Sotoca</h3>
+                    <p class="teacher-subject">Réseaux</p>
+                    <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
+                </div>
+                <button class="consult-btn">
+                    <i class="fas fa-folder-open"></i> Consulter
+                </button>
+            </div>
+            
+            <div id="sotoca-documents" class="documents-container">
+                <div class="documents-grid">
+                    <!-- Document 1 -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu du TP B1 Paramétrage du matériel informatique</h4>
+                            <p class="document-desc">Test réseau</p>
+                            <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 1,1 Mo</span>
+                        </div>
+                    </div>
+
+                    <!-- Document 2 -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu TP les logiciels de diagnostic</h4>
+                            <p class="document-desc">Test Logiciels diagnostic</p>
+                            <a href="Compte rendu TP les logiciels de diagnostic.pdf" download="Compte rendu TP les logiciels de diagnostic.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 2,2 Mo</span>
+                        </div>
+                    </div>
+
+                   <!-- Document 3  -->
+                    <div class="document-card">
+                        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Prochainement">
+                        <div class="document-content">
+                            <h4 class="document-title">Compte rendu TP Création d’une documentation avec captures d'écran</h4>
+                            <p class="document-desc">Logiciels de captures d'écran</p>
+                            <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                            </a>
+                            <span class="file-info">PDF - 287 Ko</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -1043,11 +1034,12 @@
         <div class="container text-center">
             <div class="social-icons">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/romain_jqt?极sh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
             </div>
             <p>&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
         </div>
     </footer>
+
 
     <!-- Project Modals -->
     <!-- Modal 1 -->
@@ -1075,7 +1067,7 @@
     </div>
 
     <!-- Modal 2 -->
-    <div class="modal fade" id="projectModal2" tab极="-1" aria-hidden="true">
+    <div class="modal fade" id="projectModal2" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1083,7 +1075,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA极fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Préparation de poste">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Préparation de poste">
                     <p>Durant mon stage chez ACI à Gap en septembre-octobre 2024, j'ai été responsable de la préparation et de la configuration de postes informatiques.</p>
                     <p>Mes missions comprenaient :</p>
                     <ul>
@@ -1091,7 +1083,7 @@
                         <li>Installation de logiciels et applications nécessaires</li>
                         <li>Configuration réseau et téléphonie IP</li>
                         <li>Tests de fonctionnement et résolution des problèmes</li>
-                        <li>Préparation de documentation utilisateur</极>
+                        <li>Préparation de documentation utilisateur</li>
                     </ul>
                     <p>Cette expérience m'a permis d'approfondir mes connaissances en administration système et en support utilisateur.</p>
                 </div>
@@ -1108,7 +1100,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfH极8fGVufDB8f极x8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Maintenance informatique">
+                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Maintenance informatique">
                     <p>Lors de mes stages chez ACI et Sun Valley Systems à Gap, j'ai effectué diverses missions de maintenance informatique.</p>
                     <p>Mes activités comprenaient :</p>
                     <ul>
@@ -1126,7 +1118,7 @@
 
     <!-- Modal 4 -->
     <div class="modal fade" id="projectModal4" tabindex="-1" aria-hidden="true">
-        <div class极"modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Film "Les Éclaireurs"</h5>
@@ -1222,3 +1214,18 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
