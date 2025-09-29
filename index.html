@@ -843,137 +843,136 @@
 <section id="compte-rendu" class="compte-rendu">
     <div class="container">
         <h2 class="section-title">Mes comptes rendus</h2>
+<!-- Enseignant 1: Mme Beauvallet -->
+<div class="teacher-section">
+    <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
+        <div class="teacher-avatar anonymous-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="teacher-info">
+            <h3 class="teacher-name">Mme Beauvallet</h3>
+            <p class="teacher-subject">Programmation</p>
+            <p>Consultez tous les comptes rendus des TP réalisés avec Mme Beauvallet</p>
+        </div>
+        <button class="consult-btn">
+            <i class="fas fa-folder-open"></i> Consulter
+        </button>
+    </div>
 
-        <!-- Enseignant 1: Mme Beauvallet -->
-        <div class="teacher-section">
-            <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
-                <div class="teacher-avatar anonymous-avatar">
-                    <i class="fas fa-user"></i>
+    <div id="beauvallet-documents" class="documents-container">
+        <div class="documents-grid">
+            <!-- Ligne 1 -->
+            <div class="document-row">
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP code.org</h4>
+                        <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
+                        <a href="Romain Jacquet Compte rendu TP code.org.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 384 Ko</span>
+                    </div>
                 </div>
-                <div class="teacher-info">
-                    <h3 class="teacher-name">Mme Beauvallet</h3>
-                    <p class="teacher-subject">Programmation</p>
-                    <p>Consultez tous les comptes rendus des TP réalisés avec Mme Beauvallet</p>
+
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Mes premiers pas en Java</h4>
+                        <p class="document-desc">Premiers pas en Java</p>
+                        <a href="Compte rendu TP Mes premiers pas en Java.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 319 Ko</span>
+                    </div>
                 </div>
-                <button class="consult-btn">
-                    <i class="fas fa-folder-open"></i> Consulter
-                </button>
+
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Portfolio">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Création du Portfolio</h4>
+                        <p class="document-desc">Création d'un portfolio</p>
+                        <a href="Compte rendu TP Création du PortFolio.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 668 Ko</span>
+                    </div>
+                </div>
             </div>
 
-            <div id="beauvallet-documents" class="documents-container">
-                <div class="documents-grid">
-                    <!-- Ligne 1 -->
-                    <div class="document-row">
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP code.org</h4>
-                                <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
-                                <a href="Romain Jacquet Compte rendu TP code.org.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 384 Ko</span>
-                            </div>
-                        </div>
-
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Mes premiers pas en Java</h4>
-                                <p class="document-desc">Premiers pas en Java</p>
-                                <a href="Compte rendu TP Mes premiers pas en Java.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 319 Ko</span>
-                            </div>
-                        </div>
-
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Portfolio">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Création du Portfolio</h4>
-                                <p class="document-desc">Création d'un portfolio</p>
-                                <a href="Compte rendu TP Création du PortFolio.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 668 Ko</span>
-                            </div>
-                        </div>
+            <!-- Ligne 2 -->
+            <div class="document-row">
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP HTML</h4>
+                        <p class="document-desc">Premiers pas en HTML</p>
+                        <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 818 Ko</span>
                     </div>
+                </div>
 
-                    <!-- Ligne 2 -->
-                    <div class="document-row">
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP HTML</h4>
-                                <p class="document-desc">Premiers pas en HTML</p>
-                                <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 818 Ko</span>
-                            </div>
-                        </div>
-
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP3 Java</h4>
-                                <p class="document-desc">Java</p>
-                                <a href="Compte rendu TP3 Java.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 342 Ko</span>
-                            </div>
-                        </div>
-
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu CSS</h4>
-                                <p class="document-desc">Introduction aux bases du CSS</p>
-                                <a href="Compte rendu TP CSS.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 324 Ko</span>
-                            </div>
-                        </div>
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP3 Java</h4>
+                        <p class="document-desc">Java</p>
+                        <a href="Compte rendu TP3 Java.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 342 Ko</span>
                     </div>
+                </div>
 
-                    <!-- Ligne 3 -->
-                    <div class="document-row">
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="JavaScript">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP HTML CSS avancé</h4>
-                                <p class="document-desc">HTML et CSS</p>
-                                <a href="Compte rendu TP HTML-CSS Avancé.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <a href="Romain Jacquet CSS-HTML.zip" download>
-                                    <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP Chuck</button>
-                                </a>
-                                <span class="file-info">PDF - 248 Ko</span>
-                            </div>
-                        </div>
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu CSS</h4>
+                        <p class="document-desc">Introduction aux bases du CSS</p>
+                        <a href="Compte rendu TP CSS.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 324 Ko</span>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS Avancé">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Cybersécurité</h4>
-                                <p class="document-desc">Cybersécurité</p>
-                                <a href="Compte rendu TP 1 -B3.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 503 Ko</span>
-                            </div>
-                        </div>
+            <!-- Ligne 3 -->
+            <div class="document-row">
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="JavaScript">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP HTML CSS avancé</h4>
+                        <p class="document-desc">HTML et CSS</p>
+                        <a href="Compte rendu TP HTML-CSS Avancé.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <a href="Romain Jacquet CSS-HTML.zip" download>
+                            <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP Chuck</button>
+                        </a>
+                        <span class="file-info">PDF - 248 Ko</span>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS Avancé">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Cybersécurité</h4>
+                        <p class="document-desc">Cybersécurité</p>
+                        <a href="Compte rendu TP 1 -B3.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 503 Ko</span>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-       <!-- Enseignant 2: M. Sotoca -->
+<!-- Enseignant 2: M. Sotoca -->
 <div class="teacher-section">
     <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
         <div class="teacher-avatar anonymous-avatar">
@@ -992,66 +991,69 @@
     <div id="sotoca-documents" class="documents-container">
         <div class="documents-grid">
             <!-- Ligne 1 -->
-            <div class="document-card">
-                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
-                <div class="document-content">
-                    <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
-                    <p class="document-desc">Test réseau</p>
-                    <a href="Compte_rendu_TP_B1_Parametrage_materiel_informatique.pdf" download class="download-btn">
-                        <i class="fas fa-download"></i> Télécharger (PDF)
-                    </a>
-                    <span class="file-info">PDF - 1,1 Mo</span>
+            <div class="document-row">
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
+                        <p class="document-desc">Test réseau</p>
+                        <a href="Compte_rendu_TP_B1_Parametrage_materiel_informatique.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 1,1 Mo</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="document-card">
-                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
-                <div class="document-content">
-                    <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
-                    <p class="document-desc">Test Logiciels diagnostic</p>
-                    <a href="Compte_rendu_TP_logiciels_diagnostic.pdf" download class="download-btn">
-                        <i class="fas fa-download"></i> Télécharger (PDF)
-                    </a>
-                    <span class="file-info">PDF - 2,2 Mo</span>
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
+                        <p class="document-desc">Test Logiciels diagnostic</p>
+                        <a href="Compte_rendu_TP_logiciels_diagnostic.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 2,2 Mo</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="document-card">
-                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
-                <div class="document-content">
-                    <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
-                    <p class="document-desc">Logiciels de captures d'écran</p>
-                    <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download class="download-btn">
-                        <i class="fas fa-download"></i> Télécharger (PDF)
-                    </a>
-                    <span class="file-info">PDF - 287 Ko</span>
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
+                        <p class="document-desc">Logiciels de captures d'écran</p>
+                        <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 287 Ko</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Ligne 2 -->
-            <div class="document-card">
-                <img src="https://images.unsplash.com/photo-1581091870620-7f5d6a9b0a44?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Réseaux avancés">
-                <div class="document-content">
-                    <h4 class="document-title">Compte rendu TP B1 Le système d'exploitation - Les commandes</h4>
-                    <p class="document-desc">Commande CMD</p>
-                    <a href="Compte_rendu_B1_TP05.pdf" download class="download-btn">
-                        <i class="fas fa-download"></i> Télécharger Partie 1 (PDF)
-                    </a>
-                    <a href="Carte_mentale_recapitulatif_commandes.pdf" download class="download-btn">
-                        <i class="fas fa-download"></i> Télécharger Partie 2 (PDF)
-                    </a>
-                    <span class="file-info">PDF - 1,5 Mo + 1,2 Mo</span>
+            <div class="document-row">
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1581091870620-7f5d6a9b0a44?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Réseaux avancés">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP B1 Le système d'exploitation - Les commandes</h4>
+                        <p class="document-desc">Commande CMD</p>
+                        <a href="Compte_rendu_B1_TP05.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger Partie 1 (PDF)</button>
+                        </a>
+                        <a href="Carte_mentale_recapitulatif_commandes.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger Partie 2 (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 1,5 Mo + 1,2 Mo</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
 <style>
 .teacher-section {
     width: 100%;
-    margin-bottom: 40px; /* espace entre enseignants */
+    margin-bottom: 40px;
 }
 
 .documents-grid {
@@ -1071,6 +1073,40 @@
     box-sizing: border-box;
 }
 
+.document-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.document-content {
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 0 0 8px 8px;
+}
+
+.download-btn {
+    margin-top: 8px;
+    padding: 6px 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.download-btn i {
+    margin-right: 5px;
+}
+
+.file-info {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;
+    color: #555;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .document-card {
@@ -1084,6 +1120,17 @@
     }
 }
 </style>
+
+<script>
+function toggleDocuments(id) {
+    const container = document.getElementById(id);
+    if (container.style.display === "none" || container.style.display === "") {
+        container.style.display = "block";
+    } else {
+        container.style.display = "none";
+    }
+}
+</script>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -1305,6 +1352,7 @@
     </script>
 </body>
 </html>
+
 
 
 
