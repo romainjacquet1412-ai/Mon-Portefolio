@@ -981,8 +981,6 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
         <!-- Enseignant 2: M. Sotoca -->
         <div class="teacher-section">
@@ -1061,6 +1059,55 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
         </div>
     </div>
 </section>
+
+<style>
+.teacher-section {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.documents-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.document-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.document-card {
+    flex: 0 0 calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .document-card {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .document-card {
+        flex: 0 0 100%;
+    }
+}
+</style>
+
+<script>
+// Fonction pour afficher/masquer les documents
+function toggleDocuments(id) {
+    const element = document.getElementById(id);
+    if (element.style.display === 'block') {
+        element.style.display = 'none';
+    } else {
+        element.style.display = 'block';
+    }
+}
+</script>
 
 <!-- Contact Section -->
 <section id="contact" class="contact">
@@ -1330,6 +1377,7 @@ function toggleDocuments(id) {
     </script>
 </body>
 </html>
+
 
 
 
