@@ -976,68 +976,78 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
             </div>
         </div>
 
-        <!-- Enseignant 2: M. Sotoca -->
-        <div class="teacher-section">
-            <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
-                <div class="teacher-avatar anonymous-avatar">
-                    <i class="fas fa-user"></i>
+       <!-- Enseignant 2: M. Sotoca -->
+<div class="teacher-section">
+    <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
+        <div class="teacher-avatar anonymous-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="teacher-info">
+            <h3 class="teacher-name">M. Sotoca</h3>
+            <p class="teacher-subject">Réseaux</p>
+            <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
+        </div>
+        <button class="consult-btn">
+            <i class="fas fa-folder-open"></i> Consulter
+        </button>
+    </div>
+
+    <div id="sotoca-documents" class="documents-container">
+        <div class="documents-grid">
+            <!-- Ligne 1 -->
+            <div class="document-row">
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
+                        <p class="document-desc">Test réseau</p>
+                        <a href="Compte_rendu_TP_B1_Parametrage_materiel_informatique.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 1,1 Mo</span>
+                    </div>
                 </div>
-                <div class="teacher-info">
-                    <h3 class="teacher-name">M. Sotoca</h3>
-                    <p class="teacher-subject">Réseaux</p>
-                    <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
+                        <p class="document-desc">Test Logiciels diagnostic</p>
+                        <a href="Compte_rendu_TP_logiciels_diagnostic.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 2,2 Mo</span>
+                    </div>
                 </div>
-                <button class="consult-btn">
-                    <i class="fas fa-folder-open"></i> Consulter
-                </button>
-            </div>
-
-            <div id="sotoca-documents" class="documents-container">
-                <div class="documents-grid">
-                    <!-- Ligne 1 -->
-                    <div class="document-row">
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
-                                <p class="document-desc">Test réseau</p>
-                                <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 1,1 Mo</span>
-                            </div>
-                        </div>
-
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
-                                <p class="document-desc">Test Logiciels diagnostic</p>
-                                <a href="Compte rendu TP les logiciels de diagnostic.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 2,2 Mo</span>
-                            </div>
-                        </div>
-
-                        <div class="document-card">
-                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
-                            <div class="document-content">
-                                <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
-                                <p class="document-desc">Logiciels de captures d'écran</p>
-                                <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download>
-                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                                </a>
-                                <span class="file-info">PDF - 287 Ko</span>
-                            </div>
-                        </div>
+                <div class="document-card">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
+                    <div class="document-content">
+                        <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
+                        <p class="document-desc">Logiciels de captures d'écran</p>
+                        <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download>
+                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                        </a>
+                        <span class="file-info">PDF - 287 Ko</span>
                     </div>
                 </div>
             </div>
+          
+           <!-- Ligne 2 -->
+<div class="document-row">
+    <div class="document-card">
+        <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="TP4">
+        <div class="document-content">
+            <h4 class="document-title">Compte rendu B1 TP05</h4>
+            <p class="document-desc">Commandes CMD</p>
+            <a href="Compte rendu B1 TP05.pdf" download>
+                <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+            </a>
+            <a href="Carte mentale — récapitulatif des commandes.pdf" download>
+                <button class="download-btn"><i class="fas fa-download"></i> Télécharger carte mentale (PDF)</button>
+            </a>
+            <span class="file-info">PDF - 1,393 Ko</span>
         </div>
-        <!-- /M. Sotoca -->
     </div>
-</section>
+</div>
 
 <style>
 .teacher-section {
@@ -1296,6 +1306,7 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
     </script>
 </body>
 </html>
+
 
 
 
