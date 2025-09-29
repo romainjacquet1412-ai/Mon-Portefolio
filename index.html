@@ -976,83 +976,134 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
             </div>
         </div>
 
-       <!-- Enseignant 2: M. Sotoca -->
-<div class="teacher-section">
-    <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
-        <div class="teacher-avatar anonymous-avatar">
-            <i class="fas fa-user"></i>
-        </div>
-        <div class="teacher-info">
-            <h3 class="teacher-name">M. Sotoca</h3>
-            <p class="teacher-subject">Réseaux</p>
-            <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
-        </div>
-        <button class="consult-btn">
-            <i class="fas fa-folder-open"></i> Consulter
-        </button>
-    </div>
+        <!-- Enseignant 2: M. Sotoca -->
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
+                <div class="teacher-avatar anonymous-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="teacher-info">
+                    <h3 class="teacher-name">M. Sotoca</h3>
+                    <p class="teacher-subject">Réseaux</p>
+                    <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
+                </div>
+                <button class="consult-btn">
+                    <i class="fas fa-folder-open"></i> Consulter
+                </button>
+            </div>
 
-    <div id="sotoca-documents" class="documents-container">
-        <div class="documents-grid">
-            <!-- Ligne 1 -->
-            <div class="document-row">
-                <div class="document-card">
-                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
-                    <div class="document-content">
-                        <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
-                        <p class="document-desc">Test réseau</p>
-                        <a href="Compte_rendu_TP_B1_Parametrage_materiel_informatique.pdf" download>
-                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                        </a>
-                        <span class="file-info">PDF - 1,1 Mo</span>
+            <div id="sotoca-documents" class="documents-container">
+                <div class="documents-grid">
+                    <!-- Ligne 1 -->
+                    <div class="document-row">
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
+                                <p class="document-desc">Test réseau</p>
+                                <a href="Compte_rendu_TP_B1_Parametrage_materiel_informatique.pdf" download>
+                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                                </a>
+                                <span class="file-info">PDF - 1,1 Mo</span>
+                            </div>
+                        </div>
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
+                                <p class="document-desc">Test Logiciels diagnostic</p>
+                                <a href="Compte_rendu_TP_logiciels_diagnostic.pdf" download>
+                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                                </a>
+                                <span class="file-info">PDF - 2,2 Mo</span>
+                            </div>
+                        </div>
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
+                                <p class="document-desc">Logiciels de captures d'écran</p>
+                                <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download>
+                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                                </a>
+                                <span class="file-info">PDF - 287 Ko</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="document-card">
-                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
-                    <div class="document-content">
-                        <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
-                        <p class="document-desc">Test Logiciels diagnostic</p>
-                        <a href="Compte_rendu_TP_logiciels_diagnostic.pdf" download>
-                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                        </a>
-                        <span class="file-info">PDF - 2,2 Mo</span>
-                    </div>
-                </div>
-                <div class="document-card">
-                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
-                    <div class="document-content">
-                        <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
-                        <p class="document-desc">Logiciels de captures d'écran</p>
-                        <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download>
-                            <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-                        </a>
-                        <span class="file-info">PDF - 287 Ko</span>
+                  
+                    <!-- Ligne 2 -->
+                    <div class="document-row">
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="TP4">
+                            <div class="document-content">
+                                <h4 class="document-title">Compte rendu B1 TP05</h4>
+                                <p class="document-desc">Commandes CMD</p>
+                                <a href="Compte rendu B1 TP05.pdf" download>
+                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
+                                </a>
+                                <a href="Carte mentale — récapitulatif des commandes.pdf" download>
+                                    <button class="download-btn"><i class="fas fa-download"></i> Télécharger carte mentale (PDF)</button>
+                                </a>
+                                <span class="file-info">PDF - 1,393 Ko</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-          
-           <!-- Ligne 2 -->
-<div class="document-row">
-    <div class="document-card">
-        <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="TP4">
-        <div class="document-content">
-            <h4 class="document-title">Compte rendu B1 TP05</h4>
-            <p class="document-desc">Commandes CMD</p>
-            <a href="Compte rendu B1 TP05.pdf" download>
-                <button class="download-btn"><i class="fas fa-download"></i> Télécharger (PDF)</button>
-            </a>
-            <a href="Carte mentale — récapitulatif des commandes.pdf" download>
-                <button class="download-btn"><i class="fas fa-download"></i> Télécharger carte mentale (PDF)</button>
-            </a>
-            <span class="file-info">PDF - 1,393 Ko</span>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">Contactez-moi</h2>
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="contact-info">
+                    <p><i class="fas fa-phone contact-icon"></i> 06.31.57.22.39</p>
+                    <p><i class="fas fa-envelope contact-icon"></i> romain.jacquet1412@orange.fr</p>
+                    <p><i class="fas fa-map-marker-alt contact-icon"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <form id="contactForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Votre nom" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Votre email" required>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Sujet" required>
+                    <textarea class="form-control" rows="5" placeholder="Votre message" required></textarea>
+                    <button type="submit" class="btn btn-download">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
+    </div>
+</footer>
 
 <style>
 .teacher-section {
     width: 100%;
-    margin-bottom: 40px; /* espace entre enseignants */
+    margin-bottom: 40px;
 }
 
 .documents-grid {
@@ -1086,52 +1137,17 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
 }
 </style>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contactez-moi</h2>
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone contact-icon"></i> 06.31.57.22.39</p>
-                        <p><i class="fas fa-envelope contact-icon"></i> romain.jacquet1412@orange.fr</p>
-                        <p><i class="fas fa-map-marker-alt contact-icon"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</p>
-                    </div>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <form id="contactForm">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Votre nom" required>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" placeholder="Votre email" required>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Sujet" required>
-                        <textarea class="form-control" rows="5" placeholder="Votre message" required></textarea>
-                        <button type="submit" class="btn btn-download">Envoyer le message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p>&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
-        </div>
-    </footer>
-
+<script>
+// Fonction pour afficher/masquer les documents
+function toggleDocuments(id) {
+    const element = document.getElementById(id);
+    if (element.style.display === 'block') {
+        element.style.display = 'none';
+    } else {
+        element.style.display = 'block';
+    }
+}
+</script>
 
     <!-- Project Modals -->
     <!-- Modal 1 -->
@@ -1306,6 +1322,7 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
     </script>
 </body>
 </html>
+
 
 
 
