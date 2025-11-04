@@ -522,6 +522,56 @@ taskkill /IM notepad.exe /F
             font-size: 2rem;
         }
         
+        /* Veille Technologique Section */
+        .veille-technologique {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .veille-intro {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .veille-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .veille-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0;
+        }
+        
+        .veille-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .veille-table td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: top;
+        }
+        
+        .veille-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .veille-table tr:last-child td {
+            border-bottom: none;
+        }
+        
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .hero h1 {
@@ -569,6 +619,15 @@ taskkill /IM notepad.exe /F
             
             .documents-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .veille-table {
+                overflow-x: auto;
+                display: block;
+            }
+            
+            .veille-table table {
+                min-width: 800px;
             }
         }
     </style>
@@ -1252,54 +1311,71 @@ taskkill /IM notepad.exe /F
     </div>
 </div>
 
-<style>
-.teacher-section {
-    width: 100%;
-    margin-bottom: 40px;
-}
+<!-- Veille Technologique Section -->
+<section id="veille-technologique" class="veille-technologique">
+    <div class="container">
+        <h2 class="section-title">Veille Technologique</h2>
+        
+        <div class="veille-intro">
+            <h3>Suivi des dernières innovations et tendances en automatisation et robotique</h3>
+            <p>Cette veille technologique présente les avancées récentes dans le domaine de la robotique et de l'automatisation, avec un focus sur les technologies émergentes et leurs applications pratiques.</p>
+        </div>
 
-.documents-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.document-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.document-card {
-    flex: 0 0 calc(33.333% - 20px);
-    box-sizing: border-box;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .document-card {
-        flex: 0 0 calc(50% - 20px);
-    }
-}
-
-@media (max-width: 768px) {
-    .document-card {
-        flex: 0 0 100%;
-    }
-}
-</style>
-
-<script>
-// Fonction pour afficher/masquer les documents
-function toggleDocuments(id) {
-    const element = document.getElementById(id);
-    if (element.style.display === 'block') {
-        element.style.display = 'none';
-    } else {
-        element.style.display = 'block';
-    }
-}
-</script>
+        <div class="veille-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Technologie / Sujet</th>
+                        <th>Entreprise</th>
+                        <th>Problème</th>
+                        <th>Avantage</th>
+                        <th>Description</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07/10/2024</td>
+                        <td>Robotique collaborative avancée</td>
+                        <td>Universal Robots</td>
+                        <td>Coût d'implémentation élevé pour les PME</td>
+                        <td>Sécurité accrue pour les opérateurs humains</td>
+                        <td>Nouvelle génération de robots collaboratifs avec des capteurs de sécurité améliorés et une programmation intuitive par démonstration.</td>
+                        <td>Universal Robots</td>
+                    </tr>
+                    <tr>
+                        <td>07/10/2024</td>
+                        <td>IA pour la maintenance prédictive</td>
+                        <td>Siemens</td>
+                        <td>Nécessite une grande quantité de données</td>
+                        <td>Réduction des temps d'arrêt machines</td>
+                        <td>Nouveaux algorithmes d'intelligence artificielle permettant de prédire les pannes des machines industrielles avec une précision de 95%.</td>
+                        <td>Siemens</td>
+                    </tr>
+                    <tr>
+                        <td>15/10/2024</td>
+                        <td>Robot Néo - Robot humanoïde</td>
+                        <td>NEO Home Robot</td>
+                        <td>Autonomie énergétique limitée, vie privée corrompue</td>
+                        <td>Polyvalence dans les tâches minimes</td>
+                        <td>Lancement du robot humanoïde Néo capable d'interagir avec des environnements non structurés et d'apprendre de nouvelles tâches par imitation.</td>
+                        <td>1x.tech</td>
+                    </tr>
+                    <tr>
+                        <td>21/10/2024</td>
+                        <td>Robotique médicale</td>
+                        <td>Intuitive Surgical</td>
+                        <td>Courbe d'apprentissage pour les chirurgiens</td>
+                        <td>Précision chirurgicale améliorée</td>
+                        <td>Nouveaux instruments chirurgicaux pour le système da Vinci permettant des interventions moins invasives avec une précision accrue.</td>
+                        <td>Intuitive Surgical</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
 <!-- Contact Section -->
 <section id="contact" class="contact">
