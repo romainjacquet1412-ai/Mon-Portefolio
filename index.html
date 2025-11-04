@@ -26,78 +26,49 @@ taskkill /IM notepad.exe /F  <!DOCTYPE html>
             overflow-x: hidden;
         }
         
-        /* Navigation */
-        .navbar {
-            background-color: rgba(10, 25, 47, 0.95) !important;
-            padding: 15px 0;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-brand {
-            color: var(--accent-color) !important;
-            font-weight: 700;
-        }
-        
-        .nav-link {
-            color: #fff !important;
-            font-weight: 500;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        .nav-link:hover {
-            color: var(--accent-color) !important;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #112240 100%);
-            color: white;
-            padding: 150px 0 100px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-        }
-        
-        .hero-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn-download {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-download:hover {
-            background-color: #4ecdb4;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
+       /* Navigation */
+.navbar {
+    background-color: rgba(10, 25, 47, 0.95) !important;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: var(--accent-color) !important;
+    font-weight: 700;
+}
+
+.navbar-nav {
+    display: flex; /* Force tous les items sur une ligne */
+    flex-wrap: nowrap; /* Empêche le retour à la ligne */
+}
+
+.nav-item {
+    white-space: nowrap; /* Empêche le texte de se casser */
+}
+
+.nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Pour forcer le menu mobile à être toujours horizontal */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        flex-direction: row !important;
+    }
+    .navbar-nav {
+        flex-direction: row !important;
+        justify-content: flex-end;
+    }
+}
+
         
         /* Section Titles */
         .section-title {
@@ -1550,6 +1521,7 @@ function toggleDocuments(id) {
     </script>
 </body>
 </html>
+
 
 
 
