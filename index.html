@@ -315,7 +315,7 @@ taskkill /IM notepad.exe /F
             margin-bottom: 15px;
         }
         
-      /* Compte Rendu Section */
+       /* Compte Rendu Section */
         .compte-rendu {
             padding: 100px 0;
             background-color: var(--light-bg);
@@ -1159,7 +1159,7 @@ taskkill /IM notepad.exe /F
             <div class="document-row">
                 <!-- Document 13 -->
                 <div class="document-card">
-                    <img src="https://www.cnil.fr/sites/default/files/styles/contenu_generique_visuel/public/thumbnails/image/00_logo-1.png?itok=bdT6-lUn" 
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" 
                          class="document-img" alt="Réseaux">
                     <div class="document-content">
                         <h4 class="document-title">Compte rendu TP-B3-PIA2</h4>
@@ -1310,6 +1310,55 @@ taskkill /IM notepad.exe /F
         </div>
     </div>
 </div>
+
+<style>
+.teacher-section {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.documents-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.document-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.document-card {
+    flex: 0 0 calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .document-card {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .document-card {
+        flex: 0 0 100%;
+    }
+}
+</style>
+
+<script>
+// Fonction pour afficher/masquer les documents
+function toggleDocuments(id) {
+    const element = document.getElementById(id);
+    if (element.style.display === 'block') {
+        element.style.display = 'none';
+    } else {
+        element.style.display = 'block';
+    }
+}
+</script>
 
 <!-- Veille Technologique Section -->
 <section id="veille-technologique" class="veille-technologique">
@@ -1614,4 +1663,5 @@ taskkill /IM notepad.exe /F
     </script>
 </body>
 </html>
+
 
