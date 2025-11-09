@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+</head>
+<body>
+    <form action="sendToMySecondYearInIut.php" method="get"> 
+        <fieldset>
+            <legend>Informations personnels</legend> 
+            <div>
+                <label for="surname">Nom*</label>
+                <input id="surname" name="uname" type="text" required> 
+            </div>
+            <div>
+                <label for="prenom">Prénom</label> 
+                <input id="prenom" name="prenom" type="text"> 
+            </div>
+            <div>
+                <label for="sexe">Sexe</label> 
+                <select id="sexe" name="sexe"> 
+                    <option value="homme">Homme</option> 
+                    <option value="femme">Femme</option> 
+                </select>
+            </div>
+            <div>
+                <label for="age">Age</label>
+                <input id="age" name="age" type="date"> 
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="yourmail@domain.com" required> 
+            </div>
+            <div>
+                <label for="pays">Pays d'origine</label>
+                <select id="pays" name="pays" required>
+                    <option value="us">U.S.A</option>
+                    <option value="fr" selected>France</option>
+                    <option value="cn">Chine</option>
+                    <option value="vn">Viêt Nam</option>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Les sports de combats </legend> 
+            <div>
+                <legend>Arts-Martiaux préférés</legend> 
+                <label>
+                    <input type="checkbox" name="arts[]" value="kungfu">
+                    Kung fu
+                </label>
+                <label>
+                    <input type="checkbox" name="arts[]" value="karate">
+                    Karaté
+                </label>
+                <label>
+                    <input type="checkbox" name="arts[]" value="fullcontact">
+                    Fullcontact
+                </label>
+            </div>
+            <div>
+                <label for="niveauKarate">Niveau en karaté (0 à 5)</label>
+                <input id="niveauKarate" name="niveauKarate" type="number" min="0" max="5" step="1"> 
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Inscription</legend>
+            <div>
+                <label for="niveauEngagement">Niveau d'engagement</label>
+                <select id="niveauEngagement" name="niveauEngagement">
+                    <option value="basique">Basique (5€)</option>
+                    <option value="gold">Gold (15€)</option>
+                    <option value="tataneInYourFace">Tatane in your face (50€)</option>
+                </select>
+            </div>
+            <div>
+                <label for="mdp">Mot de passe</label>
+                <input id="mdp" name="mdp" type="password" pattern="[A-Za-z0-9]+" minlength="8" required> 
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <input id="message" name="message" type="textarea" placeholder="Un inscrit sera tiré au sort, et verra son message transmis à Chuck Norris !"> <!-- champ pour l'âge -->
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="clauses" required>
+                    J’ai bien lu les clauses que je n’ai pas lues
+                </label>
+            </div>
+        </fieldset>
+        
+        
+        <input type="submit" value="Envoyer"> 
+    </form> 
+</body>
+</html>
