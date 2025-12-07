@@ -315,150 +315,171 @@ taskkill /IM notepad.exe /F
             margin-bottom: 15px;
         }
         
-       /* Compte Rendu Section */
-        .compte-rendu {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .teacher-section {
-            margin-bottom: 50px;
-        }
-        
-        .teacher-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .teacher-header:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .teacher-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 20px;
-            border: 3px solid var(--primary-color);
-        }
-        
-        .teacher-info {
-            flex-grow: 1;
-        }
-        
-        .teacher-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--secondary-color);
-        }
-        
-        .teacher-subject {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-        
-        .consult-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-        
-        .consult-btn:hover {
-            background: #2980b9;
-        }
-        
-        .documents-container {
-            display: none;
-            margin-top: 20px;
-        }
-        
-        .documents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .document-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .document-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .document-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--primary-color);
-        }
-        
-        .document-content {
-            padding: 15px;
-        }
-        
-        .document-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--secondary-color);
-        }
-        
-        .document-desc {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        
-        .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 8px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .download-btn:hover {
-            background: #2980b9;
-        }
-        
-        .file-info {
-            display: block;
-            text-align: center;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #95a5a6;
-        }
+      /* Compte Rendu Section */
+.compte-rendu {
+    padding: 100px 0;
+    background-color: var(--light-bg);
+}
+
+/* Section professeur */
+.teacher-section {
+    margin-bottom: 50px;
+}
+
+/* Header du professeur */
+.teacher-header {
+    display: flex;
+    align-items: center; /* aligne verticalement avatar + texte + bouton */
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 20px; /* espace entre avatar et texte */
+}
+
+.teacher-header:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Avatar du professeur */
+.teacher-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    flex-shrink: 0; /* empêche l’avatar de se rétrécir */
+}
+
+/* Conteneur texte */
+.teacher-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centre verticalement nom et matière */
+    flex-grow: 1;
+}
+
+/* Nom et matière */
+.teacher-name, .teacher-subject {
+    margin: 0; /* supprime marges par défaut */
+}
+
+.teacher-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.teacher-subject {
+    color: #7f8c8d;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+/* Bouton de consultation */
+.consult-btn {
+    margin-left: auto; /* pousse le bouton à droite */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.consult-btn:hover {
+    background: #2980b9;
+}
+
+/* Conteneur des documents */
+.documents-container {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Grille des documents */
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Carte document */
+.document-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.document-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image document */
+.document-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* Contenu document */
+.document-content {
+    padding: 15px;
+}
+
+.document-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+}
+
+.document-desc {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Bouton téléchargement */
+.download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+    background: #2980b9;
+}
+
+.file-info {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #95a5a6;
+}
+
 
         /* Contact Section */
         .contact {
@@ -1764,6 +1785,7 @@ function toggleDocuments(id) {
     </script>
 </body>
 </html>
+
 
 
 
