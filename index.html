@@ -1,883 +1,535 @@
-fcotaskkill /IM notepad.exe /F  
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Romain Jacquet - Portfolio BTS SIO</title>
-    <!-- Bootstrap 5 CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #3a6cf4;
-            --secondary-color: #0a192f;
-            --accent-color: #64ffda;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --dark-bg: #0a192f;
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #4cc9f0;
+            --accent: #f72585;
+            --dark: #0b132b;
+            --text-main: #2b2d42;
+            --text-light: #8d99ae;
+            --bg-light: #f8f9fa;
+            --gradient-main: linear-gradient(135deg, #4361ee 0%, #4cc9f0 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            background-color: #fcfcfc;
             overflow-x: hidden;
+            line-height: 1.7;
         }
-        
-        /* Navigation */
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- Navbar --- */
         .navbar {
-            background-color: rgba(10, 25, 47, 0.95) !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 15px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
             transition: all 0.3s ease;
         }
         
         .navbar-brand {
-            color: var(--accent-color) !important;
-            font-weight: 700;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
         }
         
         .nav-link {
-            color: #fff !important;
+            color: var(--text-main) !important;
             font-weight: 500;
-            margin: 0 10px;
-            transition: color 0.3s;
-            white-space: nowrap;
+            padding: 8px 18px !important;
+            border-radius: 50px;
+            transition: all 0.3s;
+            margin: 0 2px;
         }
         
-        .nav-link:hover {
-            color: var(--accent-color) !important;
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+            background-color: rgba(67, 97, 238, 0.08);
         }
-        
-        /* Correction pour la navigation - TOUT SUR UNE LIGNE */
-        .navbar-nav {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        
-        .navbar-nav::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .navbar-collapse {
-            flex-basis: auto !important;
-            flex-grow: 0 !important;
-        }
-        
-        /* Hero Section */
+
+        /* --- Hero --- */
         .hero {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #112240 100%);
-            color: white;
-            padding: 150px 0 100px;
+            padding: 160px 0 100px;
+            background: radial-gradient(circle at top right, rgba(76, 201, 240, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(67, 97, 238, 0.15), transparent 40%);
             position: relative;
             overflow: hidden;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-size: 4rem;
+            font-weight: 800;
             margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
+            line-height: 1.1;
         }
         
         .hero-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
+            width: 350px;
+            height: 350px;
             object-fit: cover;
-            border: 5px solid var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 40px; /* Squircle */
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1), -20px -20px 60px rgba(255,255,255,0.8);
+            animation: float 6s ease-in-out infinite;
         }
-        
-        .btn-download {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
+
+        /* --- Buttons --- */
+        .btn-modern {
+            background: var(--gradient-main);
+            color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 12px 35px;
+            border-radius: 50px;
             font-weight: 600;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
             transition: all 0.3s;
         }
-        
-        .btn-download:hover {
-            background-color: #4ecdb4;
+        .btn-modern:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+            color: white;
         }
-        
-        /* Section Titles */
+        .btn-outline-modern {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .btn-outline-modern:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- Cards Global --- */
+        .card-glass {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .card-glass:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        /* --- Section Titles --- */
         .section-title {
-            position: relative;
-            margin-bottom: 60px;
-            font-weight: 700;
             text-align: center;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 70px;
+            color: var(--dark);
+            position: relative;
         }
-        
-        .section-title:after {
+        .section-title::after {
             content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
+            width: 60px;
+            height: 5px;
+            background: var(--gradient-main);
+            margin: 15px auto 0;
+            border-radius: 10px;
+        }
+
+        section { padding: 100px 0; }
+
+        /* --- Diplomas --- */
+        .diploma-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(67, 97, 238, 0.1);
             width: 80px;
-            height: 4px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-        }
-        
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        /* Skills Section */
-        .skills {
-            padding: 100px 0;
-        }
-        
-        .skill-item {
-            margin-bottom: 30px;
-        }
-        
-        .skill-info {
+            height: 80px;
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
+
+        /* --- Skills --- */
         .skill-bar {
             height: 10px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .skill-progress {
-            height: 100%;
-            background-color: var(--primary-color);
-            border-radius: 5px;
-            position: relative;
-            transition: width 1s ease-in-out;
-        }
-        
-        /* Projects Section */
-        .projects {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .project-card {
+            background: #e9ecef;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            margin-bottom: 30px;
+            margin-top: 10px;
         }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
         }
-        
-        .project-img {
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .project-content {
-            padding: 20px;
-        }
-        
-        /* Experience Section */
-        .experience {
-            padding: 100px 0;
-        }
-        
+
+        /* --- Experience Timeline --- */
         .timeline {
             position: relative;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
-        
         .timeline::after {
             content: '';
             position: absolute;
-            width: 6px;
-            background-color: var(--primary-color);
+            width: 4px;
+            background-color: #e9ecef;
             top: 0;
             bottom: 0;
             left: 50%;
-            margin-left: -3px;
+            margin-left: -2px;
+            border-radius: 2px;
         }
-        
         .timeline-item {
             padding: 10px 40px;
             position: relative;
             width: 50%;
-            box-sizing: border-box;
         }
-        
         .timeline-item::after {
             content: '';
             position: absolute;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
+            right: -10px;
             background-color: white;
-            border: 4px solid var(--primary-color);
+            border: 4px solid var(--primary);
             border-radius: 50%;
-            top: 15px;
-            right: -13px;
+            top: 20px;
             z-index: 1;
         }
-        
-        .left {
-            left: 0;
-        }
-        
-        .right {
-            left: 50%;
-        }
-        
-        .left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid var(--primary-color);
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent var(--primary-color);
-        }
-        
-        .right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid var(--primary-color);
-            border-width: 10px 10px 10px 0;
-            border-color: transparent var(--primary-color) transparent transparent;
-        }
-        
-        .right::after {
-            left: -13px;
-        }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -10px; }
         
         .timeline-content {
-            padding: 20px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Diplomas Section */
-        .diplomas {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .diploma-card {
-            background: white;
-            border-radius: 10px;
             padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: 0.3s;
         }
+        .timeline-content:hover { transform: translateX(5px); }
+
+        /* --- Rapports / Accordion --- */
+        .teacher-section { margin-bottom: 30px; }
         
-        .diploma-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .diploma-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-      /* Compte Rendu Section */
-.compte-rendu {
-    padding: 100px 0;
-    background-color: var(--light-bg);
-}
-
-/* Section professeur */
-.teacher-section {
-    margin-bottom: 50px;
-}
-
-/* Header du professeur */
-.teacher-header {
-    display: flex;
-    align-items: center; /* aligne verticalement avatar + texte + bouton */
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    gap: 20px; /* espace entre avatar et texte */
-}
-
-.teacher-header:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Avatar du professeur */
-.teacher-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--primary-color);
-    flex-shrink: 0; /* empêche l’avatar de se rétrécir */
-}
-
-/* Conteneur texte */
-.teacher-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centre verticalement nom et matière */
-    flex-grow: 1;
-}
-
-/* Nom et matière */
-.teacher-name, .teacher-subject {
-    margin: 0; /* supprime marges par défaut */
-}
-
-.teacher-name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--secondary-color);
-}
-
-.teacher-subject {
-    color: #7f8c8d;
-    font-size: 1rem;
-    margin-top: 5px;
-}
-
-/* Bouton de consultation */
-.consult-btn {
-    margin-left: auto; /* pousse le bouton à droite */
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background 0.3s ease;
-}
-
-.consult-btn:hover {
-    background: #2980b9;
-}
-
-/* Conteneur des documents */
-.documents-container {
-    display: none;
-    margin-top: 20px;
-}
-
-/* Grille des documents */
-.documents-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-/* Carte document */
-.document-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-}
-
-.document-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Image document */
-.document-img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-bottom: 3px solid var(--primary-color);
-}
-
-/* Contenu document */
-.document-content {
-    padding: 15px;
-}
-
-.document-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--secondary-color);
-}
-
-.document-desc {
-    color: #7f8c8d;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-/* Bouton téléchargement */
-.download-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 8px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.download-btn:hover {
-    background: #2980b9;
-}
-
-.file-info {
-    display: block;
-    text-align: center;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    color: #95a5a6;
-}
-
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
-        
-        .contact-info {
-            margin-bottom: 30px;
-        }
-        
-        .contact-icon {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-right: 15px;
-        }
-        
-        .form-control {
-            border: none;
-            border-bottom: 2px solid #e9ecef;
-            border-radius: 0;
-            padding: 15px 0;
-            margin-bottom: 30px;
-        }
-        
-        .form-control:focus {
-            box-shadow: none;
-            border-bottom-color: var(--primary-color);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .social-icons {
-            margin-bottom: 20px;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 24px;
-            margin: 0 15px;
+        .teacher-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
             transition: all 0.3s;
         }
-        
-        .social-icons a:hover {
-            color: var(--accent-color);
+        .teacher-header:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        
-        /* Anonymous avatar style */
-        .anonymous-avatar {
+        .teacher-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f1f3f5;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #ddd;
-            color: #777;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-right: 20px;
         }
         
-        /* Veille Technologique Section */
-        .veille-technologique {
-            padding: 100px 0;
-            background-color: var(--light-bg);
-        }
+        .documents-container { display: none; margin-top: 30px; }
         
-        .veille-intro {
-            text-align: center;
-            margin-bottom: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .veille-table {
+        .document-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
+        .document-card:hover { transform: translateY(-5px); }
+        .document-img { height: 160px; object-fit: cover; width: 100%; }
+        .document-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         
-        .veille-table table {
+        .btn-download-sm {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 0;
-        }
-        
-        .veille-table th {
-            background-color: var(--primary-color);
+            background: var(--dark);
             color: white;
-            font-weight: 600;
-            padding: 15px;
-            text-align: left;
-            border-bottom: 2px solid #dee2e6;
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.3s;
         }
-        
-        .veille-table td {
-            padding: 15px;
-            border-bottom: 1px solid #dee2e6;
-            vertical-align: top;
+        .btn-download-sm:hover { background: var(--primary); color: white; }
+
+        /* --- Veille --- */
+        .veille-table {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            background: white;
         }
-        
-        .veille-table tr:hover {
-            background-color: #f8f9fa;
+        .veille-table th { background: var(--dark); color: white; padding: 20px; font-weight: 500; border: none; }
+        .veille-table td { padding: 20px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
         }
-        
-        .veille-table tr:last-child td {
-            border-bottom: none;
+        .social-icon-btn {
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            transition: 0.3s;
+            text-decoration: none;
         }
-        
-        /* Responsive Adjustments */
+        .social-icon-btn:hover { background: var(--primary); transform: translateY(-5px); }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item::before {
-                left: 60px;
-                border: medium solid var(--primary-color);
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--primary-color) transparent transparent;
-            }
-            
-            .left::after, .right::after {
-                left: 18px;
-            }
-            
-            .right {
-                left: 0;
-            }
-            
-            .teacher-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .teacher-avatar {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .veille-table {
-                overflow-x: auto;
-                display: block;
-            }
-            
-            .veille-table table {
-                min-width: 800px;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .left::after, .right::after { left: 21px; }
+            .right { left: 0; }
+            .teacher-header { flex-direction: column; text-align: center; gap: 15px; }
+            .teacher-avatar { margin-right: 0; }
         }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar">
-    <!-- Navigation -->
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Romain Jacquet</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#home">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">À propos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#diplomas">Diplômes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#skills">Compétences</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#projects">Projets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#experience">Expérience</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#compte-rendu">Compte Rendu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#veille-technologique">Veille Technologique</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
+
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Romain Jacquet</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="fas fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#diplomas">Diplômes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Expérience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#compte-rendu">Rapports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#veille-technologique">Veille</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-modern btn-sm px-4" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 hero-content">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
+                    <span class="badge bg-light text-primary border rounded-pill px-3 py-2 mb-3">Portfolio BTS SIO</span>
                     <h1>Romain Jacquet</h1>
-                    <p>Étudiant en BTS SIO</p>
-                    <div class="mb-4">
-                        <a href="#contact" class="btn btn-download me-3">Me contacter</a>
-                        <button id="downloadCV" class="btn btn-download">Télécharger mon CV</button>
-                    </div>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                    <p class="lead text-muted mb-4">Étudiant passionné par l'infrastructure, les réseaux et la cybersécurité. En route vers l'excellence technique.</p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#contact" class="btn btn-modern">Me contacter</a>
+                        <button id="downloadCV" class="btn btn-outline-modern">Télécharger CV <i class="fas fa-download ms-2"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="My photo.jpeg" alt="My photo" class="hero-img">
+                    <img src="My photo.jpeg" alt="Romain Jacquet" class="hero-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about reveal">
         <div class="container">
             <h2 class="section-title">À propos de moi</h2>
-            <div class="row">
+            <div class="row g-5">
                 <div class="col-lg-6">
-                    <h3>Qui suis-je ?</h3>
-                    <p>Je suis Romain Jacquet, étudiant en BTS Services Informatiques aux Organisations (SIO). Passionné par l'informatique et les nouvelles technologies, je possède une solide formation en maintenance informatique, réseaux et téléphonie, avec plusieurs expériences en entreprise qui m'ont permis de développer mes compétences techniques et professionnelles.</p>
-                    <p>Je suis titulaire du BAC PRO SN option ARED (mention Bien), du B1 (habilitation électrique), du SST (Sauveteur Secouriste du Travail) et du Brevet des Collèges. Je recherche actuellement une alternance pour mettre en pratique mes compétences et continuer à me développer professionnellement dans le domaine des services informatiques.</p>
-                </div>
-                <div class="col-lg-6">
-                    <h3>Informations personnelles</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Âge:</strong> 17 ans</p>
-                            <p><strong>Téléphone:</strong> 06.31.57.22.39</p>
-                            <p><strong>Email:</strong> romain.jacquet1412@orange.fr</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Adresse:</strong> 2 Chemin du Moulin Villeneuve, 05500 Poligny</p>
-                            <p><strong>Permis:</strong> Permis B</p>
-                            <p><strong>Disponibilité:</strong> Immédiate</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Diplomas Section -->
-    <section id="diplomas" class="diplomas">
-        <div class="container">
-            <h2 class="section-title">Mes diplômes et certifications</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="diploma-card">
-                        <div class="diploma-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h4>BAC PRO SN option ARED</h4>
-                        <p class="text-primary">2025 - Admis mention Bien</p>
-                        <p>Formation aux systèmes numériques avec spécialisation en Audiovisuel, Réseaux et Équipements Domestiques</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="diploma-card">
-                        <div class="diploma-icon">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <h4>SST (Sauveteur Secouriste du Travail)</h4>
-                        <p class="text-primary">2023 - Lycée Poutrain</p>
-                        <p>Certification de secourisme en milieu professionnel</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="diploma-card">
-                        <div class="diploma-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h4>B1 (Habilitation électrique)</h4>
-                        <p class="text-primary">2023 - Lycée Poutrain</p>
-                        <p>Habilitation pour les travaux d'ordre électrique</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="diploma-card">
-                        <div class="diploma-icon">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <h4>Brevet des Collèges</h4>
-                        <p class="text-primary">2022 - Collège de Saint Bonnet</p>
-                        <p>Diplôme national du bremet</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-        
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Mes compétences</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Application des procédures</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Adaptation</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%"></div>
-                        </div>
+                    <div class="card-glass">
+                        <h3 class="fw-bold mb-4">Qui suis-je ?</h3>
+                        <p>Je suis Romain Jacquet, étudiant en BTS Services Informatiques aux Organisations (SIO). Passionné par l'informatique et les nouvelles technologies, je possède une solide formation en maintenance informatique, réseaux et téléphonie, avec plusieurs expériences en entreprise qui m'ont permis de développer mes compétences techniques et professionnelles.</p>
+                        <p class="mb-0">Je suis titulaire du BAC PRO SN option ARED (mention Bien), du B1 (habilitation électrique), du SST (Sauveteur Secouriste du Travail) et du Brevet des Collèges. Je recherche actuellement une alternance pour mettre en pratique mes compétences.</p>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Organisation</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Autonomie</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-5">
-                <h3 class="text-center mb-4">Centres d'intérêt</h3>
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <div class="p-4">
-                            <i class="fas fa-laptop-code fa-3x mb-3 text-primary"></i>
-                            <h4>Informatique</h4>
-                            <p>Passionné par les réseaux et la cybersécurité</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <div class="p-4">
-                            <i class="fas fa-running fa-3x mb-3 text-primary"></i>
-                            <h4>Sport</h4>
-                            <p>Activités physiques régulières pour maintenir un bon état de santé</p>
-                        </div>
+                    <div class="card-glass" style="background: var(--dark); color: white;">
+                        <h3 class="fw-bold mb-4">Infos Personnelles</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-birthday-cake text-info me-3"></i> 17 ans</li>
+                            <li class="mb-3"><i class="fas fa-phone text-info me-3"></i> 06.31.57.22.39</li>
+                            <li class="mb-3"><i class="fas fa-envelope text-info me-3"></i> romain.jacquet1412@orange.fr</li>
+                            <li class="mb-3"><i class="fas fa-map-marker-alt text-info me-3"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</li>
+                            <li class="mb-3"><i class="fas fa-car text-info me-3"></i> Permis B</li>
+                            <li><i class="fas fa-check-circle text-info me-3"></i> Disponibilité Immédiate</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="diplomas" class="reveal" style="background-color: #f8f9fa;">
         <div class="container">
-            <h2 class="section-title">Mes projets</h2>
-            <div class="row">
-                <!-- Project 1 -->
+            <h2 class="section-title">Diplômes & Certifications</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h5>BAC PRO SN (ARED)</h5>
+                        <p class="text-primary small fw-bold">2025 - Mention Bien</p>
+                        <p class="small text-muted">Systèmes Numériques, Audiovisuel, Réseaux</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-certificate"></i></div>
+                        <h5>SST</h5>
+                        <p class="text-primary small fw-bold">2023 - Lycée Poutrain</p>
+                        <p class="small text-muted">Sauveteur Secouriste du Travail</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-bolt"></i></div>
+                        <h5>Habilitation B1</h5>
+                        <p class="text-primary small fw-bold">2023 - Lycée Poutrain</p>
+                        <p class="small text-muted">Travaux d'ordre électrique</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-school"></i></div>
+                        <h5>Brevet des Collèges</h5>
+                        <p class="text-primary small fw-bold">2022</p>
+                        <p class="small text-muted">Collège de Saint Bonnet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Application des procédures</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Adaptation</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Organisation</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Autonomie</span><span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5 justify-content-center g-4">
+                <div class="col-md-5 text-center">
+                    <div class="card-glass h-100">
+                        <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                        <h4>Informatique</h4>
+                        <p class="text-muted">Passionné par les réseaux et la cybersécurité</p>
+                    </div>
+                </div>
+                <div class="col-md-5 text-center">
+                    <div class="card-glass h-100">
+                        <i class="fas fa-running fa-3x text-primary mb-3"></i>
+                        <h4>Sport</h4>
+                        <p class="text-muted">Activités physiques régulières pour maintenir la forme</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Projets Réalisés</h2>
+            <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
-                    <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1159&q=80" alt="Film Les Éclaireurs" class="project-img img-fluid">
-                        <div class="project-content">
+                    <div class="card-glass p-0 overflow-hidden h-100">
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1159&q=80" alt="Film Les Éclaireurs" class="img-fluid" style="height:200px; width:100%; object-fit:cover;">
+                        <div class="p-4">
                             <h4>Film "Les Éclaireurs"</h4>
-                            <p>Participation à la conception du film sur la Résistance Haut-Alpine avec le Lycée Poutrain.</p>
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#projectModal4">Voir plus</button>
+                            <p class="text-muted small">Conception du film sur la Résistance Haut-Alpine avec le Lycée Poutrain.</p>
+                            <button class="btn btn-outline-modern btn-sm w-100" data-bs-toggle="modal" data-bs-target="#projectModal4">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -885,997 +537,627 @@ fcotaskkill /IM notepad.exe /F
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
+    <section id="experience" class="reveal">
         <div class="container">
-            <h2 class="section-title">Mon expérience</h2>
+            <h2 class="section-title">Parcours Professionnel</h2>
             <div class="timeline">
-                <!-- Experience 1 -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h4>Intermarché La Fare en Champsaur</h4>
-                        <p class="text-primary">Juillet - Août 2025</p>
-                        <p>Mise en rayon</p>
+                        <h4>Intermarché La Fare</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">Juillet - Août 2025</span>
+                        <p class="mb-0">Mise en rayon</p>
                     </div>
                 </div>
-                <!-- Experience 2 -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <h4>Lycée Saint Joseph - Gap</h4>
-                        <p class="text-primary">Décembre 2024</p>
-                        <p>Création de VLANs sur Switch (Tagged-Untagged)</p>
+                        <span class="badge bg-primary rounded-pill mb-2">Décembre 2024</span>
+                        <p class="mb-0">Création de VLANs sur Switch (Tagged-Untagged)</p>
                     </div>
                 </div>
-                <!-- Experience 3 -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <h4>ACI - Gap</h4>
-                        <p class="text-primary">Septembre - Octobre 2024</p>
-                        <p>Préparation de poste (PC), Réseau Téléphonie</p>
+                        <span class="badge bg-primary rounded-pill mb-2">Sept - Oct 2024</span>
+                        <p class="mb-0">Préparation de poste (PC), Réseau Téléphonie</p>
                     </div>
                 </div>
-                <!-- Experience 4 -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <h4>ACI - Gap</h4>
-                        <p class="text-primary">Juin - Juillet 2024</p>
-                        <p>Maintenance informatique, Réseau, Téléphonie, Dépannage à domicile</p>
+                        <span class="badge bg-primary rounded-pill mb-2">Juin - Juil 2024</span>
+                        <p class="mb-0">Maintenance informatique, Réseau, Téléphonie, Dépannage</p>
                     </div>
                 </div>
-                <!-- Experience 5 -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h4>Sun Valley Systems - Gap</h4>
-                        <p class="text-primary">Mai - Juin 2023 & Septembre - Octobre 2023</p>
-                        <p>Maintenance informatique, Soudure à l'étain sur composant informatique</p>
+                        <h4>Sun Valley Systems</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">2023</span>
+                        <p class="mb-0">Maintenance informatique, Soudure sur composant</p>
                     </div>
                 </div>
-                <!-- Experience 6 -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <h4>In Store Solutions</h4>
-                        <p class="text-primary">Stage de 3ème</p>
-                        <p>Stage d'observation: Programmation</p>
+                        <span class="badge bg-secondary rounded-pill mb-2">Stage 3ème</span>
+                        <p class="mb-0">Stage d'observation: Programmation</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-<section id="compte-rendu" class="compte-rendu">
-    <div class="container">
-        <h2 class="section-title">Mes comptes rendus</h2>
+    <section id="compte-rendu" class="reveal" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Comptes Rendus</h2>
 
-        <div class="teachers-row">
-
-            <!-- ================= Mme Beauvallet ================= -->
             <div class="teacher-section">
                 <div class="teacher-header" onclick="toggleDocuments('beauvallet-documents')">
-                    <div class="teacher-avatar anonymous-avatar">
-                        <i class="fas fa-user"></i>
+                    <div class="teacher-avatar"><i class="fas fa-code"></i></div>
+                    <div class="flex-grow-1">
+                        <h4 class="mb-0">Mme Beauvallet</h4>
+                        <p class="text-muted mb-0">Programmation</p>
                     </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">Mme Beauvallet</h3>
-                        <p class="teacher-subject">Programmation</p>
-                        <p>Consultez tous les comptes rendus des TP réalisés avec Mme Beauvallet</p>
-                    </div>
-                    <button class="consult-btn">
-                        <i class="fas fa-folder-open"></i> Consulter
-                    </button>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
                 </div>
 
                 <div id="beauvallet-documents" class="documents-container">
-                    <div class="documents-grid">
-
-                        <!-- Ligne 1 -->
-                        <div class="document-row">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algorithmes">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algo">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP code.org</h4>
-                                    <p class="document-desc">Introduction aux concepts de base des algorithmes</p>
-                                    <a href="Romain Jacquet Compte rendu TP code.org.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="Romain_Jacquet_TP_code_org.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 384 Ko | ZIP - 1,1 Mo</span>
+                                    <h6>TP code.org</h6>
+                                    <p class="small text-muted flex-grow-1">Concepts de base algorithmes</p>
+                                    <a href="Romain Jacquet Compte rendu TP code.org.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Romain_Jacquet_TP_code_org.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
                                 <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Mes premiers pas en Java</h4>
-                                    <p class="document-desc">Premiers pas en Java</p>
-                                    <a href="Compte rendu TP Mes premiers pas en Java.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="TP_Java.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 319 Ko | ZIP - 950 Ko</span>
+                                    <h6>TP Premiers pas Java</h6>
+                                    <p class="small text-muted flex-grow-1">Introduction Java</p>
+                                    <a href="Compte rendu TP Mes premiers pas en Java.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_Java.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
                                 <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Portfolio">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Création du Portfolio</h4>
-                                    <p class="document-desc">Création d'un portfolio</p>
-                                    <a href="Compte rendu TP Création du PortFolio.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="Portfolio.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 668 Ko | ZIP - 2,3 Mo</span>
+                                    <h6>TP Création Portfolio</h6>
+                                    <p class="small text-muted flex-grow-1">Création portfolio</p>
+                                    <a href="Compte rendu TP Création du PortFolio.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Portfolio.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 2 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
                                 <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP HTML</h4>
-                                    <p class="document-desc">Premiers pas en HTML</p>
-                                    <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="TP_HTML.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 818 Ko | ZIP - 1,5 Mo</span>
+                                    <h6>TP HTML</h6>
+                                    <p class="small text-muted flex-grow-1">Bases HTML</p>
+                                    <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_HTML.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
+                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java TP3">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP3 Java</h4>
-                                    <p class="document-desc">Java</p>
-                                    <a href="Compte rendu TP3 Java.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="TP3_Java.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 342 Ko | ZIP - 1,2 Mo</span>
+                                    <h6>TP3 Java</h6>
+                                    <p class="small text-muted flex-grow-1">Exercices Java</p>
+                                    <a href="Compte rendu TP3 Java.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP3_Java.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
                                 <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu CSS</h4>
-                                    <p class="document-desc">Introduction aux bases du CSS</p>
-                                    <a href="Compte rendu TP CSS.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="TP_CSS.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 324 Ko | ZIP - 1,1 Mo</span>
+                                    <h6>TP CSS</h6>
+                                    <p class="small text-muted flex-grow-1">Bases CSS</p>
+                                    <a href="Compte rendu TP CSS.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_CSS.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 3 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="JavaScript">
+                                <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML CSS Avancé">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP HTML CSS avancé</h4>
-                                    <p class="document-desc">HTML & CSS</p>
-                                    <a href="Compte rendu TP HTML-CSS Avancé.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="Romain Jacquet CSS-HTML.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 248 Ko | ZIP - 821 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS Avancé">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Cybersécurité</h4>
-                                    <p class="document-desc">Cybersécurité</p>
-                                    <a href="Compte rendu TP 1 -B3.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="TP_Cybersecurite.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 503 Ko | ZIP - 1,8 Mo</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Projet Final">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP 4 Shifumi</h4>
-                                    <p class="document-desc">JAVA</p>
-                                    <a href="Compte rendu TP4 Shifumi.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="shifumi.java" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 115 Ko | ZIP - 5,7 Ko</span>
+                                    <h6>TP HTML CSS Avancé</h6>
+                                    <p class="small text-muted flex-grow-1">Perfectionnement</p>
+                                    <a href="Compte rendu TP HTML-CSS Avancé.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Romain Jacquet CSS-HTML.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 4 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://www.iim.fr/ecole-web/wp-content/uploads/2017/01/HTML5.jpg" class="document-img" alt="Python">
+                                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Cyber">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP HTML CSS avancé 2/2</h4>
-                                    <p class="document-desc">CSS & HTML</p>
-                                    <a href="Compte rendu TP HTML-CSS Avancé2.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="TP-CSS HTML.zip" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 243 Ko | ZIP - 820 Ko</span>
+                                    <h6>TP Cybersécurité</h6>
+                                    <p class="small text-muted flex-grow-1">Initiation Cyber</p>
+                                    <a href="Compte rendu TP 1 -B3.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_Cybersecurite.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://img-c.udemycdn.com/course/750x422/3755872_becb_2.jpg" class="document-img" alt="Python Avancé">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Shifumi">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP5 Java</h4>
-                                    <p class="document-desc">ALGO vers JAVA</p>
-                                    <a href="Compte rendu B1 TP5 JAVA.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 295 Ko</span>
+                                    <h6>TP 4 Shifumi</h6>
+                                    <p class="small text-muted flex-grow-1">Jeu Java</p>
+                                    <a href="Compte rendu TP4 Shifumi.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="shifumi.java" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.iim.fr/ecole-web/wp-content/uploads/2017/01/HTML5.jpg" class="document-img" alt="HTML5">
+                                <div class="document-content">
+                                    <h6>TP HTML CSS Avancé 2</h6>
+                                    <p class="small text-muted flex-grow-1">Suite perfectionnement</p>
+                                    <a href="Compte rendu TP HTML-CSS Avancé2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP-CSS HTML.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://img-c.udemycdn.com/course/750x422/3755872_becb_2.jpg" class="document-img" alt="Java5">
+                                <div class="document-content">
+                                    <h6>TP5 Java</h6>
+                                    <p class="small text-muted flex-grow-1">Algo vers Java</p>
+                                    <a href="Compte rendu B1 TP5 JAVA.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
                                 <img src="https://www.cnil.fr/sites/default/files/styles/contenu_generique_visuel/public/thumbnails/image/00_logo-1.png?itok=bdT6-lUn" class="document-img" alt="PIA">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP 2-B3-PIA</h4>
-                                    <p class="document-desc">PIA</p>
-                                    <a href="Compte rendu TP 2 -B3-PIA.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 796 Ko</span>
+                                    <h6>TP 2-B3-PIA</h6>
+                                    <p class="small text-muted flex-grow-1">Analyse PIA</p>
+                                    <a href="Compte rendu TP 2 -B3-PIA.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 5 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://www.cnil.fr/sites/default/files/styles/contenu_generique_visuel/public/thumbnails/image/00_logo-1.png?itok=bdT6-lUn" class="document-img" alt="Réseaux">
+                                <img src="https://www.cnil.fr/sites/default/files/styles/contenu_generique_visuel/public/thumbnails/image/00_logo-1.png?itok=bdT6-lUn" class="document-img" alt="PIA2">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP-B3-PIA2</h4>
-                                    <p class="document-desc">PIA</p>
-                                    <a href="Compte rendu TP-B3-PIA2.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="pia.json" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 127 Ko | ZIP - 21,0 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://perso.univ-lyon1.fr/marc.buffat/COURS/BOOK_INPROS_HTML/_images/cloud_fonction.png" class="document-img" alt="Projet Python">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP B1 TP06-Fonctions et procédures</h4>
-                                    <p class="document-desc">Fonctions et procédures</p>
-                                    <a href="Compte rendu TP B1 TP06-Fonctions et procédures.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 253 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://www.gekkode.com/wp-content/uploads/2022/03/Formulaire-HTML-4-bonnes-pratiques.png" class="document-img" alt="Nouveau TP">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Atelier 07 TD4 Les formulaires</h4>
-                                    <p class="document-desc">Les Formulaires</p>
-                                    <a href="Compte rendu Tp les formulaires.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="inscription.html" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 177 Ko | ZIP - 3,8 Ko</span>
+                                    <h6>TP-B3-PIA2</h6>
+                                    <p class="small text-muted flex-grow-1">Suite PIA</p>
+                                    <a href="Compte rendu TP-B3-PIA2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="pia.json" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> JSON</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 6 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://www.adpremier.fr/wp-content/uploads/2023/06/responsive-design.jpeg" class="document-img" alt="Responsive Design">
+                                <img src="https://perso.univ-lyon1.fr/marc.buffat/COURS/BOOK_INPROS_HTML/_images/cloud_fonction.png" class="document-img" alt="Fonctions">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Atelier 07 TD5 Responsive Design</h4>
-                                    <p class="document-desc">Responsive Design</p>
-                                    <a href="Compte rendu TP Responsive design.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 117 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://m.media-amazon.com/images/I/81O9xum4D6L.jpg" class="document-img" alt="Framework">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Bataille Navale</h4>
-                                    <p class="document-desc">Java</p>
-                                    <a href="Compte rendu TP Bataille Navale .pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="BatailleNavale.java" download>
-                                        <button class="download-btn"><i class="fas fa-file-archive"></i> Télécharger ZIP</button>
-                                    </a>
-                                    <span class="file-info">PDF - 224 Ko | ZIP - 7,5 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://imtech.imt.fr/wp-content/uploads/2017/11/Visuel_Une_900x1350.jpg" class="document-img" alt="Cybersécurité">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP thème 2 : chapitre 3 : td1</h4>
-                                    <p class="document-desc">Cybersécurité</p>
-                                    <a href="Compte renduTCH3TD1.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 98,1 Ko</span>
+                                    <h6>TP06 Fonctions</h6>
+                                    <p class="small text-muted flex-grow-1">Procédures & Fonctions</p>
+                                    <a href="Compte rendu TP B1 TP06-Fonctions et procédures.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 7 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Document 19">
+                                <img src="https://www.gekkode.com/wp-content/uploads/2022/03/Formulaire-HTML-4-bonnes-pratiques.png" class="document-img" alt="Formulaires">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte Rendu Atelier 10 _ TP2 Sécurité informatique</h4>
-                                    <p class="document-desc">Sécurité informatique</p>
-                                    <a href="Compte Rendu Atelier 10 _ TP2 Sécurité informatique.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 271 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz_4bkOdrJ38q7ryKEojTe7aTr5M88cLaEgQ&s" class="document-img" alt="Document 20">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu Base de données (PHP)</h4>
-                                    <p class="document-desc">Base de données</p>
-                                    <a href="Compte rendu Base de données (PHP).pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 390 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://static.cachem.fr/uploads/2025/08/debian-13.jpg" class="document-img" alt="Document 21">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP TH2 : CH3 TD2</h4>
-                                    <a href="Compte rendu TP TH2 _ CH3 TD2.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 193 Ko</span>
+                                    <h6>TP Les formulaires</h6>
+                                    <p class="small text-muted flex-grow-1">Création formulaires</p>
+                                    <a href="Compte rendu Tp les formulaires.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="inscription.html" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-code"></i> HTML</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 8 : Document 22, 23, 24 -->
-                        <div class="document-row">
-                            <!-- Document 22 -->
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="Document 22">
+                                <img src="https://www.adpremier.fr/wp-content/uploads/2023/06/responsive-design.jpeg" class="document-img" alt="Responsive">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu Javascript</h4>
-                                    <a href="Compte rendu Javascript.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 1,3 Mo</span>
-                                </div>
-                            </div>
-
-                            <!-- Document 23 -->
-                            <div class="document-card">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAsy338-smhpCZOZxXE9DUx3fHaBoQpWk-TQ&s" alt="Document 23">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP 11 Modélisation de Ledlerc acec AnalyseSI</h4>
-                                    <a href="Compte rendu TP 11 Modélisation de Leclerc avec AnalyseSI.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 229 Ko</span>
-                                </div>
-                            </div>
-
-                            <!-- Document 24 -->
-                            <div class="document-card">
-                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="Document 24">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Atelier 12 Javascript</h4>
-                                    <a href="Compte rendu TP Atelier 12 _ Javascript .pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 733 Ko</span>
+                                    <h6>TP Responsive Design</h6>
+                                    <p class="small text-muted flex-grow-1">Adaptation mobile</p>
+                                    <a href="Compte rendu TP Responsive design.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 9 : Document 25 et 26 -->
-                        <div class="document-row">
-                            <!-- Document 25 -->
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="Document 25">
+                                <img src="https://m.media-amazon.com/images/I/81O9xum4D6L.jpg" class="document-img" alt="Bataille">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Atelier 13 Javascript</h4>
-                                    <a href="Compte rendu TP Atelier 13 _ Javascript.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 689 Ko</span>
-                                </div>
-                            </div>
-
-                            <!-- Document 26 -->
-                            <div class="document-card">
-                                <img src="https://us.123rf.com/450wm/asnia/asnia1707/asnia170700318/83206225-ic%C3%B4ne-de-base-de-donn%C3%A9es-sql-conception-de-logo-application-ui-ou-ux-inscription-orange-avec.jpg?ver=6" alt="Document 26">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP BDD-EXO</h4>
-                                    <a href="Compte rendu TP BDD-Exo.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 515 Ko</span>
+                                    <h6>TP Bataille Navale</h6>
+                                    <p class="small text-muted flex-grow-1">Jeu Java</p>
+                                    <a href="Compte rendu TP Bataille Navale .pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="BatailleNavale.java" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-code"></i> JAVA</a>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://imtech.imt.fr/wp-content/uploads/2017/11/Visuel_Une_900x1350.jpg" class="document-img" alt="Thème2">
+                                <div class="document-content">
+                                    <h6>TP Thème 2 Ch3 TD1</h6>
+                                    <p class="small text-muted flex-grow-1">Cybersécurité</p>
+                                    <a href="Compte renduTCH3TD1.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Secu">
+                                <div class="document-content">
+                                    <h6>TP2 Sécurité informatique</h6>
+                                    <p class="small text-muted flex-grow-1">Atelier 10</p>
+                                    <a href="Compte Rendu Atelier 10 _ TP2 Sécurité informatique.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz_4bkOdrJ38q7ryKEojTe7aTr5M88cLaEgQ&s" class="document-img" alt="PHP">
+                                <div class="document-content">
+                                    <h6>BDD PHP</h6>
+                                    <p class="small text-muted flex-grow-1">Base de données</p>
+                                    <a href="Compte rendu Base de données (PHP).pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://static.cachem.fr/uploads/2025/08/debian-13.jpg" class="document-img" alt="TH2">
+                                <div class="document-content">
+                                    <h6>TP TH2 CH3 TD2</h6>
+                                    <p class="small text-muted flex-grow-1">Système</p>
+                                    <a href="Compte rendu TP TH2 _ CH3 TD2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="JS">
+                                <div class="document-content">
+                                    <h6>Compte rendu Javascript</h6>
+                                    <p class="small text-muted flex-grow-1">Bases JS</p>
+                                    <a href="Compte rendu Javascript.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAsy338-smhpCZOZxXE9DUx3fHaBoQpWk-TQ&s" class="document-img" alt="Leclerc">
+                                <div class="document-content">
+                                    <h6>TP 11 Leclerc</h6>
+                                    <p class="small text-muted flex-grow-1">Modélisation AnalyseSI</p>
+                                    <a href="Compte rendu TP 11 Modélisation de Leclerc avec AnalyseSI.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="JS12">
+                                <div class="document-content">
+                                    <h6>Atelier 12 Javascript</h6>
+                                    <p class="small text-muted flex-grow-1">Exercices JS</p>
+                                    <a href="Compte rendu TP Atelier 12 _ Javascript .pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="JS13">
+                                <div class="document-content">
+                                    <h6>Atelier 13 Javascript</h6>
+                                    <p class="small text-muted flex-grow-1">Suite JS</p>
+                                    <a href="Compte rendu TP Atelier 13 _ Javascript.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://us.123rf.com/450wm/asnia/asnia1707/asnia170700318/83206225-ic%C3%B4ne-de-base-de-donn%C3%A9es-sql-conception-de-logo-application-ui-ou-ux-inscription-orange-avec.jpg?ver=6" class="document-img" alt="BDD">
+                                <div class="document-content">
+                                    <h6>TP BDD-EXO</h6>
+                                    <p class="small text-muted flex-grow-1">Exercices BDD</p>
+                                    <a href="Compte rendu TP BDD-Exo.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-            <!-- ================= M. Sotoca ================= -->
             <div class="teacher-section">
                 <div class="teacher-header" onclick="toggleDocuments('sotoca-documents')">
-                    <div class="teacher-avatar anonymous-avatar">
-                        <i class="fas fa-user"></i>
+                    <div class="teacher-avatar"><i class="fas fa-network-wired"></i></div>
+                    <div class="flex-grow-1">
+                        <h4 class="mb-0">M. Sotoca</h4>
+                        <p class="text-muted mb-0">Réseaux</p>
                     </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">M. Sotoca</h3>
-                        <p class="teacher-subject">Réseaux</p>
-                        <p>Consultez tous les comptes rendus des TP réalisés avec M. Sotoca</p>
-                    </div>
-                    <button class="consult-btn">
-                        <i class="fas fa-folder-open"></i> Consulter
-                    </button>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
                 </div>
 
                 <div id="sotoca-documents" class="documents-container">
-                    <div class="documents-grid">
-
-                        <!-- Ligne 1 -->
-                        <div class="document-row">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Configuration VLAN">
+                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Matériel">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP B1 Paramétrage matériel informatique</h4>
-                                    <p class="document-desc">Test réseau</p>
-                                    <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 1,1 Mo</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Logiciels diagnostic">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Logiciels de diagnostic</h4>
-                                    <p class="document-desc">Test Logiciels diagnostic</p>
-                                    <a href="Compte rendu TP les logiciels de diagnostic.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 2,2 Mo</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Documentation">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Documentation avec captures</h4>
-                                    <p class="document-desc">Logiciels de captures d'écran</p>
-                                    <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 287 Ko</span>
+                                    <h6>TP B1 Paramétrage</h6>
+                                    <p class="small text-muted flex-grow-1">Test réseau</p>
+                                    <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 2 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="TP4">
+                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Diag">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu B1 TP05</h4>
-                                    <p class="document-desc">Commandes CMD</p>
-                                    <a href="Compte rendu B1 TP05.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <a href="Carte mentale — récapitulatif des commandes.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger carte mentale (PDF)</button>
-                                    </a>
-                                    <span class="file-info">PDF - 1,393 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://images.frandroid.com/wp-content/uploads/2023/12/synology-ds223plus-5-scaled.jpg" class="document-img" alt="Serveur NAS Synology DS223+">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP Serveur NAS</h4>
-                                    <p class="document-desc">Configuration Serveur NAS</p>
-                                    <a href="Compte rendu B3 TP02 Le serveur NAS.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 140 Ko</span>
-                                </div>
-                            </div>
-
-                            <div class="document-card">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Command_Prompt_on_Windows_10_RTM.png" class="document-img" alt="Invite de commandes Windows">
-                                <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP06 La société TechCorpl</h4>
-                                    <p class="document-desc">Commande DOS/CMD</p>
-                                    <a href="CompterenduTPB1TP06.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 402 Ko</span>
+                                    <h6>Logiciels diagnostic</h6>
+                                    <p class="small text-muted flex-grow-1">Tests logiciels</p>
+                                    <a href="Compte rendu TP les logiciels de diagnostic.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Ligne 3 -->
-                        <div class="document-row">
+                        <div class="col-md-6 col-lg-4">
                             <div class="document-card">
-                                <img src="https://www.reseau-mesure.com/wp-content/uploads/2018/11/AdobeStock_153484570-300x200.jpeg" class="document-img" alt="TP05">
+                                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Doc">
                                 <div class="document-content">
-                                    <h4 class="document-title">Compte rendu TP05 B3 Cybersécurité données hachées</h4>
-                                    <p class="document-desc">Cybersécurité</p>
-                                    <a href="Compte rendu TP05 B3_ Cybersécurité - données hachées.pdf" download>
-                                        <button class="download-btn"><i class="fas fa-download"></i> Télécharger PDF</button>
-                                    </a>
-                                    <span class="file-info">PDF - 159 Ko</span>
+                                    <h6>Documentation</h6>
+                                    <p class="small text-muted flex-grow-1">Captures d'écran</p>
+                                    <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CMD">
+                                <div class="document-content">
+                                    <h6>TP B1 TP05</h6>
+                                    <p class="small text-muted flex-grow-1">Commandes CMD</p>
+                                    <a href="Compte rendu B1 TP05.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Carte mentale — récapitulatif des commandes.pdf" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-pdf"></i> Carte</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.frandroid.com/wp-content/uploads/2023/12/synology-ds223plus-5-scaled.jpg" class="document-img" alt="NAS">
+                                <div class="document-content">
+                                    <h6>TP Serveur NAS</h6>
+                                    <p class="small text-muted flex-grow-1">Config Synology</p>
+                                    <a href="Compte rendu B3 TP02 Le serveur NAS.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Command_Prompt_on_Windows_10_RTM.png" class="document-img" alt="TechCorpl">
+                                <div class="document-content">
+                                    <h6>TP06 TechCorpl</h6>
+                                    <p class="small text-muted flex-grow-1">Commandes DOS</p>
+                                    <a href="CompterenduTPB1TP06.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.reseau-mesure.com/wp-content/uploads/2018/11/AdobeStock_153484570-300x200.jpeg" class="document-img" alt="Hachage">
+                                <div class="document-content">
+                                    <h6>TP05 B3 Cybersécurité</h6>
+                                    <p class="small text-muted flex-grow-1">Données hachées</p>
+                                    <a href="Compte rendu TP05 B3_ Cybersécurité - données hachées.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
     
-<style>
-.teacher-section {
-    width: 100%;
-    margin-bottom: 40px;
-}
+    <section id="veille-technologique" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Veille Technologique</h2>
+            
+            <div class="text-center mb-5">
+                <span class="badge bg-info text-dark mb-3 rounded-pill px-3 py-2">Actualisé Janvier 2026</span>
+                <h3>L'Intelligence Artificielle Début 2026</h3>
+                <p class="text-muted">Analyse de la transition vers les systèmes autonomes.</p>
+            </div>
 
-.documents-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+            <div class="card-glass p-4 mb-4">
+                <h5><i class="fas fa-tools text-primary me-2"></i>Méthodologie</h5>
+                <p>Suivi via Google Alerts, Feedly, X (Twitter) et analyse via Gemini/Perplexity.</p>
+            </div>
 
-.document-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+            <div class="table-responsive veille-table mb-4">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Sujet</th>
+                            <th>Acteur</th>
+                            <th>Analyse</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>02/01/2026</td>
+                            <td>Agents Autonomes</td>
+                            <td>OpenAI / Apple</td>
+                            <td>Automatisation workflows vs Risques cyber</td>
+                        </tr>
+                        <tr>
+                            <td>15/12/2025</td>
+                            <td>Souveraineté IA</td>
+                            <td>Mistral AI</td>
+                            <td>Indépendance EU vs Puissance US</td>
+                        </tr>
+                        <tr>
+                            <td>28/11/2025</td>
+                            <td>Vidéo-to-Action</td>
+                            <td>DeepMind</td>
+                            <td>Simulation robotique vs Droits d'auteur</td>
+                        </tr>
+                        <tr>
+                            <td>10/11/2025</td>
+                            <td>Gemini 3</td>
+                            <td>Google</td>
+                            <td>Moins d'hallucinations vs Latence</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-.document-card {
-    flex: 0 0 calc(33.333% - 20px);
-    box-sizing: border-box;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .document-card {
-        flex: 0 0 calc(50% - 20px);
-    }
-}
-
-@media (max-width: 768px) {
-    .document-card {
-        flex: 0 0 100%;
-    }
-}
-</style>
-
-<script>
-// Fonction pour afficher/masquer les documents
-function toggleDocuments(id) {
-    const element = document.getElementById(id);
-    if (element.style.display === 'block') {
-        element.style.display = 'none';
-    } else {
-        element.style.display = 'block';
-    }
-}
-</script>
-
-<section id="veille-technologique" class="veille-technologique">
-    <div class="container">
-        <h2 class="section-title"> Veille Technologique : L'Intelligence Artificielle Début 2026</h2>
-
-        <div class="veille-intro">
-            <h3>Suivi des dernières innovations et tendances en intelligence artificielle (Actualisé Janvier 2026)</h3>
-            <p>Cette veille technologique analyse la transition vers les <strong>systèmes autonomes de niveau 3</strong>, l'intégration massive de la vidéo générative (Sora, Veo) et l'émergence des modèles "Small Language Models" (SLM) pour le local. Elle démontre une <strong>méthodologie rigoureuse</strong> maintenue tout au long de l'année 2025 jusqu'à aujourd'hui.</p>
+            <div class="card-glass bg-dark text-white">
+                <h4 class="mb-3">Synthèse Janvier 2026</h4>
+                <ul>
+                    <li>L'Ère des Agents : L'IA agit directement sur l'OS.</li>
+                    <li>Edge AI : Traitement local sur les PC 2026 (NPU).</li>
+                    <li>Multimodalité Native : Texte/Audio/Vidéo en temps réel.</li>
+                    <li>Régulation : Application stricte de l'AI Act.</li>
+                </ul>
+            </div>
         </div>
+    </section>
 
-        <hr>
-
-        <div class="veille-methodologie">
-            <h3>🛠️ Méthodologie et Outils de Veille</h3>
-            <p>Le suivi est structuré pour capter l'innovation en temps réel grâce à un écosystème d'outils automatisés :</p>
-            <ul>
-                <li><strong>Google Alerts</strong> : Focus sur <em>Agents IA</em>, <em>AGI</em>, <em>Régulation IA (EU AI Act)</em> et <em>Open-source LLM</em>.</li>
-                <li><strong>Feedly & Inoreader</strong> : Centralisation des publications de DeepMind, OpenAI, Meta AI et des pré-publications ArXiv.</li>
-                <li><strong>X (Twitter) & LinkedIn</strong> : Analyse des retours d'expérience des développeurs et leaders d'opinion (Andrej Karpathy, Andrew Ng).</li>
-                <li><strong>Perplexity & Gemini</strong> : Utilisation de l'IA pour synthétiser les rapports hebdomadaires complexes.</li>
-            </ul>
-        </div>
-
-        <hr>
-
-        <div class="veille-table">
-            <h3 class="mt-4">🔍 Tableau de Veille Détaillé (Dernières Mises à Jour)</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Technologie / Sujet</th>
-                        <th>Entreprise / Acteur</th>
-                        <th>Outil de Découverte</th>
-                        <th>Analyse Personnelle (Enjeux & Limites)</th>
-                        <th>Description</th>
-                        <th>Source</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>02/01/2026</td>
-                        <td>Agents Autonomes de Navigation</td>
-                        <td>OpenAI / Apple</td>
-                        <td>Google Alerts</td>
-                        <td><strong>Enjeu :</strong> Automatisation complète des workflows bureautiques. <strong>Limite :</strong> Risques de cybersécurité liés à l'exécution de scripts automatiques.</td>
-                        <td>Lancement des premiers agents capables d'interagir directement avec l'OS pour exécuter des tâches multi-applications sans intervention humaine.</td>
-                        <td><a href="#" target="_blank">TechCrunch</a></td>
-                    </tr>
-                    <tr>
-                        <td>15/12/2025</td>
-                        <td>Souveraineté : Modèles Européens</td>
-                        <td>Mistral AI / Kyutai</td>
-                        <td>Feedly</td>
-                        <td><strong>Enjeu :</strong> Indépendance technologique et protection des données sensibles. <strong>Limite :</strong> Écart de puissance de calcul face aux hyperscalers US.</td>
-                        <td>Sortie de modèles spécialisés pour les secteurs régulés (santé, défense) avec une empreinte carbone optimisée.</td>
-                        <td><a href="#" target="_blank">Le Monde Informatique</a></td>
-                    </tr>
-                    <tr>
-                        <td>28/11/2025</td>
-                        <td>Vidéo-to-Action (V2A)</td>
-                        <td>Google DeepMind / Runway</td>
-                        <td>X Lists</td>
-                        <td><strong>Enjeu :</strong> Révolution du gaming et de la simulation robotique. <strong>Limite :</strong> Problématiques de droits d'auteur sur les contenus générés.</td>
-                        <td>L'IA est désormais capable de transformer une vidéo d'instruction en code exécutable pour des robots ou des avatars virtuels.</td>
-                        <td><a href="#" target="_blank">The Verge</a></td>
-                    </tr>
-                    <tr>
-                        <td>10/11/2025</td>
-                        <td>Gemini 3 — Raisonnement Avancé</td>
-                        <td>Google</td>
-                        <td>Flux RSS</td>
-                        <td><strong>Enjeu :</strong> Réduction drastique des hallucinations. <strong>Limite :</strong> Temps de latence plus élevé dû aux étapes de "réflexion" interne.</td>
-                        <td>Intégration d'un module de vérification factuelle en temps réel qui valide chaque étape du raisonnement avant de répondre.</td>
-                        <td><a href="#" target="_blank">Google Blog</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <hr>
-
-        <div class="veille-synthese">
-            <h3>📈 Synthèse et Analyse des Tendances Clés (Janvier 2026)</h3>
-            <p>Le paysage de l'IA en ce début d'année s'articule autour de quatre piliers :</p>
-            <ol>
-                <li>**L'Ère des Agents** : On ne parle plus de "Chatbots" mais d'agents capables d'agir. L'IA prend le contrôle de la souris et du clavier pour réaliser des processus métier complexes.</li>
-                <li>**L'IA "On-Device" (Edge AI)** : La tendance est au traitement local. Les nouveaux smartphones et PC de 2026 intègrent des NPU (Neural Processing Units) capables de faire tourner des modèles puissants sans connexion internet.</li>
-                <li>**Multimodalité Native** : La compréhension simultanée du texte, de l'image, de la vidéo et du son en temps réel est devenue le standard, permettant des interactions naturelles en mode "Live".</li>
-                <li>**Régulation et Éthique** : Avec la mise en application complète de l'IA Act, la transparence des algorithmes et le marquage (watermarking) des contenus générés deviennent obligatoires en Europe.</li>
-            </ol>
-            <blockquote class="blockquote">
-                <p class="mb-0"><strong>Conclusion :</strong> En 2026, l'IA devient invisible : elle s'intègre nativement dans les systèmes d'exploitation et les objets du quotidien, passant d'un outil de consultation à un moteur d'exécution autonome.</p>
-            </blockquote>
-        </div>
-
-    </div>
-</section>
-    
-<!-- Footer -->
-<footer>
-    <div class="container text-center">
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
-    </div>
-</footer>
-
-    <!-- Project Modals -->
-    <!-- Modal 1 -->
-    <div class="modal fade" id="projectModal1" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Création de VLAN</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1563207153-f403bf289096?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" class="img-fluid mb-4" alt="Création de VLAN">
-                    <p>Lors de mon stage au Lycée Saint Joseph à Gap en décembre 2024, j'ai travaillé sur la création et la configuration de VLANs sur des switches réseau.</p>
-                    <p>Mes responsabilités comprenaient :</p>
-                    <ul>
-                        <li>Configuration de VLANs tagged et untagged</li>
-                        <li>Gestion des priorités de trafic</li>
-                        <li>Test et validation de la connectivité entre VLANs</li>
-                        <li>Documentation des configurations mises en place</li>
-                    </ul>
-                    <p>Ce projet m'a permis de développer mes compétences en réseaux et en gestion de configurations complexes.</p>
+    <section id="contact" class="reveal" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Me Contacter</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card-glass p-5">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control rounded-4 py-3" placeholder="Votre Nom" required style="background:#f8f9fa; border:none;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control rounded-4 py-3" placeholder="Votre Email" required style="background:#f8f9fa; border:none;">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control rounded-4 py-3" placeholder="Sujet" style="background:#f8f9fa; border:none;">
+                            </div>
+                            <div class="mb-4">
+                                <textarea class="form-control rounded-4 py-3" rows="5" placeholder="Votre Message" required style="background:#f8f9fa; border:none;"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-modern w-100 py-3">Envoyer le message</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Modal 2 -->
-    <div class="modal fade" id="projectModal2" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Préparation de poste</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Préparation de poste">
-                    <p>Durant mon stage chez ACI à Gap en septembre-octobre 2024, j'ai été responsable de la préparation et de la configuration de postes informatiques.</p>
-                    <p>Mes missions comprenaient :</p>
-                    <ul>
-                        <li>Installation et configuration de systèmes d'exploitation</li>
-                        <li>Installation de logiciels et applications nécessaires</li>
-                        <li>Configuration réseau et téléphonie IP</li>
-                        <li>Tests de fonctionnement et résolution des problèmes</li>
-                        <li>Préparation de documentation utilisateur</li>
-                    </ul>
-                    <p>Cette expérience m'a permis d'approfondir mes connaissances en administration système et en support utilisateur.</p>
-                </div>
+    <footer>
+        <div class="container text-center">
+            <h3 class="fw-bold mb-4">Romain Jacquet</h3>
+            <div class="mb-4">
+                <a href="#" class="social-icon-btn"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:romain.jacquet1412@orange.fr" class="social-icon-btn"><i class="fas fa-envelope"></i></a>
             </div>
+            <p class="text-white-50 mb-0">&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- Modal 3 -->
-    <div class="modal fade" id="projectModal3" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Maintenance informatique</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Maintenance informatique">
-                    <p>Lors de mes stages chez ACI et Sun Valley Systems à Gap, j'ai effectué diverses missions de maintenance informatique.</p>
-                    <p>Mes activités comprenaient :</p>
-                    <ul>
-                        <li>Diagnostic et résolution de pannes matérielles et logicielles</li>
-                        <li>Maintenance préventive et corrective sur équipements informatiques</li>
-                        <li>Réparation par soudure de composants électroniques</li>
-                        <li>Dépannage à domicile pour les clients particuliers</li>
-                        <li>Gestion de parc informatique et inventaire</li>
-                    </ul>
-                    <p>Ces expériences m'ont permis de développer une solide expertise technique et un bon relationnel client.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 4 -->
     <div class="modal fade" id="projectModal4" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Film "Les Éclaireurs"</h5>
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 overflow-hidden">
+                <div class="modal-header border-0 p-4">
+                    <h5 class="modal-title fw-bold">Film "Les Éclaireurs"</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1159&q=80" class="img-fluid mb-4" alt="Film Les Éclaireurs">
-                    <p>Participation à la conception du film "Les Éclaireurs de la Résistance haut-alpine" de Danielle Racanière et Christophe Rosanvallon en 2025 avec le Lycée Pierre et Louis Poutrain.</p>
-                    <p>Mes contributions comprenaient :</p>
+                <div class="modal-body p-4 pt-0">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1159&q=80" class="img-fluid rounded-4 mb-4" alt="Film">
+                    <p>Participation à la conception du film sur la Résistance Haut-Alpine avec le Lycée Poutrain.</p>
+                    <h6>Mes missions :</h6>
                     <ul>
-                        <li>Participation à la conception et à la réalisation du film</li>
-                        <li>Collaboration avec l'équipe pédagogique et les autres étudiants</li>
-                        <li>Apprentissage des techniques audiovisuelles</li>
-                        <li>Participation aux différentes étapes de production</li>
+                        <li>Conception et réalisation</li>
+                        <li>Travail d'équipe</li>
+                        <li>Techniques audiovisuelles</li>
                     </ul>
-                    <p>Ce projet m'a permis de développer mes compétences en travail d'équipe et en gestion de projet.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap & JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Animation for skill bars
-        document.addEventListener('DOMContentLoaded', function() {
-            const skillBars = document.querySelectorAll('.skill-progress');
-            
-            // Function to animate skill bars when they come into view
-            function animateSkillBars() {
-                skillBars.forEach(bar => {
-                    const rect = bar.getBoundingClientRect();
-                    const isInViewport = rect.top <= (window.innerHeight || document.documentElement.clientHeight) && 
-                                        rect.bottom >= 0;
-                    
-                    if (isInViewport) {
-                        bar.style.width = bar.getAttribute('data-width');
-                    }
-                });
-            }
-            
-            // Initial check and then on scroll
-            animateSkillBars();
-            window.addEventListener('scroll', animateSkillBars);
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a.nav-link').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // CV Download functionality
-            document.getElementById('downloadCV').addEventListener('click', function() {
-                // Create a temporary link element
-                const link = document.createElement('a');
-                link.href = 'CV Romain Jacquet.pdf'; // This should point to your actual CV file
-                link.download = 'CV Romain Jacquet.pdf';
-                
-                // Simulate click to trigger download
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
-            
-            // Form submission
-            document.getElementById('contactForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Merci pour votre message ! Je vous répondrai très rapidement.');
-                this.reset();
-            });
-            
-            // Fonction pour afficher/masquer les documents
-            function toggleDocuments(id) {
-                const element = document.getElementById(id);
-                if (element.style.display === 'block') {
-                    element.style.display = 'none';
-                } else {
-                    element.style.display = 'block';
+        // Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
                 }
             }
-            
-            // Exposer la fonction globalement
-            window.toggleDocuments = toggleDocuments;
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Init
+
+        // Skill Bars
+        window.addEventListener('scroll', function() {
+            document.querySelectorAll('.skill-progress').forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if(rect.top < window.innerHeight) {
+                    bar.style.width = bar.getAttribute('data-width');
+                }
+            });
+        });
+
+        // Toggle Documents
+        function toggleDocuments(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+            } else {
+                el.style.display = 'block';
+                el.style.animation = 'fadeInUp 0.5s ease';
+            }
+        }
+
+        // CV Download
+        document.getElementById('downloadCV').addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.href = 'CV Romain Jacquet.pdf'; 
+            link.download = 'CV Romain Jacquet.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Form Submit
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci ! Votre message a été envoyé.');
+            this.reset();
         });
     </script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
