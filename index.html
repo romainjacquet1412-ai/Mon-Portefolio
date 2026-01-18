@@ -1070,24 +1070,21 @@
             </div>
         </div>
 
-        <div class="teacher-section">
-            <div class="teacher-header" onclick="toggleDocuments('s2-pcc')">
-                <div class="teacher-avatar" style="background: #fff8e1; color: #f57f17;"><i class="fas fa-certificate"></i></div>
-                <div class="flex-grow-1">
-                    <h4 class="mb-0">PCC</h4>
-                    <p class="text-muted mb-0">Parcours de certifications...</p>
-                </div>
-                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-            </div>
-            <div id="s2-pcc" class="documents-container">
+        <div id="s2-pcc" class="documents-container">
                 <div class="row g-4">
-                    <div class="col-12 text-center py-4 text-muted">
-                        <i class="fas fa-folder-open fa-2x mb-3 opacity-50"></i>
-                        <p>Aucun document pour le moment.</p>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="PCC">
+                            <div class="document-content">
+                                <h6>Compte rendu PCC</h6>
+                                <a href="Nom_De_Ton_Fichier_PCC.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-sisr')">
                 <div class="teacher-avatar" style="background: #e0f2f1; color: #00897b;"><i class="fas fa-server"></i></div>
@@ -1347,6 +1344,7 @@
     </style>
 </body>
 </html>
+
 
 
 
