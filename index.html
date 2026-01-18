@@ -607,7 +607,7 @@
         </div>
     </section>
 
-   <section id="compte-rendu" class="reveal" style="background-color: #f8f9fa;">
+  <section id="compte-rendu" class="reveal" style="background-color: #f8f9fa;">
     <div class="container">
         <h2 class="section-title">Comptes Rendus</h2>
 
@@ -1070,7 +1070,16 @@
             </div>
         </div>
 
-        <div id="s2-pcc" class="documents-container">
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-pcc')">
+                <div class="teacher-avatar" style="background: #fff8e1; color: #f57f17;"><i class="fas fa-certificate"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">PCC</h4>
+                    <p class="text-muted mb-0">Parcours de certifications</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-pcc" class="documents-container">
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-4">
                         <div class="document-card">
@@ -1085,6 +1094,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-sisr')">
                 <div class="teacher-avatar" style="background: #e0f2f1; color: #00897b;"><i class="fas fa-server"></i></div>
@@ -1344,6 +1355,7 @@
     </style>
 </body>
 </html>
+
 
 
 
