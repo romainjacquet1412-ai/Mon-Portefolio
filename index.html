@@ -1131,430 +1131,116 @@
     </div>
 </section>
     
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Veille Stratégique IA - Janvier 2026</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-dark: #0b0f19;
-            --bg-card: rgba(30, 41, 59, 0.4);
-            --border-glass: rgba(148, 163, 184, 0.1);
-            --accent-cyan: #06b6d4;
-            --accent-purple: #8b5cf6;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
-
-        /* --- GLASSMORPHISM COMPONENTS --- */
-        .glass-panel {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* --- HEADER --- */
-        .header-date {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--accent-cyan);
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-        }
+   <section id="veille-technologique" class="reveal">
+    <div class="container">
+        <h2 class="section-title">Veille Technologique</h2>
         
-        .pulse {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-cyan);
-            border-radius: 50%;
-            margin-right: 10px;
-            box-shadow: 0 0 0 rgba(6, 182, 212, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
-        }
-
-        /* --- KPI CARDS --- */
-        .kpi-card {
-            padding: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-        .kpi-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255,255,255,0.2);
-        }
-        .kpi-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-        .kpi-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-        }
-
-        /* --- TABLE STYLING --- */
-        .table-custom {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-        
-        .table-custom th {
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            font-weight: 600;
-        }
-
-        .table-custom td {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-glass);
-            vertical-align: top;
-        }
-
-        .table-custom tr:last-child td {
-            border-bottom: none;
-        }
-
-        .table-custom tr:hover td {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        /* --- TAGS & BADGES --- */
-        .category-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        
-        .cat-agent { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
-        .cat-dev { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3); }
-        .cat-hardware { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .cat-reg { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
-
-        .tool-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: white;
-            display: block;
-            margin-bottom: 4px;
-        }
-        
-        .tool-provider {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-        }
-
-        .impact-score {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            background: rgba(255,255,255,0.05);
-        }
-        
-        .score-critical { color: var(--accent-cyan); border: 2px solid var(--accent-cyan); box-shadow: 0 0 15px rgba(6, 182, 212, 0.2); }
-        .score-high { color: var(--accent-green); border: 2px solid var(--accent-green); }
-        .score-mid { color: var(--accent-purple); border: 2px solid var(--accent-purple); }
-
-        .feature-box {
-            background: rgba(255,255,255,0.03);
-            border-left: 3px solid var(--accent-cyan);
-            padding: 10px 15px;
-            border-radius: 0 6px 6px 0;
-            margin-bottom: 10px;
-        }
-        
-        .analysis-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-        
-        .analysis-list li {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .analysis-list i {
-            margin-top: 4px;
-            margin-right: 8px;
-            font-size: 0.8rem;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="container py-5">
-        
-        <div class="row mb-5 align-items-end">
-            <div class="col-lg-8">
-                <div class="header-date mb-3">
-                    <span class="pulse"></span> 20 JANVIER 2026
-                </div>
-                <h1 class="display-4 fw-bold mb-2">Radar Technologique IA</h1>
-                <p class="lead text-secondary">
-                    Analyse détaillée des outils de <span class="text-white">Niveau 3 (Agents Autonomes)</span> et de l'infrastructure décentralisée (Edge).
-                </p>
-            </div>
-            <div class="col-lg-4 text-end">
-                <button class="btn btn-outline-info rounded-pill px-4 py-2">
-                    <i class="fas fa-download me-2"></i>Exporter le Rapport
-                </button>
-            </div>
+        <div class="text-center mb-4">
+            <span class="badge bg-info text-dark mb-3 rounded-pill px-3 py-2">
+                <i class="fas fa-sync-alt me-1"></i> Actualisé le 14 Janvier 2026
+            </span>
+            <h3>L'Intelligence Artificielle </h3>
+            <p class="text-muted mx-auto" style="max-width: 700px;">
+                Analyse de la transition vers les systèmes autonomes (Niveau 3), l'intégration native sur OS et la régulation post-AI Act.
+            </p>
         </div>
 
-        <div class="row g-4 mb-5">
-            <div class="col-md-3">
-                <div class="glass-panel kpi-card">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="kpi-value text-info">AGENTS</div>
-                            <div class="kpi-label">Dominante Techno</div>
-                        </div>
-                        <i class="fas fa-robot fa-2x text-info opacity-50"></i>
-                    </div>
-                    <div class="mt-3 small text-success"><i class="fas fa-arrow-up"></i> +140% adoption vs 2025</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="glass-panel kpi-card">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="kpi-value" style="color: var(--accent-purple);">EDGE AI</div>
-                            <div class="kpi-label">Architecture</div>
-                        </div>
-                        <i class="fas fa-microchip fa-2x opacity-50" style="color: var(--accent-purple);"></i>
-                    </div>
-                    <div class="mt-3 small text-white-50">Standard "Local-First" activé</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="glass-panel kpi-card">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="kpi-value text-danger">EU ACT</div>
-                            <div class="kpi-label">Conformité</div>
-                        </div>
-                        <i class="fas fa-gavel fa-2x text-danger opacity-50"></i>
-                    </div>
-                    <div class="mt-3 small text-white-50">Audit Watermarking obligatoire</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="glass-panel kpi-card">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="kpi-value text-success">VIDEO</div>
-                            <div class="kpi-label">Multimodalité</div>
-                        </div>
-                        <i class="fas fa-video fa-2x text-success opacity-50"></i>
-                    </div>
-                    <div class="mt-3 small text-white-50">Génération Temps Réel < 50ms</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-panel overflow-hidden">
-            <div class="table-responsive">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th width="8%">Score</th>
-                            <th width="12%">Catégorie</th>
-                            <th width="20%">Outil / Acteur</th>
-                            <th width="30%">Fonctionnalité Rupture (2026)</th>
-                            <th width="30%">Analyse & Risques</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                            <td><div class="impact-score score-critical">9.8</div></td>
-                            <td><span class="category-badge cat-agent">OS AGENT</span></td>
-                            <td>
-                                <span class="tool-title">OpenAI "Operator" (Desktop)</span>
-                                <span class="tool-provider"><i class="fab fa-windows me-2"></i>Intégration Windows 12</span>
-                            </td>
-                            <td>
-                                <div class="feature-box">
-                                    <strong class="text-info d-block mb-1">Navigation UI Autonome</strong>
-                                    L'IA contrôle la souris et le clavier pour exécuter des tâches cross-app (ex: extraire data d'un PDF -> saisir dans SAP -> envoyer email).
-                                </div>
-                            </td>
-                            <td>
-                                <ul class="analysis-list">
-                                    <li class="text-white"><i class="fas fa-check-circle text-success"></i> Remplace 90% des scripts RPA traditionnels.</li>
-                                    <li class="text-danger"><i class="fas fa-exclamation-triangle"></i> <strong>Risque :</strong> "Hallucination d'action" (cliquer sur le mauvais bouton si l'interface change).</li>
-                                    <li class="text-secondary"><i class="fas fa-lock"></i> Nécessite validation humaine pour actions bancaires.</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><div class="impact-score score-critical">9.5</div></td>
-                            <td><span class="category-badge cat-dev">DEV / CODE</span></td>
-                            <td>
-                                <span class="tool-title">GitHub Copilot "Workspace"</span>
-                                <span class="tool-provider"><i class="fab fa-github me-2"></i>Microsoft / OpenAI</span>
-                            </td>
-                            <td>
-                                <div class="feature-box">
-                                    <strong style="color: var(--accent-purple);" class="d-block mb-1">Résolution d'Issue Complète</strong>
-                                    Ne complète plus le code. On lui assigne une "Issue", il planifie, modifie 15 fichiers, lance les tests unitaires et soumet la PR.
-                                </div>
-                            </td>
-                            <td>
-                                <ul class="analysis-list">
-                                    <li class="text-white"><i class="fas fa-check-circle text-success"></i> Le développeur devient un "Code Reviewer".</li>
-                                    <li class="text-warning"><i class="fas fa-shield-alt"></i> <strong>Vigilance :</strong> Risque d'introduction de failles logiques subtiles sur les gros refactorings.</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><div class="impact-score score-high">8.9</div></td>
-                            <td><span class="category-badge cat-hardware">LOCAL / EDGE</span></td>
-                            <td>
-                                <span class="tool-title">Mistral "Nano-Secure"</span>
-                                <span class="tool-provider"><i class="fas fa-server me-2"></i>Mistral AI (France)</span>
-                            </td>
-                            <td>
-                                <div class="feature-box">
-                                    <strong style="color: var(--accent-green);" class="d-block mb-1">Inférence 100% Offline</strong>
-                                    Modèle 7B optimisé pour les puces NPU (Intel/Apple M5). Aucune donnée ne sort de l'ordinateur.
-                                </div>
-                            </td>
-                            <td>
-                                <ul class="analysis-list">
-                                    <li class="text-white"><i class="fas fa-check-circle text-success"></i> Conformité RGPD totale pour RH/Défense/Santé.</li>
-                                    <li class="text-secondary"><i class="fas fa-bolt"></i> Latence zéro (pas d'appel API).</li>
-                                    <li class="text-secondary"><i class="fas fa-battery-half"></i> Impact batterie réduit de 40% vs GPT-4o Cloud.</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><div class="impact-score score-high">8.5</div></td>
-                            <td><span class="category-badge cat-agent">RAG / SEARCH</span></td>
-                            <td>
-                                <span class="tool-title">Perplexity Enterprise 3.0</span>
-                                <span class="tool-provider"><i class="fas fa-search me-2"></i>Perplexity AI</span>
-                            </td>
-                            <td>
-                                <div class="feature-box">
-                                    <strong class="text-info d-block mb-1">Live Fact-Checking</strong>
-                                    Croise les données internes (Sharepoint/Slack) avec le web en temps réel pour valider la véracité des rapports.
-                                </div>
-                            </td>
-                            <td>
-                                <ul class="analysis-list">
-                                    <li class="text-white"><i class="fas fa-check-circle text-success"></i> Fin des hallucinations sur les chiffres financiers.</li>
-                                    <li class="text-secondary"><i class="fas fa-link"></i> Cite chaque source interne précise (page & paragraphe).</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><div class="impact-score score-mid">7.0</div></td>
-                            <td><span class="category-badge cat-reg">LEGAL</span></td>
-                            <td>
-                                <span class="tool-title">Adobe "Content Credentials"</span>
-                                <span class="tool-provider"><i class="fas fa-fingerprint me-2"></i>Standard C2PA</span>
-                            </td>
-                            <td>
-                                <div class="feature-box">
-                                    <strong class="text-danger d-block mb-1">Watermarking Obligatoire</strong>
-                                    Application stricte de l'AI Act : tout contenu généré (texte/image) inclut une métadonnée inviolable.
-                                </div>
-                            </td>
-                            <td>
-                                <ul class="analysis-list">
-                                    <li class="text-white"><i class="fas fa-check-circle text-success"></i> Transparence obligatoire pour le marketing.</li>
-                                    <li class="text-danger"><i class="fas fa-ban"></i> Les outils open-source non conformes sont bloqués par les navigateurs UE.</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="p-3 bg-dark bg-opacity-50 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
-                <small class="text-muted"><i class="fas fa-info-circle me-1"></i> Les scores d'impact sont basés sur l'adoption entreprise Q4 2025.</small>
+        <div class="card-glass p-4 mb-4">
+            <div class="d-flex align-items-center mb-2">
+                <i class="fas fa-satellite-dish text-primary fa-2x me-3"></i>
                 <div>
-                    <span class="badge bg-secondary me-1">Source: Gartner 2026</span>
-                    <span class="badge bg-secondary">Source: Hugging Face</span>
+                    <h5 class="mb-1">Méthodologie & Sources</h5>
+                    <p class="mb-0 text-muted small">
+                        Suivi automatisé (Google Alerts, Feedly), analyse technique (ArXiv, Hugging Face) et synthèse assistée par IA (Gemini/Perplexity).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive veille-table mb-4">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" style="width: 15%;">Date</th>
+                        <th scope="col" style="width: 20%;">Technologie</th>
+                        <th scope="col" style="width: 20%;">Acteur clé</th>
+                        <th scope="col" style="width: 45%;">Analyse (Enjeux vs Limites)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge bg-secondary">02/01/2026</span></td>
+                        <td>
+                            <strong>Agents Autonomes</strong><br>
+                            <small class="text-muted">Navigation OS & Workflows</small>
+                        </td>
+                        <td>OpenAI / Apple</td>
+                        <td>
+                            <i class="fas fa-arrow-right text-success small me-1"></i> Automatisation complète des tâches bureautiques.<br>
+                            <i class="fas fa-exclamation-triangle text-warning small me-1"></i> <em>Risques élevés de cybersécurité (scripts auto).</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15/12/2025</td>
+                        <td>
+                            <strong>Souveraineté IA</strong><br>
+                            <small class="text-muted">Modèles spécialisés EU</small>
+                        </td>
+                        <td>Mistral AI / Kyutai</td>
+                        <td>
+                            <i class="fas fa-arrow-right text-success small me-1"></i> Indépendance technologique (Défense/Santé).<br>
+                            <i class="fas fa-exclamation-triangle text-warning small me-1"></i> <em>Écart de puissance de calcul (Compute Gap) vs US.</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>28/11/2025</td>
+                        <td>
+                            <strong>Vidéo-to-Action (V2A)</strong><br>
+                            <small class="text-muted">Simulation Robotique</small>
+                        </td>
+                        <td>DeepMind / Runway</td>
+                        <td>
+                            <i class="fas fa-arrow-right text-success small me-1"></i> Apprentissage robotique par la vidéo.<br>
+                            <i class="fas fa-exclamation-triangle text-warning small me-1"></i> <em>Complexité des droits d'auteur sur les sources.</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10/11/2025</td>
+                        <td>
+                            <strong>Gemini 3</strong><br>
+                            <small class="text-muted">Raisonnement Avancé</small>
+                        </td>
+                        <td>Google</td>
+                        <td>
+                            <i class="fas fa-arrow-right text-success small me-1"></i> Vérification factuelle en temps réel (Anti-hallucination).<br>
+                            <i class="fas fa-exclamation-triangle text-warning small me-1"></i> <em>Latence accrue due au temps de "réflexion".</em>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-glass bg-dark text-white p-4">
+            <h4 class="mb-3 border-bottom border-secondary pb-2">
+                <i class="fas fa-chart-line me-2 text-info"></i>Tendances Clés Janvier 2026
+            </h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i><strong>L'Ère des Agents :</strong> L'IA passe du "Chat" à l'action directe sur l'interface (souris/clavier).</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i><strong>Edge AI (NPU) :</strong> Traitement local sur les PC/Mobiles 2026 pour la confidentialité.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i><strong>Multimodalité Native :</strong> Interaction Fluide Audio/Vidéo/Texte en temps réel.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i><strong>Régulation :</strong> Application stricte de l'AI Act (Watermarking obligatoire).</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-
-<style>
-    .card-glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    .pulse-animation {
-        animation: pulse-green 2s infinite;
-    }
-
-    @keyframes pulse-green {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(25, 135, 84, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(25, 135, 84, 0); }
-    }
-</style>
+</section>
 
     <section id="contact" class="reveal" style="background-color: #f8f9fa;">
         <div class="container">
@@ -1682,7 +1368,6 @@
     </style>
 </body>
 </html>
-
 
 
 
