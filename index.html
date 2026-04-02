@@ -31,7 +31,6 @@
             overflow-x: hidden;
             line-height: 1.7;
         }
-
         /* --- Animations --- */
         .reveal {
             opacity: 0;
@@ -42,13 +41,11 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
-
         /* --- Navbar --- */
         .navbar {
             background: rgba(255, 255, 255, 0.8) !important;
@@ -80,7 +77,6 @@
             color: var(--primary) !important;
             background-color: rgba(67, 97, 238, 0.08);
         }
-
         /* --- Hero --- */
         .hero {
             padding: 160px 0 100px;
@@ -105,7 +101,6 @@
             box-shadow: 20px 20px 60px rgba(0,0,0,0.1), -20px -20px 60px rgba(255,255,255,0.8);
             animation: float 6s ease-in-out infinite;
         }
-
         /* --- Buttons --- */
         .btn-modern {
             background: var(--gradient-main);
@@ -136,7 +131,6 @@
             color: white;
             transform: translateY(-3px);
         }
-
         /* --- Cards Global --- */
         .card-glass {
             background: white;
@@ -151,7 +145,6 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
         }
-
         /* --- Section Titles --- */
         .section-title {
             text-align: center;
@@ -170,7 +163,6 @@
             margin: 15px auto 0;
             border-radius: 10px;
         }
-
         /* Subtitles for Semesters */
         .semester-title {
             font-size: 1.8rem;
@@ -188,9 +180,7 @@
             background: #e9ecef;
             border-radius: 2px;
         }
-
         section { padding: 100px 0; }
-
         /* --- Diplomas --- */
         .diploma-icon {
             font-size: 2.5rem;
@@ -206,7 +196,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         /* --- Skills --- */
         .skill-bar {
             height: 10px;
@@ -222,7 +211,6 @@
             width: 0;
             transition: width 1.5s ease-in-out;
         }
-
         /* --- Experience Timeline --- */
         .timeline {
             position: relative;
@@ -270,7 +258,6 @@
             transition: 0.3s;
         }
         .timeline-content:hover { transform: translateX(5px); }
-
         /* --- Rapports / Accordion --- */
         .teacher-section { margin-bottom: 20px; }
         
@@ -336,7 +323,6 @@
             transition: 0.3s;
         }
         .btn-download-sm:hover { background: var(--primary); color: white; }
-
         /* --- Veille --- */
         .veille-table {
             border-radius: 20px;
@@ -346,7 +332,6 @@
         }
         .veille-table th { background: var(--dark); color: white; padding: 20px; font-weight: 500; border: none; }
         .veille-table td { padding: 20px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-
         /* --- Footer --- */
         footer {
             background: var(--dark);
@@ -367,7 +352,6 @@
             text-decoration: none;
         }
         .social-icon-btn:hover { background: var(--primary); transform: translateY(-5px); }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
@@ -382,7 +366,6 @@
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar">
-
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Romain Jacquet</a>
@@ -406,7 +389,6 @@
             </div>
         </div>
     </nav>
-
     <section id="home" class="hero">
         <div class="container">
             <div class="row align-items-center flex-column-reverse flex-lg-row">
@@ -425,7 +407,6 @@
             </div>
         </div>
     </section>
-
     <section id="about" class="about reveal">
         <div class="container">
             <h2 class="section-title">À propos de moi</h2>
@@ -453,7 +434,6 @@
             </div>
         </div>
     </section>
-
     <section id="diplomas" class="reveal" style="background-color: #f8f9fa;">
         <div class="container">
             <h2 class="section-title">Diplômes & Certifications</h2>
@@ -493,7 +473,6 @@
             </div>
         </div>
     </section>
-
     <section id="skills" class="reveal">
         <div class="container">
             <h2 class="section-title">Compétences</h2>
@@ -538,7 +517,6 @@
             </div>
         </div>
     </section>
-
     <section id="projects" class="reveal" style="background-color: #f8f9fa;">
         <div class="container">
             <h2 class="section-title">Projets Réalisés</h2>
@@ -556,7 +534,6 @@
             </div>
         </div>
     </section>
-
     <section id="experience" class="reveal">
         <div class="container">
             <h2 class="section-title">Parcours Professionnel</h2>
@@ -606,11 +583,15 @@
             </div>
         </div>
     </section>
-
-
 <section id="compte-rendu" class="reveal" style="background-color: #f8f9fa;">
     <div class="container">
         <h2 class="section-title">Comptes Rendus</h2>
+        
+        <div class="text-center mb-5">
+            <button id="downloadAllPdfs" class="btn btn-modern">
+                <i class="fas fa-file-archive me-2"></i>Télécharger tous les PDFs (ZIP)
+            </button>
+        </div>
 
         <h3 class="semester-title">Semestre 1</h3>
         
@@ -624,7 +605,6 @@
                     </div>
                     <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
                 </div>
-
                 <div id="s1-beauvallet" class="documents-container">
                     <div class="row g-4">
                         <div class="col-md-6 col-lg-4">
@@ -906,7 +886,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="teacher-section">
                 <div class="teacher-header" onclick="toggleDocuments('s1-sotoca')">
                     <div class="teacher-avatar"><i class="fas fa-network-wired"></i></div>
@@ -916,7 +895,6 @@
                     </div>
                     <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
                 </div>
-
                 <div id="s1-sotoca" class="documents-container">
                     <div class="row g-4">
                         <div class="col-md-6 col-lg-4">
@@ -987,9 +965,7 @@
                 </div>
             </div>
         </div>
-
         <h3 class="semester-title">Semestre 2</h3>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-b1-beauvallet')">
                 <div class="teacher-avatar" style="background: #e0e7ff; color: var(--primary);"><i class="fas fa-code"></i></div>
@@ -1072,7 +1048,6 @@
                 </div>
             </div>
         </div>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-b3-beauvallet')">
                 <div class="teacher-avatar" style="background: #e0e7ff; color: var(--primary);"><i class="fas fa-shield-alt"></i></div>
@@ -1123,7 +1098,6 @@
                 </div>
             </div>
         </div>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-b1-sotoca')">
                 <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-server"></i></div>
@@ -1171,7 +1145,6 @@
                 </div>
             </div>
         </div>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-b3-sotoca')">
                 <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-lock"></i></div>
@@ -1190,7 +1163,6 @@
                 </div>
             </div>
         </div>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-atelier')">
                 <div class="teacher-avatar" style="background: #fce4ec; color: var(--accent);"><i class="fas fa-users-cog"></i></div>
@@ -1259,7 +1231,6 @@
                 </div>
             </div>
         </div>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-pcc')">
                 <div class="teacher-avatar" style="background: #fff8e1; color: #f57f17;"><i class="fas fa-certificate"></i></div>
@@ -1285,7 +1256,6 @@
                 </div>
             </div>
         </div>
-
         <div class="teacher-section">
             <div class="teacher-header" onclick="toggleDocuments('s2-sisr')">
                 <div class="teacher-avatar" style="background: #e0f2f1; color: #00897b;"><i class="fas fa-server"></i></div>
@@ -1386,7 +1356,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
     
@@ -1403,7 +1372,6 @@
                 Ma veille se concentre sur l'évolution des modèles de raisonnement complexe, l'IA "Actionnable" (Agents) et l'intégration profonde de l'IA physique dans les infrastructures industrielles européennes.
             </p>
         </div>
-
         <div class="row g-4 mb-5">
             <div class="col-lg-4">
                 <div class="card-glass h-100">
@@ -1433,7 +1401,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="col-lg-8">
                 <div class="card-glass h-100" style="background: var(--dark); color: white;">
                     <h4 class="mb-4 text-white"><i class="fas fa-project-diagram me-2"></i>Thèmes majeurs Mars 2026</h4>
@@ -1470,7 +1437,6 @@
                 </div>
             </div>
         </div>
-
         <div class="card-glass p-0 overflow-hidden mb-5">
             <div class="table-responsive veille-table">
                 <table class="table table-hover align-middle mb-0">
@@ -1583,7 +1549,6 @@
                 </table>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-light border shadow-sm rounded-4 p-4">
@@ -1595,7 +1560,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
     
@@ -1610,7 +1574,6 @@
             <p class="text-white-50 mb-0">&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
         </div>
     </footer>
-
     <div class="modal fade" id="projectModal4" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 overflow-hidden">
@@ -1631,8 +1594,11 @@
             </div>
         </div>
     </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
     <script>
         // Scroll Reveal
         function reveal() {
@@ -1647,7 +1613,7 @@
         }
         window.addEventListener("scroll", reveal);
         reveal(); // Init
-
+        
         // Skill Bars
         window.addEventListener('scroll', function() {
             document.querySelectorAll('.skill-progress').forEach(bar => {
@@ -1657,7 +1623,7 @@
                 }
             });
         });
-
+        
         // Toggle Documents
         function toggleDocuments(id) {
             const el = document.getElementById(id);
@@ -1668,7 +1634,7 @@
                 el.style.animation = 'fadeInUp 0.5s ease';
             }
         }
-
+        
         // CV Download
         document.getElementById('downloadCV').addEventListener('click', function() {
             const link = document.createElement('a');
@@ -1678,12 +1644,79 @@
             link.click();
             document.body.removeChild(link);
         });
+        
+        // Form Submit (if present)
+        let contactForm = document.getElementById('contactForm');
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Merci ! Votre message a été envoyé.');
+                this.reset();
+            });
+        }
 
-        // Form Submit
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci ! Votre message a été envoyé.');
-            this.reset();
+        // Téléchargement de tous les PDFs en ZIP
+        document.getElementById('downloadAllPdfs').addEventListener('click', async function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            // Changement visuel du bouton pour faire patienter l'utilisateur
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Création du ZIP en cours...';
+            btn.disabled = true;
+
+            try {
+                const zip = new JSZip();
+                const sections = document.querySelectorAll('.teacher-section');
+                const fetchPromises = [];
+
+                sections.forEach(section => {
+                    // Récupérer le nom du professeur/section pour créer un dossier
+                    const titleElement = section.querySelector('h4');
+                    if (!titleElement) return;
+                    
+                    // Nettoyer le nom du dossier pour éviter les caractères invalides
+                    const folderName = titleElement.innerText.trim().replace(/[^a-zA-Z0-9 -]/g, ""); 
+                    const folder = zip.folder(folderName);
+
+                    // Cibler uniquement les liens qui finissent par .pdf
+                    const pdfLinks = section.querySelectorAll('a[href$=".pdf"]');
+                    
+                    pdfLinks.forEach(link => {
+                        const url = link.getAttribute('href');
+                        // Utiliser l'attribut download comme nom, ou le nom du fichier dans l'URL
+                        let filename = link.getAttribute('download') || url.split('/').pop();
+                        if (!filename.toLowerCase().endsWith('.pdf')) filename += '.pdf';
+
+                        // Télécharger le fichier et l'ajouter au dossier ZIP
+                        const promise = fetch(url)
+                            .then(response => {
+                                if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+                                return response.blob();
+                            })
+                            .then(blob => {
+                                folder.file(filename, blob);
+                            })
+                            .catch(e => console.warn(`Impossible de télécharger ${url}:`, e));
+                        
+                        fetchPromises.push(promise);
+                    });
+                });
+
+                // Attendre que tous les téléchargements soient terminés
+                await Promise.all(fetchPromises);
+                
+                // Générer le ZIP et déclencher le téléchargement
+                const content = await zip.generateAsync({ type: "blob" });
+                saveAs(content, "Comptes_Rendus_Romain_Jacquet.zip");
+
+            } catch (error) {
+                console.error("Erreur lors de la création du ZIP :", error);
+                alert("Une erreur est survenue lors de la création du fichier ZIP.");
+            } finally {
+                // Remettre le bouton à son état normal
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
         });
     </script>
     <style>
