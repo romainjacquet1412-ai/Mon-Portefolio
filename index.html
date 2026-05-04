@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romain Jacquet - Portfolio BTS SIO</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #4cc9f0;
+            --accent: #f72585;
+            --dark: #0b132b;
+            --text-main: #2b2d42;
+            --text-light: #8d99ae;
+            --bg-light: #f8f9fa;
+            --gradient-main: linear-gradient(135deg, #4361ee 0%, #4cc9f0 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            background-color: #fcfcfc;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        /* --- Navbar --- */
+        .navbar {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 15px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-main) !important;
+            font-weight: 500;
+            padding: 8px 18px !important;
+            border-radius: 50px;
+            transition: all 0.3s;
+            margin: 0 2px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+            background-color: rgba(67, 97, 238, 0.08);
+        }
+        /* --- Hero --- */
+        .hero {
+            padding: 160px 0 100px;
+            background: radial-gradient(circle at top right, rgba(76, 201, 240, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(67, 97, 238, 0.15), transparent 40%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 40px; /* Squircle */
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1), -20px -20px 60px rgba(255,255,255,0.8);
+            animation: float 6s ease-in-out infinite;
+        }
+        /* --- Buttons --- */
+        .btn-modern {
+            background: var(--gradient-main);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+            transition: all 0.3s;
+        }
+        .btn-modern:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+            color: white;
+        }
+        .btn-outline-modern {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .btn-outline-modern:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        /* --- Cards Global --- */
+        .card-glass {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .card-glass:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+        /* --- Section Titles --- */
+        .section-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 70px;
+            color: var(--dark);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            background: var(--gradient-main);
+            margin: 15px auto 0;
+            border-radius: 10px;
+        }
+        /* Subtitles for Semesters */
+        .semester-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .semester-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: #e9ecef;
+            border-radius: 2px;
+        }
+        section { padding: 100px 0; }
+        /* --- Diplomas --- */
+        .diploma-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(67, 97, 238, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* --- Skills --- */
+        .skill-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+        /* --- Experience Timeline --- */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e9ecef;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -10px; }
+        
+        .timeline-content {
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: 0.3s;
+        }
+        .timeline-content:hover { transform: translateX(5px); }
+        /* --- Rapports / Accordion --- */
+        .teacher-section { margin-bottom: 20px; }
+        
+        .teacher-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .teacher-header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        .teacher-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f1f3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-right: 20px;
+        }
+        
+        .documents-container { display: none; margin-top: 30px; margin-bottom: 40px;}
+        
+        .document-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .document-card:hover { transform: translateY(-5px); }
+        .document-img { height: 160px; object-fit: cover; width: 100%; }
+        .document-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .btn-download-sm {
+            width: 100%;
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-download-sm:hover { background: var(--primary); color: white; }
+        /* --- Veille --- */
+        .veille-table {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            background: white;
+        }
+        .veille-table th { background: var(--dark); color: white; padding: 20px; font-weight: 500; border: none; }
+        .veille-table td { padding: 20px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+        /* --- Footer --- */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .social-icon-btn {
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .social-icon-btn:hover { background: var(--primary); transform: translateY(-5px); }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .left::after, .right::after { left: 21px; }
+            .right { left: 0; }
+            .teacher-header { flex-direction: column; text-align: center; gap: 15px; }
+            .teacher-avatar { margin-right: 0; }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Romain Jacquet</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="fas fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#diplomas">Diplômes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Expérience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#compte-rendu">Comptes rendus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#veille-technologique">Veille</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-modern btn-sm px-4" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
+                    <span class="badge bg-light text-primary border rounded-pill px-3 py-2 mb-3">Portfolio BTS SIO</span>
+                    <h1>Romain Jacquet</h1>
+                    <p class="lead text-muted mb-4">Étudiant passionné par l'infrastructure, les réseaux et la cybersécurité. En route vers l'excellence technique.</p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#contact" class="btn btn-modern">Me contacter</a>
+                        <button id="downloadCV" class="btn btn-outline-modern">Télécharger CV <i class="fas fa-download ms-2"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="photo.jpeg" alt="Romain Jacquet" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about reveal">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="card-glass">
+                        <h3 class="fw-bold mb-4">Qui suis-je ?</h3>
+                        <p>Je suis Romain Jacquet, étudiant en BTS Services Informatiques aux Organisations (SIO). Passionné par l'informatique et les nouvelles technologies, je possède une solide formation en maintenance informatique, réseaux et téléphonie, avec plusieurs expériences en entreprise qui m'ont permis de développer mes compétences techniques et professionnelles.</p>
+                        <p class="mb-0">Je suis titulaire du BAC PRO SN option ARED (mention Bien), du B1 (habilitation électrique), du SST (Sauveteur Secouriste du Travail) et du Brevet des Collèges. Je recherche actuellement une alternance pour mettre en pratique mes compétences.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-glass" style="background: var(--dark); color: white;">
+                        <h3 class="fw-bold mb-4">Infos Personnelles</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-birthday-cake text-info me-3"></i> 18 ans</li>
+                            <li class="mb-3"><i class="fas fa-phone text-info me-3"></i> 06.31.57.22.39</li>
+                            <li class="mb-3"><i class="fas fa-envelope text-info me-3"></i> romain.jacquet1412@orange.fr</li>
+                            <li class="mb-3"><i class="fas fa-map-marker-alt text-info me-3"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</li>
+                            <li class="mb-3"><i class="fas fa-car text-info me-3"></i> Permis B</li>
+                            <li><i class="fas fa-check-circle text-info me-3"></i> Disponibilité Immédiate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="diplomas" class="reveal" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Diplômes & Certifications</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h5>BAC PRO SN (ARED)</h5>
+                        <p class="text-primary small fw-bold">2025 - Mention Bien</p>
+                        <p class="small text-muted">Systèmes Numériques, Audiovisuel, Réseaux</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-certificate"></i></div>
+                        <h5>SST</h5>
+                        <p class="text-primary small fw-bold">2023 - Lycée Poutrain</p>
+                        <p class="small text-muted">Sauveteur Secouriste du Travail</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-bolt"></i></div>
+                        <h5>Habilitation B1</h5>
+                        <p class="text-primary small fw-bold">2023 - Lycée Poutrain</p>
+                        <p class="small text-muted">Travaux d'ordre électrique</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-glass text-center">
+                        <div class="diploma-icon"><i class="fas fa-school"></i></div>
+                        <h5>Brevet des Collèges</h5>
+                        <p class="text-primary small fw-bold">2022</p>
+                        <p class="small text-muted">Collège de Saint Bonnet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Application des procédures</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Adaptation</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Organisation</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between fw-bold"><span>Autonomie</span><span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5 justify-content-center g-4">
+                <div class="col-md-5 text-center">
+                    <div class="card-glass h-100">
+                        <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                        <h4>Informatique</h4>
+                        <p class="text-muted">Passionné par les réseaux et la cybersécurité</p>
+                    </div>
+                </div>
+                <div class="col-md-5 text-center">
+                    <div class="card-glass h-100">
+                        <i class="fas fa-running fa-3x text-primary mb-3"></i>
+                        <h4>Sport</h4>
+                        <p class="text-muted">Activités physiques régulières pour maintenir la forme</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Projets Réalisés</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-glass p-0 overflow-hidden h-100">
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1159&q=80" alt="Film Les Éclaireurs" class="img-fluid" style="height:200px; width:100%; object-fit:cover;">
+                        <div class="p-4">
+                            <h4>Film "Les Éclaireurs"</h4>
+                            <p class="text-muted small">Conception du film sur la Résistance Haut-Alpine avec le Lycée Poutrain.</p>
+                            <button class="btn btn-outline-modern btn-sm w-100" data-bs-toggle="modal" data-bs-target="#projectModal4">En savoir plus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Parcours Professionnel</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>Intermarché La Fare</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">Juillet - Août 2025</span>
+                        <p class="mb-0">Mise en rayon</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>Lycée Saint Joseph - Gap</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">Décembre 2024</span>
+                        <p class="mb-0">Création de VLANs sur Switch (Tagged-Untagged)</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>ACI - Gap</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">Sept - Oct 2024</span>
+                        <p class="mb-0">Préparation de poste (PC), Réseau Téléphonie</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>ACI - Gap</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">Juin - Juil 2024</span>
+                        <p class="mb-0">Maintenance informatique, Réseau, Téléphonie, Dépannage</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>Sun Valley Systems</h4>
+                        <span class="badge bg-primary rounded-pill mb-2">2023</span>
+                        <p class="mb-0">Maintenance informatique, Soudure sur composant</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>In Store Solutions</h4>
+                        <span class="badge bg-secondary rounded-pill mb-2">Stage 3ème</span>
+                        <p class="mb-0">Stage d'observation: Programmation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="compte-rendu" class="reveal" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Comptes Rendus</h2>
+        
+        <div class="text-center mb-5">
+            <button id="downloadAllPdfs" class="btn btn-modern">
+                <i class="fas fa-file-archive me-2"></i>Télécharger tous les PDFs (ZIP)
+            </button>
+        </div>
+
+        <h3 class="semester-title">Semestre 1</h3>
+        
+        <div class="mb-5">
+            <div class="teacher-section">
+                <div class="teacher-header" onclick="toggleDocuments('s1-beauvallet')">
+                    <div class="teacher-avatar"><i class="fas fa-code"></i></div>
+                    <div class="flex-grow-1">
+                        <h4 class="mb-0">Mme Beauvallet</h4>
+                        <p class="text-muted mb-0">Programmation & Développement</p>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+                </div>
+                <div id="s1-beauvallet" class="documents-container">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Algo">
+                                <div class="document-content">
+                                    <h6>TP code.org</h6>
+                                    <p class="small text-muted flex-grow-1">Concepts de base algorithmes</p>
+                                    <a href="Romain Jacquet Compte rendu TP code.org.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Romain_Jacquet_TP_code_org.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java">
+                                <div class="document-content">
+                                    <h6>TP Premiers pas Java</h6>
+                                    <a href="Compte rendu TP Mes premiers pas en Java.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_Java.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Portfolio">
+                                <div class="document-content">
+                                    <h6>TP Création Portfolio</h6>
+                                    <a href="Compte rendu TP Création du PortFolio.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Portfolio.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML">
+                                <div class="document-content">
+                                    <h6>TP HTML</h6>
+                                    <a href="Compte rendu Atelier 02 TD1 Partie 1 le HTML.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_HTML.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Java TP3">
+                                <div class="document-content">
+                                    <h6>TP3 Java</h6>
+                                    <a href="Compte rendu TP3 Java.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP3_Java.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CSS">
+                                <div class="document-content">
+                                    <h6>TP CSS</h6>
+                                    <a href="Compte rendu TP CSS.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_CSS.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="HTML CSS Avancé">
+                                <div class="document-content">
+                                    <h6>TP HTML CSS Avancé</h6>
+                                    <a href="Compte rendu TP HTML-CSS Avancé.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Romain Jacquet CSS-HTML.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Cyber">
+                                <div class="document-content">
+                                    <h6>TP Cybersécurité</h6>
+                                    <a href="Compte rendu TP 1 -B3.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP_Cybersecurite.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Shifumi">
+                                <div class="document-content">
+                                    <h6>TP 4 Shifumi</h6>
+                                    <a href="Compte rendu TP4 Shifumi.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="shifumi.java" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.iim.fr/ecole-web/wp-content/uploads/2017/01/HTML5.jpg" class="document-img" alt="HTML5">
+                                <div class="document-content">
+                                    <h6>TP HTML CSS Avancé 2</h6>
+                                    <a href="Compte rendu TP HTML-CSS Avancé2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="TP-CSS HTML.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://img-c.udemycdn.com/course/750x422/3755872_becb_2.jpg" class="document-img" alt="Java5">
+                                <div class="document-content">
+                                    <h6>TP5 Java</h6>
+                                    <a href="Compte rendu B1 TP5 JAVA.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.cnil.fr/sites/default/files/styles/contenu_generique_visuel/public/thumbnails/image/00_logo-1.png?itok=bdT6-lUn" class="document-img" alt="PIA">
+                                <div class="document-content">
+                                    <h6>TP 2-B3-PIA</h6>
+                                    <a href="Compte rendu TP 2 -B3-PIA.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.cnil.fr/sites/default/files/styles/contenu_generique_visuel/public/thumbnails/image/00_logo-1.png?itok=bdT6-lUn" class="document-img" alt="PIA2">
+                                <div class="document-content">
+                                    <h6>TP-B3-PIA2</h6>
+                                    <a href="Compte rendu TP-B3-PIA2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="pia.json" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> JSON</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://perso.univ-lyon1.fr/marc.buffat/COURS/BOOK_INPROS_HTML/_images/cloud_fonction.png" class="document-img" alt="Fonctions">
+                                <div class="document-content">
+                                    <h6>TP06 Fonctions</h6>
+                                    <a href="Compte rendu TP B1 TP06-Fonctions et procédures.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.gekkode.com/wp-content/uploads/2022/03/Formulaire-HTML-4-bonnes-pratiques.png" class="document-img" alt="Formulaires">
+                                <div class="document-content">
+                                    <h6>TP Les formulaires</h6>
+                                    <a href="Compte rendu Tp les formulaires.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="inscription.html" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-code"></i> HTML</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.adpremier.fr/wp-content/uploads/2023/06/responsive-design.jpeg" class="document-img" alt="Responsive">
+                                <div class="document-content">
+                                    <h6>TP Responsive Design</h6>
+                                    <a href="Compte rendu TP Responsive design.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://m.media-amazon.com/images/I/81O9xum4D6L.jpg" class="document-img" alt="Bataille">
+                                <div class="document-content">
+                                    <h6>TP Bataille Navale</h6>
+                                    <a href="Compte rendu TP Bataille Navale .pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="BatailleNavale.java" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-code"></i> JAVA</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://imtech.imt.fr/wp-content/uploads/2017/11/Visuel_Une_900x1350.jpg" class="document-img" alt="Thème2">
+                                <div class="document-content">
+                                    <h6>TP Thème 2 Ch3 TD1</h6>
+                                    <a href="Compte renduTCH3TD1.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Secu">
+                                <div class="document-content">
+                                    <h6>TP2 Sécurité informatique</h6>
+                                    <a href="Compte Rendu Atelier 10 _ TP2 Sécurité informatique.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz_4bkOdrJ38q7ryKEojTe7aTr5M88cLaEgQ&s" class="document-img" alt="PHP">
+                                <div class="document-content">
+                                    <h6>BDD PHP</h6>
+                                    <a href="Compte rendu Base de données (PHP).pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://linuxiac.com/wp-content/uploads/2021/07/kali-linux-virtualbox.png" class="document-img" alt="TH2">
+                                <div class="document-content">
+                                    <h6>TP TH2 CH3 TD2</h6>
+                                    <a href="Compte rendu TP TH2 _ CH3 TD2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="JS">
+                                <div class="document-content">
+                                    <h6>Compte rendu Javascript</h6>
+                                    <a href="Compte rendu Javascript.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAsy338-smhpCZOZxXE9DUx3fHaBoQpWk-TQ&s" class="document-img" alt="Leclerc">
+                                <div class="document-content">
+                                    <h6>TP 11 Leclerc</h6>
+                                    <a href="Compte rendu TP 11 Modélisation de Leclerc avec AnalyseSI.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="JS12">
+                                <div class="document-content">
+                                    <h6>Atelier 12 Javascript</h6>
+                                    <a href="Compte rendu TP Atelier 12 _ Javascript .pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Symbol.png" class="document-img" alt="JS13">
+                                <div class="document-content">
+                                    <h6>Atelier 13 Javascript</h6>
+                                    <a href="Compte rendu TP Atelier 13 _ Javascript.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://us.123rf.com/450wm/asnia/asnia1707/asnia170700318/83206225-ic%C3%B4ne-de-base-de-donn%C3%A9es-sql-conception-de-logo-application-ui-ou-ux-inscription-orange-avec.jpg?ver=6" class="document-img" alt="BDD">
+                                <div class="document-content">
+                                    <h6>TP BDD-EXO</h6>
+                                    <a href="Compte rendu TP BDD-Exo.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1544383023-53fafa396df8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="SQL">
+                                <div class="document-content">
+                                    <h6>Compte rendu TD4 - BDD - LECLERC</h6>
+                                    <p class="small text-muted flex-grow-1">BDD</p>
+                                    <a href="Compte rendu TD4 - BDD - LECLERC.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://linuxiac.com/wp-content/uploads/2021/07/kali-linux-virtualbox.png">
+                                <div class="document-content">
+                                    <h6>Compte rendu TP TH3 _ CH4 _ TD1</h6>
+                                    <a href="Compte rendu TP TH3 _ CH4 _ TD1.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb64dgGpdvEGzY_k-jNfjPA1cBTCDS_BCnEw&s">
+                                <div class="document-content">
+                                    <h6>Compte rendu TP TH3 _ CH4 _ TD2</h6>
+                                    <a href="Compte rendu TP TH3 _ CH4 _ TD2.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="teacher-section">
+                <div class="teacher-header" onclick="toggleDocuments('s1-sotoca')">
+                    <div class="teacher-avatar"><i class="fas fa-network-wired"></i></div>
+                    <div class="flex-grow-1">
+                        <h4 class="mb-0">M. Sotoca</h4>
+                        <p class="text-muted mb-0">Réseaux & Infrastructure</p>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+                </div>
+                <div id="s1-sotoca" class="documents-container">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Matériel">
+                                <div class="document-content">
+                                    <h6>TP B1 Paramétrage</h6>
+                                    <a href="Compte rendu du TP B1 Paramétrage du matériel informatiques.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="Diag">
+                                <div class="document-content">
+                                    <h6>Logiciels diagnostic</h6>
+                                    <a href="Compte rendu TP les logiciels de diagnostic.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" class="document-img" alt="Doc">
+                                <div class="document-content">
+                                    <h6>Documentation</h6>
+                                    <a href="Compte_rendu_TP_Creation_documentation_captures_ecran.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" class="document-img" alt="CMD">
+                                <div class="document-content">
+                                    <h6>TP B1 TP05</h6>
+                                    <a href="Compte rendu B1 TP05.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="Carte mentale — récapitulatif des commandes.pdf" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-pdf"></i> Carte</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://images.frandroid.com/wp-content/uploads/2023/12/synology-ds223plus-5-scaled.jpg" class="document-img" alt="NAS">
+                                <div class="document-content">
+                                    <h6>TP Serveur NAS</h6>
+                                    <a href="Compte rendu B3 TP02 Le serveur NAS.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Command_Prompt_on_Windows_10_RTM.png" class="document-img" alt="TechCorpl">
+                                <div class="document-content">
+                                    <h6>TP06 TechCorpl</h6>
+                                    <a href="CompterenduTPB1TP06.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="document-card">
+                                <img src="https://www.reseau-mesure.com/wp-content/uploads/2018/11/AdobeStock_153484570-300x200.jpeg" class="document-img" alt="Hachage">
+                                <div class="document-content">
+                                    <h6>TP05 B3 Cybersécurité</h6>
+                                    <a href="Compte rendu TP05 B3_ Cybersécurité - données hachées.pdf" download class="btn-download-sm"><i class="fas fa-file-pdf"></i> PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="semester-title">Semestre 2</h3>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b1-beauvallet')">
+                <div class="teacher-avatar" style="background: #e0e7ff; color: var(--primary);"><i class="fas fa-code"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 1 - Mme Beauvallet</h4>
+                    <p class="text-muted mb-0">Support et mise à disposition de services informatiques</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-b1-beauvallet" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://img.freepik.com/vecteurs-libre/groupe-animaux-sauvages_1308-43813.jpg?semt=ais_hybrid&w=740&q=80">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 13 _ ZOO</h6>
+                                <a href="Compte rendu TP 13 _ ZOO.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="">
+                            <div class="document-content">
+                                <h6>Compte rendu TP BDD - TD3</h6>
+                                <a href="Compte rendu TP BDD - TD3.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://nouvelhorizonconseil.com/wp-content/uploads/2018/11/NH-droit-acces.jpg" class="document-img" alt="Droit acces BDD">
+                            <div class="document-content">
+                                <h6>Compte rendu TP Dossier SI3.5: Droit d'acces a une base de données</h6>
+                                <a href="Compte rendu TP Dossier SI3.5_ Droit d’acces a une base de données .pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://cdn-icons-png.flaticon.com/512/12669/12669704.png" class="document-img" alt="Nouveau TP">
+                            <div class="document-content">
+                                <h6>Compte rendu gestion des users TEST sur PHP</h6>
+                                <a href="Compte rendu gestion des users TEST sur PHP.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.software-developer-india.com/wp-content/uploads/2015/03/This-are-the-advantages-of-PHP.png" class="document-img" alt="Document supplémentaire">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 1.Bases du langage PHP.pdf</h6>
+                                <p class="small text-muted flex-grow-1">Bases du langage PHP</p>
+                                <a href="Compte Rendu TP 1.Bases du langage PHP.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.software-developer-india.com/wp-content/uploads/2015/03/This-are-the-advantages-of-PHP.png" class="document-img" alt="Nouveau PDF">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 2.Programmer avec PHP</h6>
+                                <p class="small text-muted flex-grow-1">Programmer avec PHP</p>
+                                <a href="Compte Rendu TP 2.Programmer avec PHP.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtold-PHJiSuDaziy1hapYGw8aJ6VJUfIoWQ&s" class="document-img" alt="Nouveau Document PDF">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 3.Transmission de données entre pages</h6>
+                                <p class="small text-muted flex-grow-1">Transmission de données entre pages</p>
+                                <a href="Compte Rendu TP 3.Transmission de données entre pages.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn__qzy_HL8V6TAURUIfcc73NH4OcbStkMzg&s" class="document-img" alt="Accès données">
+                            <div class="document-content">
+                                <h6>Compte rendu TP Chapitre 5: Exercice d’applications</h6>
+                                <p class="small text-muted flex-grow-1">Exercice d’applications</p>
+                                <a href="Compte rendu TP Chapitre 5_ Exercice d’applications.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b3-beauvallet')">
+                <div class="teacher-avatar" style="background: #e0e7ff; color: var(--primary);"><i class="fas fa-shield-alt"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 3 - Mme Beauvallet</h4>
+                    <p class="text-muted mb-0">Cybersécurité</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-b3-beauvallet" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/210678852/original/d0255f9bbe1e0469db1dfb8b8340937e014a62f0/do-modern-technology-cyber-security-tech-cloud-logo-design.jpg" class="document-img" alt="Cyber S2">
+                            <div class="document-content">
+                                <h6>Compte rendu TH3 chapitre 5 TD1</h6>
+                                <p class="small text-muted flex-grow-1">Gérer les accès et les privilèges appropriés</p>
+                                <a href="Compte rendu TH3 chapitre 5 TD1.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Opj_D873FHHS12bWEPge6-5Qg14omBT1Ow&s" alt="PDF">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 08  Vérifier l'efficacité de la protection</h6>
+                                <p class="small text-muted flex-grow-1">Vérifier l'efficacité de la protection</p>
+                                <a href="Compte rendu TP 08 _ Vérifier l'efficacité de la protection.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBsLQcBK8ky8g2zwByI42ju5_ln4X46mtzrQ&s" class="document-img" alt="Nouveau Document">
+                            <div class="document-content">
+                                <h6>Compte rendu TP Chapitre 5 Exercice d’applications</h6>
+                                <p class="small text-muted flex-grow-1">Exercice d’applications</p>
+                                <a href="Compte rendu TP Chapitre 5_ Exercice d’applications.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b1-sotoca')">
+                <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-server"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 1 - M. Sotoca</h4>
+                    <p class="text-muted mb-0">Support et mise à disposition de services informatiques</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-b1-sotoca" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://img.freepik.com/photos-gratuite/vue-du-pingouin-3d-anime-par-dessin-anime_23-2150882034.jpg?semt=ais_hybrid&w=740&q=80">
+                            <div class="document-content">
+                                <h6>Compte rendu B1 TP21 : Création d'un scénario Linux</h6>
+                                <a href="Compte rendu B1 TP21 _ Création d'un scénario Linux.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.vaadata.com/blog/wp-content/uploads/2023/04/securite-active-directory-ad.png" alt="Reseau Nouveau">
+                            <div class="document-content">
+                                <h6>Compte rendu TP2 L'Active Directory</h6>
+                                <a href="Compte rendu TP2 L'Active Directory.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://rdr-it.com/wp-content/uploads/2024/01/windows-11-add-in-ad-domain-17.png" class="document-img" alt="Connexion domaine">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 3 — Connexion au domaine</h6>
+                                <a href="Compte rendu TP 3 — Connexion au domaine.docx.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.software-developer-india.com/wp-content/uploads/2015/03/This-are-the-advantages-of-PHP.png" class="document-img" alt="Nouveau Document">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 4.Programmer avec PHP</h6>
+                                <p class="small text-muted flex-grow-1">Programmer avec PHP</p>
+                                <a href="Compte Rendu TP 4.Programmer avec PHP.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b3-sotoca')">
+                <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-lock"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 3 - M. Sotoca</h4>
+                    <p class="text-muted mb-0">Cybersécurité des infrastructures</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-b3-sotoca" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://faronicscloud.com/cdn/shop/articles/DeepFreeze_V_2ee6c07d-e800-4d36-9f39-e0f3d87c46c5.jpg?v=1741106987" alt="Cybersécurité">
+                            <div class="document-content">
+                                <h6>Compte rendu B3 Hack TP16 - Deep Freeze</h6>
+                                <p class="small text-muted flex-grow-1"> Deep Freeze</p>
+                                <a href="Compte rendu B3 Hack TP16 - Deep Freeze.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-atelier')">
+                <div class="teacher-avatar" style="background: #fce4ec; color: var(--accent);"><i class="fas fa-users-cog"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Atelier de Professionnalisation</h4>
+                    <p class="text-muted mb-0">Projets et travaux pratiques transversaux</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-atelier" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://didacweb.com/wp-content/uploads/2021/07/Site-Vitrine-Etape-de-creation-par-DIDACWEB.jpg">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 1- Le site Vitrine</h6>
+                                <p class="small text-muted flex-grow-1">Site Vitrines</p>
+                                <a href="Compte rendu TP 1- Le site Vitrine.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <a href="TP1 Atelier Romain Jacquet.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.codeur.com/blog/wp-content/uploads/2025/04/hebergement-web-site-vitrine-1-740x416.jpg" alt="Atelier">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 2 - L'hébergement du site</h6>
+                                <p class="small text-muted flex-grow-1">Hébergement de site</p>
+                                <a href="Compte rendu TP 2 - L'hébergement du site-1.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.transfert.co/app/uploads/2020/11/PROFIL_TRANSFERT-1.png" alt="Atelier">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 3 - Le transfert du site</h6>
+                                <p class="small text-muted flex-grow-1">Transfert du site</p>
+                                <a href="Compte rendu TP 3 - Le transfert du site.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy9dPTyYVW4DC1PKmHSy8Mssz8JuPhKK6Brw&s">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 4 - Gestionnaire de sauvegardes</h6>
+                                <p class="small text-muted flex-grow-1">Gestionnaire de sauvegardes</p>
+                                <a href="Compte rendu TP 4 - Gestionnaire de sauvegardes.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <a href="Site sauvgarde VM.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.vaadata.com/blog/wp-content/uploads/2022/07/securiser-serveur-1024x535.jpg" class="document-img" alt="Documentation">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 5- Protection du serveur web</h6>
+                                <p class="small text-muted flex-grow-1">Protection du serveur web</p>
+                                <a href="Compte rendu TP 5- Protection du serveur web.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-pcc')">
+                <div class="teacher-avatar" style="background: #fff8e1; color: #f57f17;"><i class="fas fa-certificate"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">PCC</h4>
+                    <p class="text-muted mb-0">Parcours de certifications</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-pcc" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.numetopia.fr/wp-content/uploads/2023/01/thumbnail-tuto-linux-hidden-files.png" alt="PCC">
+                            <div class="document-content">
+                                <h6>Compte rendu TP Message secret sous ubuntu...</h6>
+                                <a href="Compte rendu TP Message secret sous ubuntu.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-sisr')">
+                <div class="teacher-avatar" style="background: #e0f2f1; color: #00897b;"><i class="fas fa-server"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Option SISR</h4>
+                    <p class="text-muted mb-0">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-sisr" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWaChgCcNWAohYaGNMaPnxuERE4wHum3RYhg&s" alt="Archive SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP01 - Prise de contrôle à distance</h6>
+                                <p class="small text-muted flex-grow-1">Prise de controle à distance</p>
+                                <a href="Prise de contrôle à distance.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://cdn8.futura-sciences.com/a1920/images/disque-dur-ouvert-stockage-informatique_01.jpg" alt="Rapport SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP02-Partitionnement de disques durs</h6>
+                                <p class="small text-muted flex-grow-1">Partitionnement de disques durs</p>
+                                <a href="Compte rendu TP02 - Partitionnement de disques durs.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://cdn.next.ink/inpactv7/data-next/images/bd/wide-linked-media/9945.jpg" alt="SISR Nouveau">
+                            <div class="document-content">
+                                <h6>Compte rendu TP03-1 - Clônage</h6>
+                                <p class="small text-muted flex-grow-1">Clônage</p>
+                                <a href="Compte rendu TP03-1 - Clônage.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.thomas-krenn.com/de/wikiDE/images/d/da/LES-network-plus-Wake-On-Lan-BIOS.jpg" alt="Atelier Nouveau">
+                            <div class="document-content">
+                                <h6>Compte rendu TP04 - Wake On Lan</h6>
+                                <a href="Compte rendu TP04 - Wake On Lan.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://windows8facile.fr/wp-content/uploads/2018/02/filezilla-logo.jpg" alt="SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP05 - Serveur de fichiers</h6>
+                                <p class="small text-muted flex-grow-1">Serveur de fichiers</p>
+                                <a href="Compte rendu TP05 - Serveur de fichiers.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://engity.com/_assets_/record-computer-activities-with-a-keylogger.FwTauLPjmgO-ESukP0thacYzpO70iUp3l_0HWvf75i8.jpg" alt="SISR TP06">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 06 - Keylogger</h6>
+                                <p class="small text-muted flex-grow-1">Keylogger</p>
+                                <a href="Compte rendu TP 06 - Keylogger.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://img.freepik.com/vecteurs-premium/concept-illustration-isometrique-plat-technicien-maintenance_18660-2013.jpg" class="document-img" alt="Services SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP07 - Kit du technicien informatique.docx</h6>
+                                <p class="small text-muted flex-grow-1">Kit du technicien informatique</p>
+                                <a href="Compte rendu TP07 - Kit du technicien informatique.docx.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <a href="KIT du Technicien Romain Jacquet.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://img.freepik.com/vecteurs-premium/concept-illustration-isometrique-plat-technicien-maintenance_18660-2013.jpg" class="document-img" alt="Services SISR">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 5.Transmission de données entre pages</h6>
+                                <p class="small text-muted flex-grow-1">Transmission de données entre pages</p>
+                                <a href="Compte Rendu TP 5.Transmission de données entre pages.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<section id="veille-technologique" class="reveal">
+    <div class="container">
+        <h2 class="section-title">Veille Technologique</h2>
+        
+        <div class="text-center mb-5">
+            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                <i class="fas fa-calendar-check me-2"></i>Actualisé le 9 Mars 2026
+            </span>
+            <h3 class="fw-bold mb-3">L'Intelligence Artificielle : L'Ère de l'Inférence et de l'Action Autonome</h3>
+            <p class="text-muted mx-auto" style="max-width: 800px;">
+                Ma veille se concentre sur l'évolution des modèles de raisonnement complexe, l'IA "Actionnable" (Agents) et l'intégration profonde de l'IA physique dans les infrastructures industrielles européennes.
+            </p>
+        </div>
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4">
+                <div class="card-glass h-100">
+                    <h4 class="mb-4 text-primary"><i class="fas fa-tools me-2"></i>Outils de Veille</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-mobile-alt text-warning fa-lg me-3"></i>
+                            <div>
+                                <strong>Apps & Flux</strong>
+                                <div class="small text-muted">Google News & Syft</div>
+                            </div>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-rss-square text-dark fa-lg me-3"></i>
+                            <div>
+                                <strong>Agrégateur</strong>
+                                <div class="small text-muted">Feedly (Flux RSS centralisé)</div>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <i class="fas fa-robot text-info fa-lg me-3"></i>
+                            <div>
+                                <strong>Analyse IA</strong>
+                                <div class="small text-muted">ChatGPT (Synthèse d'articles)</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card-glass h-100" style="background: var(--dark); color: white;">
+                    <h4 class="mb-4 text-white"><i class="fas fa-project-diagram me-2"></i>Thèmes majeurs Mars 2026</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-brain text-info me-2"></i>
+                                <span class="fw-bold">Reasoning Models</span>
+                            </div>
+                            <p class="small text-white-50">Généralisation des modèles capables de "réfléchir" avant de répondre (chaîne de pensée native).</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-network-wired text-info me-2"></i>
+                                <span class="fw-bold">Agentic Ecosystems</span>
+                            </div>
+                            <p class="small text-white-50">Interconnexion d'agents spécialisés gérant des cycles de vie complets (DevOps, RH, Finance).</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-cloud-shield text-info me-2"></i>
+                                <span class="fw-bold">Souveraineté 2.0</span>
+                            </div>
+                            <p class="small text-white-50">Déploiement massif de LLM on-premise (locaux) sécurisés pour les secteurs critiques.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-eye text-info me-2"></i>
+                                <span class="fw-bold">IA Multimodale Native</span>
+                            </div>
+                            <p class="small text-white-50">Modèles traitant simultanément vidéo, audio et texte sans latence de conversion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-glass p-0 overflow-hidden mb-5">
+            <div class="table-responsive veille-table">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 15%;">Date</th>
+                            <th style="width: 25%;">Sujet / Techno</th>
+                            <th style="width: 20%;">Source / Acteur</th>
+                            <th style="width: 40%;">Analyse & Impact SIO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge bg-primary">02/03/2026</span></td>
+                            <td>
+                                <strong>Déploiement Agents B2B</strong><br>
+                                <small class="text-muted">Automatisation de bout en bout</small>
+                            </td>
+                            <td>OpenAI / Anthropic</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Intégration native des agents autonomes dans les ERP.<br>
+                                <em class="small text-muted">Impact: Redéfinition des rôles de support et de maintenance applicative.</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>15/02/2026</td>
+                            <td>
+                                <strong>Framework Agentique</strong><br>
+                                <small class="text-muted">Orchestration d'Agents</small>
+                            </td>
+                            <td>LangChain / Microsoft</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Standardisation des protocoles de communication entre IA.<br>
+                                <em class="small text-muted">Impact: Passage du simple script à des workflows autonomes auto-correcteurs.</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>02/02/2026</td>
+                            <td>
+                                <strong>Deep Reasoning Open Source</strong><br>
+                                <small class="text-muted">Modèles R1/R2</small>
+                            </td>
+                            <td>Communauté / DeepSeek-like</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Démocratisation du raisonnement logique complexe.<br>
+                                <em class="small text-muted">Impact: Réduction drastique des hallucinations dans les outils de codage.</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>28/01/2026</td>
+                            <td>
+                                <strong>IA Act : Mise en Conformité</strong><br>
+                                <small class="text-muted">Audits obligatoires</small>
+                            </td>
+                            <td>Union Européenne</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Premières sanctions pour modèles "haute fidélité" non documentés.<br>
+                                <em class="small text-muted">Impact: Forte demande en experts Cyber/IA pour la traçabilité des données.</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10/12/2025</td>
+                            <td>
+                                <strong>Génération Multimodale Native</strong><br>
+                                <small class="text-muted">Modèles unifiés temps réel</small>
+                            </td>
+                            <td>Google (Gemini Labs)</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Traitement croisé de la voix, de la vidéo et du code sans latence.<br>
+                                <em class="small text-muted">Impact: Création d'interfaces utilisateurs 100% vocales et visuelles dynamiques.</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>15/11/2025</td>
+                            <td>
+                                <strong>Écosystèmes Copilot Studio</strong><br>
+                                <small class="text-muted">Création d'agents no-code</small>
+                            </td>
+                            <td>Microsoft</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Démocratisation de la création d'agents d'entreprise.<br>
+                                <em class="small text-muted">Impact: Le DSI devient un orchestrateur d'agents virtuels internes.</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>28/10/2025</td>
+                            <td>
+                                <strong>Souveraineté Numérique</strong><br>
+                                <small class="text-muted">Modèles Locaux (On-Premise)</small>
+                            </td>
+                            <td>Mistral AI / Bpifrance</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> Lancements de modèles légers et hautement performants pour serveurs privés.<br>
+                                <em class="small text-muted">Impact: Viabilité des IA privées pour les hôpitaux et les banques (RGPD).</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>12/09/2025</td>
+                            <td>
+                                <strong>Démocratisation du Raisonnement</strong><br>
+                                <small class="text-muted">Modèles "Chain-of-Thought"</small>
+                            </td>
+                            <td>OpenAI (o1) / DeepMind</td>
+                            <td>
+                                <i class="fas fa-arrow-right text-primary small me-1"></i> L'IA prend du temps de calcul ("think") avant de répondre aux prompts complexes.<br>
+                                <em class="small text-muted">Impact: Fin des chatbots basiques, place aux assistants capables de mathématiques et de logique pure.</em>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-light border shadow-sm rounded-4 p-4">
+                    <h5 class="alert-heading fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Synthèse : Ce qu'il faut retenir</h5>
+                    <p class="mb-0 mt-2">
+                        En ce début d'année 2026, l'IA ne se contente plus de prédire le mot suivant, elle <strong>raisonne par étapes</strong>. La tendance majeure est l'émergence des <strong>Écosystèmes Agentiques</strong> : des systèmes où plusieurs IA collaborent pour résoudre des problèmes métier sans intervention humaine constante. 
+                        Pour le profil SIO, l'enjeu se déplace de la simple utilisation de l'IA vers <strong>l'orchestration et la sécurisation</strong> de ces agents au sein du SI de l'entreprise.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <footer>
+        <div class="container text-center">
+            <h3 class="fw-bold mb-4">Romain Jacquet</h3>
+            <div class="mb-4">
+                <a href="#" class="social-icon-btn"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/romain_jqt?igsh=ODU0bHZnNTZm&utm_source=qr" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:romain.jacquet1412@orange.fr" class="social-icon-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="text-white-50 mb-0">&copy; 2025 Romain Jacquet. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <div class="modal fade" id="projectModal4" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 overflow-hidden">
+                <div class="modal-header border-0 p-4">
+                    <h5 class="modal-title fw-bold">Film "Les Éclaireurs"</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 pt-0">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1159&q=80" class="img-fluid rounded-4 mb-4" alt="Film">
+                    <p>Participation à la conception du film sur la Résistance Haut-Alpine avec le Lycée Poutrain.</p>
+                    <h6>Mes missions :</h6>
+                    <ul>
+                        <li>Conception et réalisation</li>
+                        <li>Travail d'équipe</li>
+                        <li>Techniques audiovisuelles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <script>
+        // Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Init
+        
+        // Skill Bars
+        window.addEventListener('scroll', function() {
+            document.querySelectorAll('.skill-progress').forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if(rect.top < window.innerHeight) {
+                    bar.style.width = bar.getAttribute('data-width');
+                }
+            });
+        });
+        
+        // Toggle Documents
+        function toggleDocuments(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+            } else {
+                el.style.display = 'block';
+                el.style.animation = 'fadeInUp 0.5s ease';
+            }
+        }
+        
+        // CV Download
+        document.getElementById('downloadCV').addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.href = 'CV Romain Jacquet.pdf'; 
+            link.download = 'CV Romain Jacquet.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+        
+        // Form Submit (if present)
+        let contactForm = document.getElementById('contactForm');
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Merci ! Votre message a été envoyé.');
+                this.reset();
+            });
+        }
+
+        // Téléchargement de tous les PDFs en ZIP
+        document.getElementById('downloadAllPdfs').addEventListener('click', async function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            // Changement visuel du bouton pour faire patienter l'utilisateur
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Création du ZIP en cours...';
+            btn.disabled = true;
+
+            try {
+                const zip = new JSZip();
+                const sections = document.querySelectorAll('.teacher-section');
+                const fetchPromises = [];
+
+                sections.forEach(section => {
+                    // Récupérer le nom du professeur/section pour créer un dossier
+                    const titleElement = section.querySelector('h4');
+                    if (!titleElement) return;
+                    
+                    // Nettoyer le nom du dossier pour éviter les caractères invalides
+                    const folderName = titleElement.innerText.trim().replace(/[^a-zA-Z0-9 -]/g, ""); 
+                    const folder = zip.folder(folderName);
+
+                    // Cibler uniquement les liens qui finissent par .pdf
+                    const pdfLinks = section.querySelectorAll('a[href$=".pdf"]');
+                    
+                    pdfLinks.forEach(link => {
+                        const url = link.getAttribute('href');
+                        // Utiliser l'attribut download comme nom, ou le nom du fichier dans l'URL
+                        let filename = link.getAttribute('download') || url.split('/').pop();
+                        if (!filename.toLowerCase().endsWith('.pdf')) filename += '.pdf';
+
+                        // Télécharger le fichier et l'ajouter au dossier ZIP
+                        const promise = fetch(url)
+                            .then(response => {
+                                if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+                                return response.blob();
+                            })
+                            .then(blob => {
+                                folder.file(filename, blob);
+                            })
+                            .catch(e => console.warn(`Impossible de télécharger ${url}:`, e));
+                        
+                        fetchPromises.push(promise);
+                    });
+                });
+
+                // Attendre que tous les téléchargements soient terminés
+                await Promise.all(fetchPromises);
+                
+                // Générer le ZIP et déclencher le téléchargement
+                const content = await zip.generateAsync({ type: "blob" });
+                saveAs(content, "Comptes_Rendus_Romain_Jacquet.zip");
+
+            } catch (error) {
+                console.error("Erreur lors de la création du ZIP :", error);
+                alert("Une erreur est survenue lors de la création du fichier ZIP.");
+            } finally {
+                // Remettre le bouton à son état normal
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>
