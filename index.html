@@ -304,6 +304,7 @@
         }
         .document-card:hover { transform: translateY(-5px); }
         .document-img { height: 160px; object-fit: cover; width: 100%; }
+        .document-img-container { height: 160px; overflow: hidden; background: #f8f9fa; display: flex; align-items: center; justify-content: center; }
         .document-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         
         .btn-download-sm {
@@ -384,7 +385,7 @@
                     <li class="nav-item"><a class="nav-link" href="#veille-technologique">Veille</a></li>
                     <li class="nav-item ms-2">
                         <a class="btn btn-modern btn-sm px-4" href="#contact">Contact</a>
-                                     </li>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -416,7 +417,7 @@
                 <div class="col-lg-6">
                     <div class="card-glass">
                         <h3 class="fw-bold mb-4">Qui suis-je ?</h3>
-                        <p>Je suis Romain Jacquet, étudiant en BTS Services Informatiques aux Organisations (SIO). Passionné par l'informatique et les nouvelles technologies, je possède une solide formation en maintenance informatique, réseaux et téléphonie, avec plusieurs expériences en entreprise qui m'ont permis de développer mes compétences techniques et professionnelles.</p>
+                        <p>Je suis Romain Jacquet, étudiant en BTS Services Informatiques aux Organisations (SIO). Passionné par l'informatique and les nouvelles technologies, je possède une solide formation en maintenance informatique, réseaux et téléphonie, avec plusieurs expériences en entreprise qui m'ont permis de développer mes compétences techniques et professionnelles.</p>
                         <p class="mb-0">Je suis titulaire du BAC PRO SN option ARED (mention Bien), du B1 (habilitation électrique), du SST (Sauveteur Secouriste du Travail) et du Brevet des Collèges. Je recherche actuellement une alternance pour mettre en pratique mes compétences.</p>
                     </div>
                 </div>
@@ -1105,398 +1106,415 @@
                     <!-- 2. Le TP 6 se place à la suite -->
                     <div class="col-md-6 col-lg-4">
                         <div class="document-card">
-                            <img src="data:image/png;base64,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" class="document-img" alt="Document PDF 2">
-                        <div class="document-content">
-                            <h6>Compte rendu TP [Projet] Gestion de films (version statique)</h6>
-                            <p class="small text-muted flex-grow-1"> Gestion de films (version statique)</p>
-                            <a href="Compte rendu TP [Projet] Gestion de films (version statique).pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQkAAAC+CAMAAAARDgovAAABrVBMVEX///8AAAD4+Pjn5+f19fXr6+umpqaioqLw8PC/v7/s7OzQ0NDV1dXa2trf39/R0dG5ubnKysq4uLjFxcWsrKycnJyMjIz4/f+EhISGhob///uWlpawsLDz9ffn6+6qrLDc1uS2w83V2+Dd2dYoKCjs6OSstLPNx79ycnLAuLLm7/eJkJH///b17+fa09G0iICgwd9Yi77JzdOzq6a5r7OXnp6YoarU4O3g4+qmrLfJvby0pZ7j28yYmZuVkInJ2+zBycOtama/fHatlXrMsoKtj2iTrH64mJf6Ukj/amG+UU3TlSz/1Xnlpjyo3H6Pp4Hfg3/xoJzHsHL24ofQt2awuqm41Y7lwLrwl4nvpZWoYEuublurn5HfzMn0i3Xccn7KsaqUGQCrVgeFIg5hYWF+d26KmqVSR0OWorlnfY9fYm5GRU2lmIiJh5PpaFn3z1eUOw7A3bKDAADiqaaauNdjn9EogcIAYKh4q9a9v9c2crFSkshwj7mew+GKqM2qtc4AXq6hhYV2bnynn7F7a2qQgXm32e6NnMRXWFu3ytR8cIewp5FxfILKv6yMkqtyUG2LAAAdj0lEQVR4nO2diWOjWJ7ffwGJQxziEAiJq4FBCKmk2CBLyDbIOXZnc+1mk/TuZrdq0tl0OT07pWSSdXnsOux019g9Trvnb96HJFx22VWuVrmO7tbXEjwev/fgfQTvBsM/W2ku+Ngn8MloRaLQikShFYlCKxKFViQKrUgUWpEo9CqJX5A/F/3iFhJKpfzzUEW5jQT/c9FtJHSe41j05VkOiZ0tc4lV7geLFdnbjT6KGJrh9dtIcOK/+JdbHPev/vWfsKzwp39KszPJJWwZMQz7SUpWJe42Eir7yz/7N/+WY/7dv/8PNPsXf/7nf8EyDFOlcaw0+5uvZp+rKs09c++5ydxFM3lwZr6cry88rutNBtXF4nVhLxlWX3G8GoksG7LMqreRYDb/41/+kon+03/+L6L4+V/91ediLilP2lX1hrHrDUOXwXmO4a1r+0ucyJZKjCyKrM6In5QkTUJAbiUhI4noG8iXJGAURZWoUmm2mMk/6ZL2iZ620pbSFRzkQy12LixwiUc4JFlUNUX+pEQbElo2biGhyfR1SQxK5qvC8cDFcTzyy7jI8tf3V9AfRRE0LSo3xfnRdSsJQZCE/CvlK2G+IMvULFlLSDIkgV7EJC2injlmMc+PIxXHWaxflSS8DHgRUhCouRiLcGMnl+CTppQc6Ke0WEm3iem2M4CtLizI+fO3xrUS0byFBUosklF9WNql3qcuh+BaVusWqMv/OPCqXdixclUvucqW8OI/ZCVXKhbN8xahyJdTLSGbJKHZXXprMXBR5G4lyftuz1eorJ3lNlfItBjeHqhTJuxoSZTivWF3hUrlIAP42etXqWjC0Xb6VBI7LGAYYJd1acN+hRB7HefEt7Ng3pvi6LKtYz138LNSMzO0k5FKp平kWmrowHqDDAUYJd1acN+hRB7HefEt7Ng3pvi6LKtYz138LNSMzO0k5FKpTGKoaACMR18KA4C87oSWM9fsk7sWS5jtW+zIfbHLIbC5NbZYF+GK+tjClmJxvloR51bF4mJ1SfwMhSyjNPF4WV8kjpDyTZwvC4vE4jgzW/713/zXB/l682//7m//Lt/DoY9Ckqh1dSsJhWcovE3gFYoFnCFZqMB9RyqZVM8N6iIdmFYZyr7ZlxLMwsocR+FMybonpuOmxQPej4AvYWY/dDDKN3G/zmN4E9mVm1aJYiAKbY41I6xSxjD022A5ZkZSUJWU5RmMBhqw3qBDQYUx84qqz6AFdYUEVFHbSdI0ied4ul3TDYSAr7TVfMXjSltdNK9qdO7z4FfJf/ubfPOL//73f/8/ch8OfQyk3PhWEmJFV7UvUQqhJhk8IpF9Xnu4SwUd+56jfK+I/zP+6qRjGxl9Hqfa5n2nm/16m3W2yLimDBuKag/+wbTvR1l6EvxmQAzjrvoPNU3Nzh8pU0qyS5uqSW+1NQCKL6EFgFSqYlCq8gzQnATQe+GltBXKsSzQZUkkZfnKhQEoKbzKVtWchEYQtVmrsqES+VpsNDQ5dzA1g87Xf/2/Kv/7V3mIL377298WJFidJHXu9raowqMrTycpHpFgMINDJxt6dC3C7Z4TduKhZyj90RbtBIrUvT8MN5mhMXBq99Sx6KfhVEjFlCbkKHTEzVAgA6Y98KQWI9OhsxkMgk6s0kIwEukQZhTyL22wACWGFzEoVxnouWLkuRwv8onH8VyAbtArYlAzmVZVGrWVaY0ka3mzuaqqyBQ5VEnj501NSc63+7/6P3/yl7nji/+LSOS7UOOYaWuahvxuJyEgXoioiH6ySgkWNzeAidVLF+fTrOdLv9g056veYo1d2PXoy6koXVpeFSaik7wS8jXC83Z+XmPO04SqrvNmf3XR+pcZee5gF30ID/7xH2e7Nv85EjcnkV8jOZTbW+WcgaLhZSGnzb+mfc9fWl7zvuzxughe0aypzLyN3azLZPaZ9Z0sWtncldUlj4XJxUGqF/tuJ4GMaFR9Fd9/J8FrVH2fkV/qL7mdRLWan0t11ryvzsTM2vqLLebKqjrzLvoCqj8o1MV3HqqwWMRTGF2EKqJmqjf1PLyFFj0ci2huJUFcL8M/SVGXq4tvVdkqX40AiNtIfJyE/WBVbq1eXtMrMaxIFFqKBNxUあた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" class="document-img" alt="Document PDF 2">
+                            <div class="document-content">
+                                <h6>Compte rendu TP [Projet] Gestion de films (version statique)</h6>
+                                <p class="small text-muted flex-grow-1"> Gestion de films (version statique)</p>
+                                <a href="Compte rendu TP [Projet] Gestion de films (version statique).pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- 4. Le dossier ZIP bascule automatiquement sur une nouvelle ligne, se plaçant visuellement en dessous du TP 5 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.01net.com/app/uploads/2019/07/winzip-1256.jpg" class="document-img" alt="Nouveau Fichier ZIP">
-                        <div class="document-content">
-                            <h6>Dossier ZIP avec les TP 1 à 5 + site static)</h6>
-                            <p class="small text-muted flex-grow-1">Fichiers sources associés au format compressé ZIP.</p>
-                            <a href="TP 1 à 5 + Site Static.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                    <!-- 4. Le dossier ZIP bascule automatiquement sur une nouvelle ligne, se plaçant visuellement en dessous du TP 5 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.01net.com/app/uploads/2019/07/winzip-1256.jpg" class="document-img" alt="Nouveau Fichier ZIP">
+                            <div class="document-content">
+                                <h6>Dossier ZIP avec les TP 1 à 5 + site static)</h6>
+                                <p class="small text-muted flex-grow-1">Fichiers sources associés au format compressé ZIP.</p>
+                                <a href="TP 1 à 5 + Site Static.zip" download class="btn-download-sm text-dark bg-light"><i class="fas fa-file-archive"></i> ZIP</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="teacher-section">
-        <div class="teacher-header" onclick="toggleDocuments('s2-b3-beauvallet')">
-            <div class="teacher-avatar" style="background: #e0e7ff; color: var(--primary);"><i class="fas fa-shield-alt"></i></div>
-            <div class="flex-grow-1">
-                <h4 class="mb-0">Bloc 3 - Mme Beauvallet</h4>
-                <p class="text-muted mb-0">Cybersécurité</p>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b3-beauvallet')">
+                <div class="teacher-avatar" style="background: #e0e7ff; color: var(--primary);"><i class="fas fa-shield-alt"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 3 - Mme Beauvallet</h4>
+                    <p class="text-muted mb-0">Cybersécurité</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
             </div>
-            <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-        </div>
-        <div id="s2-b3-beauvallet" class="documents-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/210678852/original/d0255f9bbe1e0469db1dfb8b8340937e014a62f0/do-modern-technology-cyber-security-tech-cloud-logo-design.jpg" class="document-img" alt="Cyber S2">
-                        <div class="document-content">
-                            <h6>Compte rendu TH3 chapitre 5 TD1</h6>
-                            <p class="small text-muted flex-grow-1">Gérer les accès et les privilèges appropriés</p>
-                            <a href="Compte rendu TH3 chapitre 5 TD1.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+            <div id="s2-b3-beauvallet" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/210678852/original/d0255f9bbe1e0469db1dfb8b8340937e014a62f0/do-modern-technology-cyber-security-tech-cloud-logo-design.jpg" class="document-img" alt="Cyber S2">
+                            <div class="document-content">
+                                <h6>Compte rendu TH3 chapitre 5 TD1</h6>
+                                <p class="small text-muted flex-grow-1">Gérer les accès et les privilèges appropriés</p>
+                                <a href="Compte rendu TH3 chapitre 5 TD1.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Opj_D873FHHS12bWEPge6-5Qg14omBT1Ow&s" alt="PDF">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 08  Vérifier l'efficacité de la protection</h6>
-                            <p class="small text-muted flex-grow-1">Vérifier l'efficacité de la protection</p>
-                            <a href="Compte rendu TP 08 _ Vérifier l'efficacité de la protection.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Opj_D873FHHS12bWEPge6-5Qg14omBT1Ow&s" alt="PDF">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 08  Vérifier l'efficacité de la protection</h6>
+                                <p class="small text-muted flex-grow-1">Vérifier l'efficacité de la protection</p>
+                                <a href="Compte rendu TP 08 _ Vérifier l'efficacité de la protection.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBsLQcBK8ky8g2zwByI42ju5_ln4X46mtzrQ&s" class="document-img" alt="Nouveau Document">
-                        <div class="document-content">
-                            <h6>Compte rendu TP Chapitre 5 Exercice d’applications</h6>
-                            <p class="small text-muted flex-grow-1">Exercice d’applications</p>
-                            <a href="Compte rendu TP Chapitre 5_ Exercice d’applications.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="teacher-section">
-        <div class="teacher-header" onclick="toggleDocuments('s2-b1-sotoca')">
-            <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-server"></i></div>
-            <div class="flex-grow-1">
-                <h4 class="mb-0">Bloc 1 - M. Sotoca</h4>
-                <p class="text-muted mb-0">Support et mise à disposition de services informatiques</p>
-            </div>
-            <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-        </div>
-        <div id="s2-b1-sotoca" class="documents-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://img.freepik.com/photos-gratuite/vue-du-pingouin-3d-anime-par-dessin-anime_23-2150882034.jpg?semt=ais_hybrid&w=740&q=80">
-                        <div class="document-content">
-                            <h6>Compte rendu B1 TP21 : Création d'un scénario Linux</h6>
-                            <a href="Compte rendu B1 TP21 _ Création d'un scénario Linux.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.vaadata.com/blog/wp-content/uploads/2023/04/securite-active-directory-ad.png" alt="Reseau Nouveau">
-                        <div class="document-content">
-                            <h6>Compte rendu TP2 L'Active Directory</h6>
-                            <a href="Compte rendu TP2 L'Active Directory.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://rdr-it.com/wp-content/uploads/2024/01/windows-11-add-in-ad-domain-17.png" class="document-img" alt="Connexion domaine">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 3 — Connexion au domaine</h6>
-                            <a href="Compte rendu TP 3 — Connexion au domaine.docx.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.shutterstock.com/image-vector/dhcp-dynamic-host-configuration-protocol-260nw-1860642253.jpg" alt="Nouveau Document">
-                        <div class="document-content">
-                            <h6>Compte Rendu TP 4 Le rôle DHCP</h6>
-                            <p class="small text-muted flex-grow-1"> Le rôle DHCP</p>
-                            <a href="Compte Rendu TP 4 Le rôle DHCP.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBsLQcBK8ky8g2zwByI42ju5_ln4X46mtzrQ&s" class="document-img" alt="Nouveau Document">
+                            <div class="document-content">
+                                <h6>Compte rendu TP Chapitre 5 Exercice d’applications</h6>
+                                <p class="small text-muted flex-grow-1">Exercice d’applications</p>
+                                <a href="Compte rendu TP Chapitre 5_ Exercice d’applications.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="teacher-section">
-        <div class="teacher-header" onclick="toggleDocuments('s2-b3-sotoca')">
-            <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-lock"></i></div>
-            <div class="flex-grow-1">
-                <h4 class="mb-0">Bloc 3 - M. Sotoca</h4>
-                <p class="text-muted mb-0">Cybersécurité des infrastructures</p>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b1-sotoca')">
+                <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-server"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 1 - M. Sotoca</h4>
+                    <p class="text-muted mb-0">Support et mise à disposition de services informatiques</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
             </div>
-            <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-        </div>
-        <div id="s2-b3-sotoca" class="documents-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://faronicscloud.com/cdn/shop/articles/DeepFreeze_V_2ee6c07d-e800-4d36-9f39-e0f3d87c46c5.jpg?v=1741106987" alt="Cybersecurite">
-                        <div class="document-content">
-                            <h6>Compte rendu B3 Hack TP16 - Deep Freeze</h6>
-                            <p class="small text-muted flex-grow-1"> Deep Freeze</p>
-                            <a href="Compte rendu B3 Hack TP16 - Deep Freeze.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+            <div id="s2-b1-sotoca" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://img.freepik.com/photos-gratuite/vue-du-pingouin-3d-anime-par-dessin-anime_23-2150882034.jpg?semt=ais_hybrid&w=740&q=80">
+                            <div class="document-content">
+                                <h6>Compte rendu B1 TP21 : Création d'un scénario Linux</h6>
+                                <a href="Compte rendu B1 TP21 _ Création d'un scénario Linux.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="teacher-section">
-        <div class="teacher-header" onclick="toggleDocuments('s2-atelier')">
-            <div class="teacher-avatar" style="background: #fce4ec; color: var(--accent);"><i class="fas fa-users-cog"></i></div>
-            <div class="flex-grow-1">
-                <h4 class="mb-0">Atelier de Professionnalisation</h4>
-                <p class="text-muted mb-0">Projets et travaux pratiques transversaux</p>
-            </div>
-            <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-        </div>
-        <div id="s2-atelier" class="documents-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://didacweb.com/wp-content/uploads/2021/07/Site-Vitrine-Etape-de-creation-par-DIDACWEB.jpg">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 1- Le site Vitrine</h6>
-                            <p class="small text-muted flex-grow-1">Site Vitrines</p>
-                            <a href="Compte rendu TP 1- Le site Vitrine.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                            <a href="TP1 Atelier Romain Jacquet.zip" download class="btn-download-sm text-dark bg-light">
-                                <i class="fas fa-file-archive"></i> ZIP
-                            </a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.vaadata.com/blog/wp-content/uploads/2023/04/securite-active-directory-ad.png" alt="Reseau Nouveau">
+                            <div class="document-content">
+                                <h6>Compte rendu TP2 L'Active Directory</h6>
+                                <a href="Compte rendu TP2 L'Active Directory.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.codeur.com/blog/wp-content/uploads/2025/04/hebergement-web-site-vitrine-1-740x416.jpg" alt="Atelier">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 2 - L'hébergement du site</h6>
-                            <p class="small text-muted flex-grow-1">Hébergement de site</p>
-                            <a href="Compte rendu TP 2 - L'hébergement du site-1.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://rdr-it.com/wp-content/uploads/2024/01/windows-11-add-in-ad-domain-17.png" class="document-img" alt="Connexion domaine">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 3 — Connexion au domaine</h6>
+                                <a href="Compte rendu TP 3 — Connexion au domaine.docx.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://cdn-icons-png.flaticon.com/512/876/876784.png" alt="Atelier">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 3 - Le transfert du site</h6>
-                            <p class="small text-muted flex-grow-1">Transfert du site</p>
-                            <a href="Compte rendu TP 3 - Le transfert du site.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy9dPTyYVW4DC1PKmHSy8Mssz8JuPhKK6Brw&s">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 4 - Gestionnaire de sauvegardes</h6>
-                            <p class="small text-muted flex-grow-1">Gestionnaire de sauvegardes</p>
-                            <a href="Compte rendu TP 4 - Gestionnaire de sauvegardes.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                            <a href="Site sauvgarde VM.zip" download class="btn-download-sm text-dark bg-light">
-                                <i class="fas fa-file-archive"></i> ZIP
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://soformatec.com/wp-content/uploads/2023/06/securing_dedicated_server.jpg" class="document-img" alt="Documentation">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 5- Protection du serveur web</h6>
-                            <p class="small text-muted flex-grow-1">Protection du serveur web</p>
-                            <a href="Compte rendu TP 5- Protection du serveur web.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- DOCUMENT SOUHAITÉ RAJOUTÉ ICI EN SUITE DIRECTE -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://zeenea.com/wp-content/uploads/2023/01/databases-zeenea.jpg" class="document-img" alt="Nouveau Document PDF">
-                        <div class="document-content">
-                            <h6>Compte Rendu TP 6 - La base de données</h6>
-                            <p class="small text-muted flex-grow-1">La base de données</p>
-                            <a href="Compte Rendu TP 6 - La base de données.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                </div>
-        </div>
-    </div>
-    <div class="teacher-section">
-        <div class="teacher-header" onclick="toggleDocuments('s2-pcc')">
-            <div class="teacher-avatar" style="background: #fff8e1; color: #f57f17;"><i class="fas fa-certificate"></i></div>
-            <div class="flex-grow-1">
-                <h4 class="mb-0">PCC</h4>
-                <p class="text-muted mb-0">Parcours de certifications</p>
-            </div>
-            <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-        </div>
-        <div id="s2-pcc" class="documents-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.numetopia.fr/wp-content/uploads/2023/01/thumbnail-tuto-linux-hidden-files.png" alt="PCC">
-                        <div class="document-content">
-                            <h6>Compte rendu TP Message secret sous ubuntu...</h6>
-                            <a href="Compte rendu TP Message secret sous ubuntu.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.shutterstock.com/image-vector/dhcp-dynamic-host-configuration-protocol-260nw-1860642253.jpg" alt="Nouveau Document">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 4 Le rôle DHCP</h6>
+                                <p class="small text-muted flex-grow-1"> Le rôle DHCP</p>
+                                <a href="Compte Rendu TP 4 Le rôle DHCP.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="teacher-section">
-        <div class="teacher-header" onclick="toggleDocuments('s2-sisr')">
-            <div class="teacher-avatar" style="background: #e0f2f1; color: #00897b;"><i class="fas fa-server"></i></div>
-            <div class="flex-grow-1">
-                <h4 class="mb-0">Option SISR</h4>
-                <p class="text-muted mb-0">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-b3-sotoca')">
+                <div class="teacher-avatar" style="background: #e3f2fd; color: var(--secondary);"><i class="fas fa-lock"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Bloc 3 - M. Sotoca</h4>
+                    <p class="text-muted mb-0">Cybersécurité des infrastructures</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
             </div>
-            <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
-        </div>
-        <div id="s2-sisr" class="documents-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvLZ-bW7I5mcRtsMFnsIkboGVEYq91Edw9gQ&s" alt="Archive SISR">
-                        <div class="document-content">
-                            <h6>Compte rendu TP01 - Prise de contrôle à distance</h6>
-                            <p class="small text-muted flex-grow-1">Prise de controle à distance</p>
-                            <a href="Prise de contrôle à distance.zip" download class="btn-download-sm text-dark bg-light">
-                                <i class="fas fa-file-archive"></i> ZIP
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://static.fnac-static.com/multimedia/Images/FD/Comete/38021/CCP_IMG_1200x800/442311.gif" alt="Rapport SISR">
-                        <div class="document-content">
-                            <h6>Compte rendu TP02-Partitionnement de disques durs</h6>
-                            <p class="small text-muted flex-grow-1">Partitionnement de disques durs</p>
-                            <a href="Compte rendu TP02 - Partitionnement de disques durs.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://cdn.next.ink/inpactv7/data-next/images/bd/wide-linked-media/9945.jpg" alt="SISR Nouveau">
-                        <div class="document-content">
-                            <h6>Compte rendu TP03-1 - Clônage</h6>
-                            <p class="small text-muted flex-grow-1">Clônage</p>
-                            <a href="Compte rendu TP03-1 - Clônage.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.thomas-krenn.com/de/wikiDE/images/d/da/LES-network-plus-Wake-On-Lan-BIOS.jpg" alt="Atelier Nouveau">
-                        <div class="document-content">
-                            <h6>Compte rendu TP04 - Wake On Lan</h6>
-                            <a href="Compte rendu TP04 - Wake On Lan.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://windows8facile.fr/wp-content/uploads/2018/02/filezilla-logo.jpg" alt="SISR">
-                        <div class="document-content">
-                            <h6>Compte rendu TP05 - Serveur de fichiers</h6>
-                            <p class="small text-muted flex-grow-1">Serveur de fichiers</p>
-                            <a href="Compte rendu TP05 - Serveur de fichiers.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://engity.com/_assets_/record-computer-activities-with-a-keylogger.FwTauLPjmgO-ESukP0thacYzpO70iUp3l_0HWvf75i8.jpg" alt="SISR TP06">
-                        <div class="document-content">
-                            <h6>Compte rendu TP 06 - Keylogger</h6>
-                            <p class="small text-muted flex-grow-1">Keylogger</p>
-                            <a href="Compte rendu TP 06 - Keylogger.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://img.freepik.com/vecteurs-premium/concept-illustration-isometrique-plat-technicien-maintenance_18660-2013.jpg" class="document-img" alt="Services SISR">
-                        <div class="document-content">
-                            <h6>Compte rendu TP07 - Kit du technicien informatique.docx</h6>
-                            <p class="small text-muted flex-grow-1">Kit du technicien informatique</p>
-                            <a href="Compte rendu TP07 - Kit du technicien informatique.docx.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
-                            <a href="KIT du Technicien Romain Jacquet.zip" download class="btn-download-sm text-dark bg-light">
-                                <i class="fas fa-file-archive"></i> ZIP
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="document-card">
-                        <img src="https://www.ionos.fr/digitalguide/fileadmin/DigitalGuide/Teaser/v-lan-t.jpg" class="document-img" alt="Services SISR">
-                        <div class="document-content">
-                            <h6>Compte rendu TP09 -TP SWITCH MANAGEABLE</h6>
-                            <p class="small text-muted flex-grow-1">SWITCH MANAGEABLE</p>
-                            <a href="Compte rendu TP09 -TP SWITCH MANAGEABLE.pdf" download class="btn-download-sm">
-                                <i class="fas fa-file-pdf"></i> PDF
-                            </a>
+            <div id="s2-b3-sotoca" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://faronicscloud.com/cdn/shop/articles/DeepFreeze_V_2ee6c07d-e800-4d36-9f39-e0f3d87c46c5.jpg?v=1741106987" alt="Cybersecurite">
+                            <div class="document-content">
+                                <h6>Compte rendu B3 Hack TP16 - Deep Freeze</h6>
+                                <p class="small text-muted flex-grow-1"> Deep Freeze</p>
+                                <a href="Compte rendu B3 Hack TP16 - Deep Freeze.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-atelier')">
+                <div class="teacher-avatar" style="background: #fce4ec; color: var(--accent);"><i class="fas fa-users-cog"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Atelier de Professionnalisation</h4>
+                    <p class="text-muted mb-0">Projets et travaux pratiques transversaux</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-atelier" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://didacweb.com/wp-content/uploads/2021/07/Site-Vitrine-Etape-de-creation-par-DIDACWEB.jpg">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 1- Le site Vitrine</h6>
+                                <p class="small text-muted flex-grow-1">Site Vitrines</p>
+                                <a href="Compte rendu TP 1- Le site Vitrine.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <a href="TP1 Atelier Romain Jacquet.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.codeur.com/blog/wp-content/uploads/2025/04/hebergement-web-site-vitrine-1-740x416.jpg" alt="Atelier">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 2 - L'hébergement du site</h6>
+                                <p class="small text-muted flex-grow-1">Hébergement de site</p>
+                                <a href="Compte rendu TP 2 - L'hébergement du site-1.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://cdn-icons-png.flaticon.com/512/876/876784.png" alt="Atelier">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 3 - Le transfert du site</h6>
+                                <p class="small text-muted flex-grow-1">Transfert du site</p>
+                                <a href="Compte rendu TP 3 - Le transfert du site.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy9dPTyYVW4DC1PKmHSy8Mssz8JuPhKK6Brw&s">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 4 - Gestionnaire de sauvegardes</h6>
+                                <p class="small text-muted flex-grow-1">Gestionnaire de sauvegardes</p>
+                                <a href="Compte rendu TP 4 - Gestionnaire de sauvegardes.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <a href="Site sauvgarde VM.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://soformatec.com/wp-content/uploads/2023/06/securing_dedicated_server.jpg" class="document-img" alt="Documentation">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 5- Protection du serveur web</h6>
+                                <p class="small text-muted flex-grow-1">Protection du serveur web</p>
+                                <a href="Compte rendu TP 5- Protection du serveur web.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DOCUMENT SOUHAITÉ RAJOUTÉ ICI EN SUITE DIRECTE -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://zeenea.com/wp-content/uploads/2023/01/databases-zeenea.jpg" class="document-img" alt="Nouveau Document PDF">
+                            <div class="document-content">
+                                <h6>Compte Rendu TP 6 - La base de données</h6>
+                                <p class="small text-muted flex-grow-1">La base de données</p>
+                                <a href="Compte Rendu TP 6 - La base de données.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-pcc')">
+                <div class="teacher-avatar" style="background: #fff8e1; color: #f57f17;"><i class="fas fa-certificate"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">PCC</h4>
+                    <p class="text-muted mb-0">Parcours de certifications</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-pcc" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.numetopia.fr/wp-content/uploads/2023/01/thumbnail-tuto-linux-hidden-files.png" alt="PCC">
+                            <div class="document-content">
+                                <h6>Compte rendu TP Message secret sous ubuntu...</h6>
+                                <a href="Compte rendu TP Message secret sous ubuntu.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="teacher-section">
+            <div class="teacher-header" onclick="toggleDocuments('s2-sisr')">
+                <div class="teacher-avatar" style="background: #e0f2f1; color: #00897b;"><i class="fas fa-server"></i></div>
+                <div class="flex-grow-1">
+                    <h4 class="mb-0">Option SISR</h4>
+                    <p class="text-muted mb-0">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="fas fa-chevron-down"></i> Voir</button>
+            </div>
+            <div id="s2-sisr" class="documents-container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvLZ-bW7I5mcRtsMFnsIkboGVEYq91Edw9gQ&s" alt="Archive SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP01 - Prise de contrôle à distance</h6>
+                                <p class="small text-muted flex-grow-1">Prise de controle à distance</p>
+                                <a href="Prise de contrôle à distance.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://static.fnac-static.com/multimedia/Images/FD/Comete/38021/CCP_IMG_1200x800/442311.gif" alt="Rapport SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP02-Partitionnement de disques durs</h6>
+                                <p class="small text-muted flex-grow-1">Partitionnement de disques durs</p>
+                                <a href="Compte rendu TP02 - Partitionnement de disques durs.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://cdn.next.ink/inpactv7/data-next/images/bd/wide-linked-media/9945.jpg" alt="SISR Nouveau">
+                            <div class="document-content">
+                                <h6>Compte rendu TP03-1 - Clônage</h6>
+                                <p class="small text-muted flex-grow-1">Clônage</p>
+                                <a href="Compte rendu TP03-1 - Clônage.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.thomas-krenn.com/de/wikiDE/images/d/da/LES-network-plus-Wake-On-Lan-BIOS.jpg" alt="Atelier Nouveau">
+                            <div class="document-content">
+                                <h6>Compte rendu TP04 - Wake On Lan</h6>
+                                <a href="Compte rendu TP04 - Wake On Lan.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://windows8facile.fr/wp-content/uploads/2018/02/filezilla-logo.jpg" alt="SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP05 - Serveur de fichiers</h6>
+                                <p class="small text-muted flex-grow-1">Serveur de fichiers</p>
+                                <a href="Compte rendu TP05 - Serveur de fichiers.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://engity.com/_assets_/record-computer-activities-with-a-keylogger.FwTauLPjmgO-ESukP0thacYzpO70iUp3l_0HWvf75i8.jpg" alt="SISR TP06">
+                            <div class="document-content">
+                                <h6>Compte rendu TP 06 - Keylogger</h6>
+                                <p class="small text-muted flex-grow-1">Keylogger</p>
+                                <a href="Compte rendu TP 06 - Keylogger.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://img.freepik.com/vecteurs-premium/concept-illustration-isometrique-plat-technicien-maintenance_18660-2013.jpg" class="document-img" alt="Services SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP07 - Kit du technicien informatique.docx</h6>
+                                <p class="small text-muted flex-grow-1">Kit du technicien informatique</p>
+                                <a href="Compte rendu TP07 - Kit du technicien informatique.docx.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <a href="KIT du Technicien Romain Jacquet.zip" download class="btn-download-sm text-dark bg-light">
+                                    <i class="fas fa-file-archive"></i> ZIP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <img src="https://www.ionos.fr/digitalguide/fileadmin/DigitalGuide/Teaser/v-lan-t.jpg" class="document-img" alt="Services SISR">
+                            <div class="document-content">
+                                <h6>Compte rendu TP09 -TP SWITCH MANAGEABLE</h6>
+                                <p class="small text-muted flex-grow-1">SWITCH MANAGEABLE</p>
+                                <a href="Compte rendu TP09 -TP SWITCH MANAGEABLE.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AJOUT DU DOCUMENT DEMANDÉ DANS L'OPTION SISR DU SEMESTRE 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="document-card">
+                            <div class="document-img-container">
+                                <i class="fas fa-network-wired fa-4x text-muted"></i>
+                            </div>
+                            <div class="document-content">
+                                <h6>Compte rendu TP10 - Services Réseaux</h6>
+                                <p class="small text-muted flex-grow-1">Configuration des services réseaux d'infrastructure.</p>
+                                <a href="Compte rendu TP10 - Services Réseaux.pdf" download class="btn-download-sm">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 </div>
 </section>
     
