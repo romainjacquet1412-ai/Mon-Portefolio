@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP05 – Portfolio de certification | BTS SIO</title>
+
+<!-- ============ PDF.js pour l'aperçu des PDF ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (typeof pdfjsLib === "undefined") {
+    document.write('<script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"><\/script>');
+  }
+</script>
+
+<!-- ============ jsPDF + html2canvas ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  if (typeof html2canvas === "undefined") {
+    document.write('<script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"><\/script>');
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  if (typeof window.jspdf === "undefined") {
+    document.write('<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"><\/script>');
+  }
+</script>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #1e3a8a;
+    --primary-light: #3b82f6;
+    --accent: #0ea5e9;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --purple: #7c3aed;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+  }
+  body {
+    font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; padding: 0 16px 100px;
+  }
+
+  /* ============ INDICATEUR SAUVEGARDE ============ */
+  #save-indicator {
+    position: fixed; top: 16px; right: 16px;
+    background: var(--success); color: white;
+    padding: 8px 16px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: 600;
+    box-shadow: var(--shadow); opacity: 0;
+    transform: translateY(-10px); transition: all 0.3s;
+    z-index: 1000; display: flex; align-items: center; gap: 6px;
+  }
+  #save-indicator.show { opacity: 1; transform: translateY(0); }
+  #save-indicator.saving { background: var(--warning); }
+
+  /* ============ BARRE D'IDENTITÉ FIXE ============ */
+  #identity-bar {
+    position: sticky; top: 0; z-index: 500;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+    color: white; padding: 16px 20px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    margin-bottom: 24px;
+    margin-left: -16px; margin-right: -16px;
+  }
+  .identity-bar-content {
+    max-width: 1080px; margin: 0 auto;
+  }
+  .identity-bar-fields {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 0.8fr 1.4fr 1.6fr 0.9fr;
+    gap: 12px; align-items: end;
+  }
+  .identity-bar-fields .field label {
+    display: block; font-size: 0.72rem;
+    font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 4px;
+  }
+  .identity-bar-fields .field input,
+  .identity-bar-fields .field select {
+    width: 100%; padding: 8px 10px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.15);
+    color: white; font-size: 0.88rem;
+    font-family: inherit; transition: all 0.2s;
+  }
+  .identity-bar-fields .field input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+  .identity-bar-fields .field input:focus,
+  .identity-bar-fields .field select:focus {
+    outline: none;
+    background: rgba(255,255,255,0.25);
+    border-color: white;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+  }
+  .identity-bar-fields .field select option {
+    color: var(--text); background: white;
+  }
+  .identity-bar-recap {
+    margin-top: 10px; padding: 8px 14px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 6px; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.3px;
+    display: flex; align-items: center;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .identity-bar-recap:empty {
+    display: none;
+  }
+  .identity-bar-recap .recap-item {
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .identity-bar-recap .recap-sep { opacity: 0.4; }
+  .identity-bar-recap .recap-badge {
+    background: rgba(255,255,255,0.25);
+    padding: 2px 10px; border-radius: 12px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .identity-bar-recap .recap-badge.sisr { background: #0ea5e9; }
+  .identity-bar-recap .recap-badge.slam { background: #7c3aed; }
+
+  /* ============ HEADER ============ */
+  header {
+    max-width: 1080px; margin: 0 auto 24px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+    color: white; padding: 32px 40px;
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  header .badge {
+    display: inline-block; background: rgba(255,255,255,0.2);
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 0.8rem; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+  header p { opacity: 0.9; font-size: 0.95rem; }
+
+  /* ============ NAVIGATION NIVEAUX ============ */
+  .niveaux-nav {
+    max-width: 1080px; margin: 0 auto 24px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .niveaux-nav button {
+    flex: 1; min-width: 200px;
+    padding: 14px 20px;
+    border: 2px solid var(--border);
+    background: white;
+    border-radius: var(--radius);
+    cursor: pointer; font-size: 0.95rem;
+    font-weight: 600; font-family: inherit;
+    color: var(--muted); transition: all 0.2s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .niveaux-nav button.active {
+    border-color: var(--primary);
+    background: var(--primary); color: white;
+    box-shadow: var(--shadow);
+  }
+  .niveaux-nav button:hover:not(.active) {
+    border-color: var(--primary-light);
+    color: var(--primary);
+  }
+
+  /* ============ SECTIONS ============ */
+  main { max-width: 1080px; margin: 0 auto; }
+  section.bloc {
+    background: var(--card); border-radius: var(--radius);
+    padding: 28px 32px; margin-bottom: 24px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    display: none;
+  }
+  section.bloc.active { display: block; }
+  section.bloc h2 {
+    color: var(--primary); font-size: 1.2rem;
+    margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+  }
+  section.bloc h2 .num {
+    background: var(--primary); color: white;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  section.bloc h3 {
+    color: var(--primary-light); font-size: 1rem;
+    margin: 24px 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+  }
+  section.bloc h4 {
+    color: var(--text); font-size: 0.95rem;
+    margin: 16px 0 8px;
+  }
+  section.bloc .hint {
+    color: var(--muted); font-size: 0.88rem;
+    margin-bottom: 18px; font-style: italic;
+  }
+
+  /* ============ FORMULAIRES ============ */
+  label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+  input[type="text"], input[type="date"], input[type="number"],
+  textarea, select {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 0.95rem; font-family: inherit;
+    color: var(--text); background: #f8fafc; transition: all 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none; border-color: var(--primary-light);
+    background: white; box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* ============ TABLEAUX À REMPLIR ============ */
+  .form-table {
+    width: 100%; border-collapse: collapse;
+    margin: 8px 0 16px; font-size: 0.9rem;
+  }
+  .form-table th {
+    background: #f8fafc; color: var(--primary);
+    text-align: left; padding: 10px 12px;
+    border-bottom: 2px solid var(--border);
+    font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .form-table td {
+    padding: 8px 10px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .form-table input[type="text"],
+  .form-table input[type="number"],
+  .form-table textarea {
+    padding: 6px 8px; font-size: 0.88rem;
+    min-height: 34px;
+  }
+  .form-table textarea { min-height: 60px; }
+
+  /* ============ CHECKBOX / RADIO ============ */
+  .checkbox-group {
+    display: flex; flex-direction: column; gap: 8px;
+    margin: 8px 0 12px;
+  }
+  .checkbox-group label {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 400; font-size: 0.9rem; cursor: pointer;
+    padding: 6px 10px; background: #f8fafc;
+    border-radius: 6px; border: 1px solid var(--border);
+  }
+  .checkbox-group label:hover { background: #eff6ff; }
+  .checkbox-group input[type="checkbox"],
+  .checkbox-group input[type="radio"] {
+    transform: scale(1.15); accent-color: var(--primary);
+  }
+
+  /* ============ ZONES DE TEXTE ============ */
+  .big-textarea { min-height: 120px; }
+  .medium-textarea { min-height: 90px; }
+
+  /* ============ UPLOAD ============ */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 8px; padding: 20px;
+    text-align: center; background: #f8fafc;
+    margin: 10px 0; transition: all 0.2s; cursor: pointer;
+  }
+  .upload-zone:hover {
+    border-color: var(--primary-light);
+    background: #eff6ff;
+  }
+  .upload-zone input[type="file"] { display: none; }
+  .upload-zone .icon {
+    font-size: 1.8rem; color: var(--primary-light);
+    margin-bottom: 6px;
+  }
+  .upload-zone .text { font-size: 0.9rem; color: var(--muted); }
+  .upload-zone .text strong { color: var(--primary); }
+
+  /* Galerie de médias */
+  .media-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px; margin: 12px 0;
+  }
+  .media-item {
+    position: relative; background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .media-item img {
+    width: 100%; height: 140px;
+    object-fit: cover; display: block;
+  }
+  .media-item img.pdf-preview {
+    object-fit: contain;
+    background: #f8fafc;
+  }
+  .media-item .file-icon {
+    width: 100%; height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    background: #f8fafc; font-size: 3rem; color: var(--primary);
+  }
+  .media-item .pdf-badge {
+    position: absolute; top: 6px; left: 6px;
+    background: #ef4444; color: white;
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 2;
+  }
+  .media-item .caption {
+    padding: 8px 10px; font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+  .media-item .caption input {
+    width: 100%; border: none;
+    padding: 2px 4px; font-size: 0.8rem;
+    background: transparent; font-style: italic;
+  }
+  .media-item .caption input:focus {
+    background: #eff6ff; box-shadow: none;
+  }
+  .media-item .filename {
+    font-size: 0.75rem; color: var(--muted);
+    word-break: break-all; display: block; margin-bottom: 4px;
+  }
+  .media-item .actions {
+    display: flex; gap: 4px; padding: 4px 6px 8px;
+  }
+  .media-item .actions button {
+    flex: 1; padding: 4px 8px;
+    font-size: 0.7rem; border-radius: 4px;
+    border: 1px solid var(--border);
+    background: white; cursor: pointer; color: var(--muted);
+  }
+  .media-item .actions button:hover {
+    background: #fef2f2; color: var(--danger);
+    border-color: var(--danger);
+  }
+  .media-item .actions button.btn-open:hover {
+    background: #eff6ff; color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  /* Spinner de conversion PDF */
+  .media-item .converting {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.9);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--primary);
+    z-index: 3;
+  }
+  .media-item .converting .mini-spinner {
+    width: 24px; height: 24px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 6px;
+  }
+
+  /* ============ BOUTONS D'ACTION ============ */
+  .actions {
+    max-width: 1080px; margin: 32px auto 0;
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center;
+    position: sticky; bottom: 16px;
+    background: rgba(241,245,249,0.95);
+    backdrop-filter: blur(6px);
+    padding: 16px; border-radius: var(--radius);
+    box-shadow: var(--shadow); z-index: 100;
+  }
+  button.btn {
+    padding: 12px 24px; border: none;
+    border-radius: 8px; font-size: 0.95rem;
+    font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  button.btn:disabled { opacity: 0.6; cursor: wait; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover:not(:disabled) { background: #152a63; transform: translateY(-1px); }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover:not(:disabled) { background: #059669; transform: translateY(-1px); }
+  .btn-danger { background: white; color: var(--danger); border: 2px solid var(--danger); }
+  .btn-danger:hover:not(:disabled) { background: #fef2f2; }
+  .btn-secondary { background: white; color: var(--primary); border: 2px solid var(--primary); }
+  .btn-secondary:hover:not(:disabled) { background: #eff6ff; }
+
+  /* ============ APERÇU ============ */
+  #apercu {
+    display: none; max-width: 1080px; margin: 32px auto 0;
+    background: white; border-radius: var(--radius);
+    padding: 40px; box-shadow: var(--shadow);
+    border-top: 6px solid var(--purple);
+  }
+  #apercu.visible { display: block; }
+  #apercu h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 4px; }
+  #apercu .subtitle {
+    color: var(--muted); font-size: 0.9rem;
+    margin-bottom: 24px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  #apercu h2 {
+    color: var(--primary); font-size: 1.1rem;
+    margin: 24px 0 12px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+  }
+  #apercu h3 {
+    color: var(--primary-light); font-size: 1rem;
+    margin: 16px 0 8px;
+  }
+  #apercu table {
+    width: 100%; border-collapse: collapse;
+    margin: 8px 0 16px; font-size: 0.85rem;
+  }
+  #apercu th, #apercu td {
+    padding: 6px 10px; border: 1px solid var(--border);
+    text-align: left; vertical-align: top;
+  }
+  #apercu th { background: #f8fafc; color: var(--primary); }
+  #apercu .meta {
+    font-size: 0.85rem; color: var(--muted);
+    margin-top: 24px; padding-top: 16px;
+    border-top: 1px solid var(--border); text-align: center;
+  }
+
+  /* ============ APERÇU IMAGES (grille compacte) ============ */
+  #apercu .media-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px; margin: 10px 0;
+  }
+  #apercu .media-preview figure {
+    border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden; background: white;
+    margin: 0; position: relative;
+  }
+  #apercu .media-preview img {
+    width: 100%; height: 100px;
+    object-fit: cover; display: block;
+  }
+  #apercu .media-preview figcaption {
+    padding: 4px 8px; font-size: 0.75rem;
+    color: var(--muted); font-style: italic;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ============ APERÇU PDF EN GRAND ============ */
+  #apercu .pdf-previews {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 16px 0 24px;
+  }
+  #apercu .pdf-preview-block {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  #apercu .pdf-preview-header {
+    background: #fef2f2;
+    padding: 10px 16px;
+    border-bottom: 2px solid #fecaca;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #apercu .pdf-badge-inline {
+    background: #ef4444;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  #apercu .pdf-preview-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #991b1b;
+    word-break: break-all;
+  }
+  #apercu .pdf-preview-image-wrapper {
+    padding: 20px;
+    background: #f8fafc;
+    text-align: center;
+  }
+  #apercu .pdf-preview-large {
+    max-width: 100%;
+    height: auto;
+    max-height: 1000px;
+    object-fit: contain;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+    background: white;
+    display: inline-block;
+  }
+  #apercu .pdf-preview-caption {
+    padding: 12px 20px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .identity-bar-fields { grid-template-columns: 1fr 1fr; }
+    .identity-bar-fields .field:nth-child(4),
+    .identity-bar-fields .field:nth-child(5) {
+      grid-column: span 2;
+    }
+  }
+  @media (max-width: 640px) {
+    .identity-bar-fields { grid-template-columns: 1fr; }
+    .identity-bar-fields .field:nth-child(4),
+    .identity-bar-fields .field:nth-child(5) {
+      grid-column: span 1;
+    }
+    header { padding: 24px 20px; }
+    header h1 { font-size: 1.3rem; }
+    section.bloc { padding: 20px; }
+    .form-table { font-size: 0.8rem; }
+    .actions { flex-direction: column; }
+    button.btn { width: 100%; justify-content: center; }
+    #apercu { padding: 24px 16px; }
+  }
+
+  /* ============ IMPRESSION ============ */
+  @media print {
+    body { background: white; padding: 0; }
+    header, section.bloc, .actions, #save-indicator,
+    .niveaux-nav, #pdf-overlay, #identity-bar { display: none !important; }
+    #apercu { display: block !important; box-shadow: none; padding: 0; border: none; }
+    #apercu .pdf-preview-block { page-break-inside: avoid; }
+    @page { margin: 1.5cm; size: A4; }
+  }
+
+  /* ============ OVERLAY PDF ============ */
+  #pdf-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15, 23, 42, 0.75);
+    display: none; align-items: center; justify-content: center;
+    z-index: 2000; backdrop-filter: blur(4px);
+  }
+  #pdf-overlay.show { display: flex; }
+  #pdf-overlay .box {
+    background: white; padding: 32px 48px;
+    border-radius: var(--radius); text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  #pdf-overlay .spinner {
+    width: 48px; height: 48px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div id="save-indicator">✓ Sauvegardé</div>
+
+<div id="pdf-overlay">
+  <div class="box">
+    <div class="spinner"></div>
+    <p><strong>Génération du document en cours…</strong></p>
+    <p style="color:#64748b; font-size:0.85rem; margin-top:8px;">Merci de patienter.</p>
+  </div>
+</div>
+
+<!-- ============ BARRE D'IDENTITÉ FIXE ============ -->
+<div id="identity-bar">
+  <div class="identity-bar-content">
+    <div class="identity-bar-fields">
+      <div class="field">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" placeholder="DUPONT" data-save>
+      </div>
+      <div class="field">
+        <label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" placeholder="Marie" data-save>
+      </div>
+      <div class="field">
+        <label for="classe">Classe *</label>
+        <select id="classe" data-save>
+          <option value="">—</option>
+          <option>SIO1</option>
+          <option>SIO2</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="option">Option *</label>
+        <select id="option" data-save>
+          <option value="">— Choisir —</option>
+          <option value="SISR">SISR</option>
+          <option value="SLAM">SLAM</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="certification">Certification préparée *</label>
+        <input type="text" id="certification" placeholder="Ex. : Cisco CCNA 200-301" data-save>
+      </div>
+      <div class="field">
+        <label for="date">Date</label>
+        <input type="date" id="date" data-save>
+      </div>
+    </div>
+    <div class="identity-bar-recap" id="identity-recap"></div>
+  </div>
+</div>
+
+<header>
+  <span class="badge">BTS SIO – Parcours de certification complémentaire (EF3)</span>
+  <h1>TP05 · Portfolio de certification</h1>
+  <p>Documenter ma démarche (Niveau 1) et prendre du recul (Niveau 2) — portfolio de preuves et retour d'expérience.</p>
+</header>
+
+<!-- ============ NAVIGATION ============ -->
+<div class="niveaux-nav">
+  <button id="btn-niveau1" class="active" onclick="afficherNiveau(1)">
+    📁 Niveau 1 — Portfolio de preuves
+  </button>
+  <button id="btn-niveau2" onclick="afficherNiveau(2)">
+    🧠 Niveau 2 — Retour d'expérience
+  </button>
+</div>
+
+<main>
+
+<!-- ============================================================
+     NIVEAU 1 — PORTFOLIO DE PREUVES
+     ============================================================ -->
+<section class="bloc active" id="section-niveau1">
+
+  <!-- 1. Fiche d'identité de la certification -->
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">1</span> Fiche d'identité de la certification</h2>
+    <p class="hint">Remplissez toutes les rubriques. Ces informations serviront de base à votre dossier EF3.</p>
+
+    <table class="form-table">
+      <tbody>
+        <tr>
+          <th style="width:35%;">Nom exact de la certification</th>
+          <td><input type="text" id="fiche_nom" data-save placeholder="Ex. : Cisco Certified Network Associate (CCNA) 200-301"></td>
+        </tr>
+        <tr>
+          <th>Organisme certificateur</th>
+          <td><input type="text" id="fiche_organisme" data-save placeholder="Ex. : Cisco Systems"></td>
+        </tr>
+        <tr>
+          <th>Domaine</th>
+          <td>
+            <select id="fiche_domaine" data-save>
+              <option value="">— Choisir —</option>
+              <option>Réseaux</option>
+              <option>Cybersécurité</option>
+              <option>Cloud</option>
+              <option>Développement</option>
+              <option>Systèmes</option>
+              <option>Données</option>
+              <option>Gestion de projet</option>
+              <option>Numérique</option>
+              <option>Langues</option>
+              <option>Autre</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Niveau</th>
+          <td>
+            <select id="fiche_niveau" data-save>
+              <option value="">— Choisir —</option>
+              <option>Débutant</option>
+              <option>Intermédiaire</option>
+              <option>Avancé</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Coût total réel (€)</th>
+          <td><input type="text" id="fiche_cout" data-save placeholder="Ex. : 300"></td>
+        </tr>
+        <tr>
+          <th>Durée officielle de préparation</th>
+          <td><input type="text" id="fiche_duree" data-save placeholder="Ex. : 3 mois recommandés"></td>
+        </tr>
+        <tr>
+          <th>Format d'examen</th>
+          <td>
+            <select id="fiche_format" data-save>
+              <option value="">— Choisir —</option>
+              <option>QCM</option>
+              <option>Pratique</option>
+              <option>Oral</option>
+              <option>Mixte</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Durée de l'examen</th>
+          <td><input type="text" id="fiche_duree_examen" data-save placeholder="Ex. : 120 minutes"></td>
+        </tr>
+        <tr>
+          <th>Nombre de questions / épreuves</th>
+          <td><input type="text" id="fiche_nb_questions" data-save placeholder="Ex. : 100 questions QCM"></td>
+        </tr>
+        <tr>
+          <th>Score minimum de réussite</th>
+          <td><input type="text" id="fiche_score_min" data-save placeholder="Ex. : 825/1000"></td>
+        </tr>
+        <tr>
+          <th>Validité de la certification</th>
+          <td>
+            <select id="fiche_validite" data-save>
+              <option value="">— Choisir —</option>
+              <option>Permanente</option>
+              <option>3 ans</option>
+              <option>5 ans</option>
+              <option>Autre</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Prérequis déclarés</th>
+          <td><textarea id="fiche_prerequis" data-save placeholder="Ex. : connaissances réseau de base"></textarea></td>
+        </tr>
+        <tr>
+          <th>Reconnaissance</th>
+          <td>
+            <select id="fiche_reconnaissance" data-save>
+              <option value="">— Choisir —</option>
+              <option>France</option>
+              <option>Europe</option>
+              <option>International</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Lien avec le BTS SIO</th>
+          <td><textarea id="fiche_lien_bts" data-save placeholder="Ex. : renforce A2.2.1 (installer et configurer des éléments d'infrastructure)"></textarea></td>
+        </tr>
+        <tr>
+          <th>Lien avec mon projet professionnel</th>
+          <td><textarea id="fiche_lien_projet" data-save placeholder="Ex. : administrateur systèmes et réseaux"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2. Journal de bord -->
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">2</span> Journal de bord de préparation</h2>
+    <p class="hint">Une ligne par semaine minimum. Honnêteté demandée : les difficultés sont formatrices. La régularité est valorisée.</p>
+
+    <table class="form-table">
+      <thead>
+        <tr>
+          <th style="width:8%;">Semaine</th>
+          <th style="width:10%;">Date</th>
+          <th style="width:8%;">Heures</th>
+          <th style="width:22%;">Ce que j'ai fait</th>
+          <th style="width:18%;">Ressource utilisée</th>
+          <th style="width:18%;">Difficulté rencontrée</th>
+          <th style="width:16%;">Progrès constaté</th>
+        </tr>
+      </thead>
+      <tbody id="journal-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" style="margin-top:8px;" onclick="ajouterLigneJournal()">+ Ajouter une ligne</button>
+  </section>
+
+  <!-- 3. Preuves de réalisation -->
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">3</span> Preuves de réalisation</h2>
+    <p class="hint">Captures d'écran, badges, résultats d'examens blancs, réalisations pratiques, notes personnelles, échanges. Chaque preuve doit être légendée.</p>
+
+    <div class="upload-zone" onclick="document.getElementById('input-images').click()">
+      <div class="icon">🖼️</div>
+      <div class="text"><strong>Cliquez pour ajouter une image</strong><br>PNG, JPG, JPEG — max 5 Mo par image</div>
+      <input type="file" id="input-images" accept="image/*" multiple onchange="ajouterImages(event)">
+    </div>
+
+    <div class="upload-zone" onclick="document.getElementById('input-fichiers').click()">
+      <div class="icon">📎</div>
+      <div class="text"><strong>Cliquez pour ajouter un fichier</strong><br>PDF (aperçu automatique), DOCX, TXT, ZIP — max 10 Mo</div>
+      <input type="file" id="input-fichiers" accept=".pdf,.doc,.docx,.txt,.zip,.odt,.ods" multiple onchange="ajouterFichiers(event)">
+    </div>
+
+    <h4 style="margin-top:20px;">Ma galerie de preuves</h4>
+    <div id="galerie" class="media-gallery"></div>
+
+    <h4>Commentaire sur mes preuves</h4>
+    <textarea id="preuves_commentaire" data-save class="medium-textarea" placeholder="Expliquez en quelques phrases ce que ces preuves démontrent, comment elles s'articulent, ce qu'elles prouvent de votre progression..."></textarea>
+  </section>
+
+  <!-- 4. Attestations -->
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">4</span> Attestations et documents officiels</h2>
+    <p class="hint">Cochez les documents que vous avez déjà obtenus et ajoutez-les ci-dessous. Les PDF sont automatiquement prévisualisés par leur première page.</p>
+
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="att_inscription" data-save> Attestation d'inscription à l'examen</label>
+      <label><input type="checkbox" id="att_mooc" data-save> Attestation de suivi de MOOC</label>
+      <label><input type="checkbox" id="att_certificat" data-save> Certificat de réussite</label>
+      <label><input type="checkbox" id="att_score" data-save> Relevé de score détaillé</label>
+      <label><input type="checkbox" id="att_facture" data-save> Facture / justificatif de paiement</label>
+      <label><input type="checkbox" id="att_badge" data-save> Badge numérique officiel</label>
+    </div>
+
+    <div class="upload-zone" onclick="document.getElementById('input-attestations').click()">
+      <div class="icon">📜</div>
+      <div class="text"><strong>Cliquez pour ajouter une attestation</strong><br>PDF (aperçu automatique) ou image</div>
+      <input type="file" id="input-attestations" accept=".pdf,image/*" multiple onchange="ajouterAttestations(event)">
+    </div>
+
+    <div id="galerie-attestations" class="media-gallery"></div>
+
+    <h4>Commentaire sur les attestations</h4>
+    <textarea id="attestations_commentaire" data-save class="medium-textarea" placeholder="Précisez les dates, les conditions d'obtention, ce que ces documents attestent..."></textarea>
+  </section>
+
+  <!-- 5. Fiche de synthèse -->
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">5</span> Fiche de synthèse « Ma certification en 1 page »</h2>
+    <p class="hint">À produire à mi-parcours puis à mettre à jour. C'est la vitrine de votre démarche.</p>
+
+    <label>Pourquoi ce choix ? (3 arguments)</label>
+    <input type="text" id="synth_arg1" data-save placeholder="Argument 1 — lié au domaine technique" style="margin-bottom:8px;">
+    <input type="text" id="synth_arg2" data-save placeholder="Argument 2 — lié à la reconnaissance / employabilité" style="margin-bottom:8px;">
+    <input type="text" id="synth_arg3" data-save placeholder="Argument 3 — lié à la faisabilité (coût, temps, prérequis)">
+
+    <label style="margin-top:16px;">Ce que j'ai appris jusqu'ici (3 à 5 compétences concrètes)</label>
+    <textarea id="synth_appris" data-save class="medium-textarea" placeholder="Ex. : 1) adressage IP et sous-réseaux ; 2) configuration de VLAN sur switch ; 3) diagnostic réseau avec ping/traceroute..."></textarea>
+
+    <label style="margin-top:16px;">Ce que ça m'apporte pour mon projet professionnel (2-3 phrases)</label>
+    <textarea id="synth_apport" data-save class="medium-textarea" placeholder="Ex. : Cette certification me permettra de candidater sur des postes de technicien réseau en alternance..."></textarea>
+
+    <label style="margin-top:16px;">Où j'en suis</label>
+    <table class="form-table">
+      <tbody>
+        <tr>
+          <th style="width:30%;">% d'avancement</th>
+          <td><input type="text" id="synth_avancement" data-save placeholder="Ex. : 60%"></td>
+        </tr>
+        <tr>
+          <th>Prochaines étapes</th>
+          <td><textarea id="synth_prochaines" data-save placeholder="Ex. : terminer le module 4, passer un examen blanc..."></textarea></td>
+        </tr>
+        <tr>
+          <th>Date prévue de passage</th>
+          <td><input type="text" id="synth_date_passage" data-save placeholder="Ex. : mars 2026"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     NIVEAU 2 — RETOUR D'EXPÉRIENCE
+     ============================================================ -->
+<section class="bloc" id="section-niveau2">
+
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">A</span> Avant — Mes attentes initiales</h2>
+    <p class="hint">Rappelez ce que vous attendiez de cette certification avant de commencer. Soyez honnête, y compris sur vos doutes.</p>
+
+    <label>Quelles étaient mes attentes en choisissant cette certification ? (3 à 5 attentes concrètes)</label>
+    <textarea id="att_attentes" data-save class="big-textarea" placeholder="Ex. : 1) maîtriser l'adressage IP et le routage ; 2) obtenir une certification reconnue pour mon stage ; 3) gagner en confiance sur les TP réseau..."></textarea>
+
+    <label style="margin-top:16px;">Quels objectifs je m'étais fixés ? (mesurables)</label>
+    <textarea id="att_objectifs" data-save class="medium-textarea" placeholder="Ex. : terminer le MOOC en 3 mois, obtenir 80% aux quiz, passer l'examen en mars..."></textarea>
+
+    <label style="margin-top:16px;">Quels moyens j'avais prévus ? (temps, budget, ressources)</label>
+    <textarea id="att_moyens" data-save class="medium-textarea" placeholder="Ex. : 3h par semaine, budget 300€, MOOC FUN + Cisco NetAcad + annales..."></textarea>
+
+    <label style="margin-top:16px;">Quels étaient mes doutes / appréhensions ?</label>
+    <textarea id="att_doutes" data-save class="medium-textarea" placeholder="Ex. : coût élevé, difficulté à suivre le rythme en parallèle des cours..."></textarea>
+  </section>
+
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">B</span> Pendant — Ce qui s'est réellement passé</h2>
+
+    <h3>B.1 — Ce qui a été facile</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:50%;">Facile</th><th>Pourquoi ?</th></tr></thead>
+      <tbody id="facile-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneTableau('facile-body', ['texte','texte'])">+ Ajouter</button>
+
+    <h3 style="margin-top:24px;">B.2 — Ce qui a été difficile</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:30%;">Difficile</th><th style="width:30%;">Pourquoi ?</th><th>Comment j'ai géré ?</th></tr></thead>
+      <tbody id="difficile-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneTableau('difficile-body', ['texte','texte','texte'])">+ Ajouter</button>
+
+    <h3 style="margin-top:24px;">B.3 — Les ressources qui m'ont aidé</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:30%;">Ressource</th><th style="width:20%;">Type</th><th>Utilité</th></tr></thead>
+      <tbody id="ressources-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneTableau('ressources-body', ['texte','texte','texte'])">+ Ajouter</button>
+
+    <h3 style="margin-top:24px;">B.4 — Les moments clés</h3>
+    <label>Le déclic : quand j'ai compris quelque chose d'important</label>
+    <textarea id="moment_declic" data-save class="medium-textarea" placeholder="Décrivez..."></textarea>
+    <label style="margin-top:12px;">Le doute : quand j'ai failli arrêter</label>
+    <textarea id="moment_doute" data-save class="medium-textarea" placeholder="Décrivez..."></textarea>
+    <label style="margin-top:12px;">La fierté : quand j'ai réussi quelque chose de marquant</label>
+    <textarea id="moment_fierte" data-save class="medium-textarea" placeholder="Décrivez..."></textarea>
+  </section>
+
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">C</span> Après — Ce que j'ai réellement acquis</h2>
+
+    <h3>C.1 — Auto-évaluation avant / après</h3>
+    <p class="hint">Positionnez-vous sur les compétences visées par la certification. Échelle : 0 = débutant · 1 = intermédiaire · 2 = autonome · 3 = expert.</p>
+    <table class="form-table">
+      <thead><tr><th style="width:50%;">Compétence</th><th style="width:16%;">Avant</th><th style="width:16%;">Après</th><th style="width:18%;">Progression</th></tr></thead>
+      <tbody id="auto-eval-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneAutoEval()">+ Ajouter une compétence</button>
+
+    <h3 style="margin-top:24px;">C.2 — Compétences du référentiel BTS SIO renforcées</h3>
+    <textarea id="acquis_referentiel" data-save class="medium-textarea" placeholder="Ex. : A2.2.1 (installer et configurer des éléments d'infrastructure) ✅ ; A2.3.1 (administrer sur site et à distance) ✅ ; 3.3.2 (identifier les menaces) ⚠️ partiellement..."></textarea>
+
+    <h3 style="margin-top:24px;">C.3 — Ce que je n'ai pas acquis</h3>
+    <textarea id="acquis_limites" data-save class="medium-textarea" placeholder="Soyez honnête sur les limites : compétences encore fragiles, non couvertes par la certification..."></textarea>
+
+    <h3 style="margin-top:24px;">C.4 — L'écart entre mes attentes et la réalité</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:35%;">Attente initiale</th><th style="width:35%;">Réalité</th><th>Écart</th></tr></thead>
+      <tbody id="ecart-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneTableau('ecart-body', ['texte','texte','texte'])">+ Ajouter</button>
+  </section>
+
+  <section class="bloc" style="display:block;box-shadow:none;border:none;padding:0;margin:0 0 24px;">
+    <h2><span class="num">D</span> Analyse critique et projection</h2>
+
+    <h3>D.1 — Cette certification était-elle un bon choix ?</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:30%;">Critère</th><th style="width:20%;">Note (1-5)</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Pertinence pour mon projet</th>
+          <td><input type="text" id="crit_pertinence_note" data-save placeholder="ex. 4/5"></td>
+          <td><textarea id="crit_pertinence_just" data-save></textarea></td>
+        </tr>
+        <tr>
+          <th>Reconnaissance dans mon domaine</th>
+          <td><input type="text" id="crit_reconnaissance_note" data-save placeholder="ex. 5/5"></td>
+          <td><textarea id="crit_reconnaissance_just" data-save></textarea></td>
+        </tr>
+        <tr>
+          <th>Coût / bénéfice</th>
+          <td><input type="text" id="crit_cout_note" data-save placeholder="ex. 3/5"></td>
+          <td><textarea id="crit_cout_just" data-save></textarea></td>
+        </tr>
+        <tr>
+          <th>Faisabilité (temps, rythme)</th>
+          <td><input type="text" id="crit_faisabilite_note" data-save placeholder="ex. 3/5"></td>
+          <td><textarea id="crit_faisabilite_just" data-save></textarea></td>
+        </tr>
+        <tr>
+          <th>Qualité du contenu</th>
+          <td><input type="text" id="crit_qualite_note" data-save placeholder="ex. 4/5"></td>
+          <td><textarea id="crit_qualite_just" data-save></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:24px;">D.2 — Ce que je ferais différemment</h3>
+    <textarea id="recul_differemment" data-save class="medium-textarea" placeholder="Ex. : commencer plus tôt, bloquer des créneaux plus réguliers..."></textarea>
+
+    <h3 style="margin-top:24px;">D.3 — Une alternative que j'aurais pu choisir</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:30%;">Alternative</th><th style="width:35%;">Pourquoi je ne l'ai pas choisie</th><th>Aurait-elle été meilleure ?</th></tr></thead>
+      <tbody id="alternative-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneTableau('alternative-body', ['texte','texte','texte'])">+ Ajouter</button>
+
+    <h3 style="margin-top:24px;">D.4 — La recommanderais-je ?</h3>
+    <label>À un camarade SISR</label>
+    <textarea id="reco_sisr" data-save placeholder="Ex. : oui, avec ces conseils..."></textarea>
+    <label style="margin-top:12px;">À un camarade SLAM</label>
+    <textarea id="reco_slam" data-save placeholder="Ex. : non, pas adapté car..."></textarea>
+    <label style="margin-top:12px;">À un débutant</label>
+    <textarea id="reco_debutant" data-save placeholder="Ex. : oui, si..."></textarea>
+
+    <h3 style="margin-top:24px;">D.5 — Mes prochaines étapes</h3>
+    <table class="form-table">
+      <thead><tr><th style="width:35%;">Étape</th><th style="width:25%;">Échéance</th><th>Objectif</th></tr></thead>
+      <tbody id="prochaines-body"></tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="ajouterLigneTableau('prochaines-body', ['texte','texte','texte'])">+ Ajouter</button>
+  </section>
+
+</section>
+
+</main>
+
+<section id="apercu"></section>
+
+<div class="actions">
+  <button class="btn btn-primary" onclick="genererApercu()">👁️ Aperçu</button>
+  <button class="btn btn-success" onclick="exporterPDF()">📄 Télécharger le PDF</button>
+  <button class="btn btn-secondary" onclick="exporterHTML()">💾 Télécharger en HTML</button>
+  <button class="btn btn-secondary" onclick="window.print()">🖨️ Imprimer</button>
+  <button class="btn btn-danger" onclick="reinitialiser()">🗑️ Réinitialiser</button>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURATION PDF.js
+   ============================================================ */
+if (typeof pdfjsLib !== "undefined") {
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+}
+
+/* ============================================================
+   CONSTANTES
+   ============================================================ */
+const STORAGE_KEY = "tp05_portfolio_certification_v1";
+/* Réponses pré-remplies (utilisées tant que rien n'a été saisi/enregistré dans ce navigateur) */
+const PRESET_DATA = {"inputs": {"nom": "JACQUET", "prenom": "Romain", "classe": "SIO2", "option": "SISR", "certification": "Certificat de réussite OpenClassrooms – Découvrez l'univers de la cybersécurité", "date": "2026-11-04", "fiche_nom": "Certificat de réussite du cours « Découvrez l'univers de la cybersécurité »", "fiche_organisme": "OpenClassrooms", "fiche_domaine": "Cybersécurité", "fiche_niveau": "Débutant", "fiche_cout": "0 (cours en libre accès ; gratuité du certificat à vérifier)", "fiche_duree": "4 heures", "fiche_format": "QCM", "fiche_duree_examen": "Pas d'examen surveillé : 3 quiz en ligne (environ 10 min chacun, estimation)", "fiche_nb_questions": "3 quiz (le quiz 1 comptait 10 questions)", "fiche_score_min": "70 % à chaque exercice (règle OpenClassrooms) ; objectif personnel : 8/10", "fiche_validite": "Permanente", "fiche_prerequis": "Aucun", "fiche_reconnaissance": "France", "fiche_lien_bts": "La cybersécurité fait partie du référentiel BTS SIO pour les deux options (bloc « Cybersécurité des services informatiques »). Ce cours donne la base de vocabulaire et de compréhension des attaques avant d'aborder la partie technique de l'option SISR.", "fiche_lien_projet": "La cybersécurité est un thème central de mon option SISR. Ce MOOC me donne une vue d'ensemble avant des contenus plus techniques, comme « Introduction to Cybersecurity » de Cisco Networking Academy.", "preuves_commentaire": "Ces preuves montrent à la fois ce que j'ai réussi (le quiz 1 à 8/10) et ce qui n'a pas marché comme prévu (le retard constaté au TP3). Je les garde toutes, car elles montrent une démarche réelle et pas seulement un résultat. Légendes : (1) résultat du quiz de la Partie 1, 8/10 ; (2) tableau de bord OpenClassrooms, progression du cours ; (3) mail de bienvenue, preuve de mon inscription ; (4) compte rendu TP2, planning en 6 semaines avec jalons ; (5) compte rendu TP3, retard de 1 h 10 et planning ajusté (fin repoussée au 08/11/2026).", "attestations_commentaire": "Je n'ai pas encore d'attestation officielle, car je n'ai pas terminé le cours. Je n'ai que le mail de bienvenue d'OpenClassrooms et mon score du quiz 1 (8/10). Il n'y a pas d'examen en salle (donc pas d'attestation d'inscription) et le cours est gratuit (donc pas de facture). Le certificat de réussite sera délivré une fois tous les exercices réussis (70 % minimum) ; je l'ajouterai dès que je l'aurai.", "synth_arg1": "C'est une vue d'ensemble de la cybersécurité, un thème central de mon option SISR.", "synth_arg2": "Certificat de réussite d'une plateforme française connue : une preuve concrète d'autoformation en cybersécurité pour mon dossier (ce n'est pas un diplôme d'État).", "synth_arg3": "Gratuit, 4 h seulement, en français et sans prérequis : facile à tenir en autoformation.", "synth_appris": "1) comprendre le déroulement d'une cyberattaque à travers le cas d'étude d'un hôpital ; 2) connaître le mode opératoire des attaquants et leurs motivations ; 3) distinguer les grands types de menaces ; 4) planifier une formation en autonomie, suivre mon avancement et ajuster quand je prends du retard.", "synth_apport": "Ce cours me donne le vocabulaire et la logique des attaques, ce qui me servira pour la partie sécurité de l'option SISR. Il m'a aussi appris à gérer une formation en autonomie, ce dont j'aurai besoin tout au long de ma carrière.", "synth_avancement": "33 % (Partie 1 sur 3 terminée, au 06/10/2026)", "synth_prochaines": "Terminer la Partie 2 puis la Partie 3 avec leurs quiz, rédiger ma fiche de synthèse, puis demander le certificat de réussite.", "synth_date_passage": "Pas d'examen : fin du MOOC prévue le 08/11/2026 (planning ajusté au TP3)", "att_attentes": "1) avoir une vision d'ensemble de la cybersécurité ; 2) comprendre comment se passe une attaque ; 3) découvrir les métiers du domaine ; 4) avoir un cours court que je peux terminer sans me décourager ; 5) m'habituer à l'autoformation.", "att_objectifs": "Terminer les 3 parties en 4 h de cours ; obtenir au moins 8/10 à chaque quiz ; finir en 6 semaines (planning du TP2) ; obtenir le certificat de réussite.", "att_moyens": "Environ 1 h par semaine (30 min à 1 h selon le TP2), budget de 0 €, cours en ligne OpenClassrooms, avec un planning et un journal de bord.", "att_doutes": "Savoir si j'allais réussir à tenir le rythme seul, sans enseignant ni date limite, et si un cours court d'introduction serait assez utile pour mon option SISR.", "moment_declic": "En faisant le TP3, j'ai compris que le problème n'était pas le cours mais mon planning, trop chargé par rapport à mon propre créneau.", "moment_doute": "Quand j'ai constaté que je n'avais rien fait depuis la Partie 1 et que j'avais déjà 1 h 10 de retard.", "moment_fierte": "Avoir réussi le quiz 1 avec 8/10 dès la première partie.", "acquis_referentiel": "Bloc « Cybersécurité des services informatiques » ✅ : mieux comprendre les cyberattaques et les menaces pour protéger les services et les données d'une organisation (partiellement, seule la Partie 1 est faite). Compétence « Organiser son développement professionnel » ✅ : mettre en place mon environnement d'apprentissage et planifier ma formation.", "acquis_limites": "Je n'ai pas encore vu les étapes de la réponse à une attaque (détection, gestion de crise, remédiation) ni les métiers de la cybersécurité, car les Parties 2 et 3 ne sont pas terminées. Ce cours est aussi une sensibilisation : je n'y ai pas appris de manipulation technique concrète (configuration, outils, pare-feu), que je devrai travailler ailleurs.", "crit_pertinence_note": "4/5", "crit_pertinence_just": "Elle couvre un thème central de l'option SISR, mais reste une introduction.", "crit_reconnaissance_note": "2/5", "crit_reconnaissance_just": "C'est un certificat d'organisme de formation, pas un diplôme ni une certification d'éditeur comme Cisco.", "crit_cout_note": "5/5", "crit_cout_just": "Cours gratuit pour une bonne vue d'ensemble.", "crit_faisabilite_note": "3/5", "crit_faisabilite_just": "Le cours est court, mais j'ai pris du retard à cause de mon planning.", "crit_qualite_note": "4/5", "crit_qualite_just": "Chapitres clairs, vidéos et cas concret (d'après la Partie 1, la seule que j'ai faite pour l'instant).", "recul_differemment": "Je construirais dès le départ un planning basé sur ma disponibilité réelle, je bloquerais des créneaux fixes dans mon agenda, et je chronométrerais mes séances dès la première pour avoir des durées fiables.", "reco_sisr": "Oui, comme première étape, avant un cours plus technique.", "reco_slam": "Oui, pour comprendre les menaces, car le contenu n'est pas technique.", "reco_debutant": "Oui, c'est accessible, gratuit et sans prérequis."}, "checkboxes": {"att_inscription": false, "att_mooc": false, "att_certificat": false, "att_score": false, "att_facture": false, "att_badge": false}, "tables": {"journal-body": [[{"value": "S1"}, {"value": "21/09 – 27/09"}, {"value": "1 h 20"}, {"value": "Inscription, Partie 1 (4 chapitres) et quiz 1"}, {"value": "Cours OpenClassrooms"}, {"value": "Aucune relevée"}, {"value": "Quiz 1 : 8/10"}], [{"value": "S2"}, {"value": "28/09 – 04/10"}, {"value": "0 h"}, {"value": "Rien de fait sur le MOOC"}, {"value": "—"}, {"value": "Planning plus chargé que ma disponibilité ; pas d'échéance officielle"}, {"value": "Constat d'un retard de 1 h 10 (TP3)"}], [{"value": "S3"}, {"value": "05/10 – 11/10"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}], [{"value": "S4"}, {"value": "12/10 – 18/10"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}], [{"value": "S5"}, {"value": "19/10 – 25/10"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}, {"value": "À compléter"}]], "facile-body": [[{"value": "L'inscription et le démarrage"}, {"value": "Compte créé et cours commencé le jour même, sans prérequis"}], [{"value": "Le contenu de la Partie 1"}, {"value": "Cours en français, chapitres courts avec des vidéos et un cas concret ; quiz 1 réussi à 8/10"}]], "difficile-body": [[{"value": "Tenir mon planning"}, {"value": "Il demandait plus de temps que ma disponibilité réelle, et le cours n'a pas de date limite"}, {"value": "Planning ajusté au TP3 (fin repoussée au 08/11) et séances courtes à créneau fixe"}], [{"value": "Rester régulier"}, {"value": "Aucune pression extérieure : le MOOC est passé après les travaux avec date de rendu"}, {"value": "Rappels dans l'agenda et journal de bord rempli après chaque séance"}]], "ressources-body": [[{"value": "Cours OpenClassrooms (chapitres et vidéos)"}, {"value": "Cours en ligne"}, {"value": "Contenu principal sur les attaques"}], [{"value": "Tableau de bord OpenClassrooms"}, {"value": "Outil de suivi"}, {"value": "Voir les chapitres validés et ma progression"}], [{"value": "Mon planning et mon journal de bord (TP2 et TP3)"}, {"value": "Document personnel"}, {"value": "Mesurer l'écart avec ce que j'avais prévu"}]], "auto-eval-body": [[{"value": "Comprendre le déroulement d'une cyberattaque"}, {"value": "1"}, {"value": "2"}, {"value": "+ 1"}], [{"value": "Connaître les types de menaces et les motivations des attaquants"}, {"value": "1"}, {"value": "2"}, {"value": "+ 1"}], [{"value": "Connaître les étapes de la réponse à une attaque (Partie 2)"}, {"value": "0"}, {"value": "0"}, {"value": "Partie non faite"}], [{"value": "Connaître les métiers de la cybersécurité (Partie 3)"}, {"value": "1"}, {"value": "1"}, {"value": "Partie non faite"}], [{"value": "Organiser une formation en autonomie"}, {"value": "1"}, {"value": "2"}, {"value": "+ 1"}]], "ecart-body": [[{"value": "Finir le cours en 6 semaines"}, {"value": "Un module sur trois fait, fin repoussée au 08/11"}, {"value": "Retard d'une semaine"}], [{"value": "Tenir environ 1 h par semaine"}, {"value": "Semaine 2 : 0 h"}, {"value": "Rythme non tenu"}], [{"value": "Obtenir au moins 8/10 aux quiz"}, {"value": "8/10 au quiz 1 ; quiz 2 et 3 à passer"}, {"value": "Objectif atteint pour l'instant"}], [{"value": "Avoir une vue d'ensemble de la cybersécurité"}, {"value": "Un tiers du contenu vu"}, {"value": "Attente seulement en partie remplie"}]], "alternative-body": [[{"value": "Introduction to Cybersecurity (Cisco Networking Academy)"}, {"value": "Plus longue (6 h max) et inscription plus longue à mettre en place"}, {"value": "Peut-être plus technique et plus proche du SISR, avec un badge numérique, mais moins simple à démarrer"}], [{"value": "Éthique du piratage : concepts de base du réseautage (Alison)"}, {"value": "Contenu plus général et moins centré sur les infrastructures"}, {"value": "Non, moins adapté à mon option"}]], "prochaines-body": [[{"value": "Terminer les Parties 2 et 3 et leurs quiz"}, {"value": "08/11/2026 (planning TP3)"}, {"value": "Valider tout le cours avec au moins 8/10"}], [{"value": "Rédiger ma fiche de synthèse"}, {"value": "Semaine du dernier quiz"}, {"value": "Garder une trace de ce que j'ai retenu"}], [{"value": "Demander le certificat de réussite"}, {"value": "Dès le cours terminé"}, {"value": "Avoir une preuve officielle pour mon portfolio"}], [{"value": "Suivre « Introduction to Cybersecurity » (Cisco)"}, {"value": "À fixer après le MOOC"}, {"value": "Passer à un contenu plus technique pour l'option SISR"}]]}, "media": {"preuves": [], "attestations": []}};
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+const MAX_FILE_SIZE  = 10 * 1024 * 1024;
+
+let mediaStore = {
+  preuves: [],
+  attestations: []
+};
+
+/* ============================================================
+   BARRE D'IDENTITÉ
+   ============================================================ */
+function escapeHtml(s) {
+  if (s === undefined || s === null) return "";
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function majIdentityBar() {
+  const nom = document.getElementById("nom").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const classe = document.getElementById("classe").value;
+  const option = document.getElementById("option").value;
+  const certification = document.getElementById("certification").value.trim();
+
+  const recap = document.getElementById("identity-recap");
+  const parts = [];
+
+  const nomComplet = [nom.toUpperCase(), prenom].filter(Boolean).join(" ");
+  if (nomComplet) parts.push(`<span class="recap-item">👤 <strong>${escapeHtml(nomComplet)}</strong></span>`);
+  if (classe) parts.push(`<span class="recap-item">📚 ${escapeHtml(classe)}</span>`);
+  if (option) {
+    const cls = option === "SISR" ? "sisr" : "slam";
+    parts.push(`<span class="recap-badge ${cls}">${escapeHtml(option)}</span>`);
+  }
+  if (certification) parts.push(`<span class="recap-item">🎯 <em>${escapeHtml(certification)}</em></span>`);
+
+  recap.innerHTML = parts.length === 0 ? "" : parts.join('<span class="recap-sep">·</span>');
+}
+
+["nom", "prenom", "classe", "option", "certification"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("input", majIdentityBar);
+    el.addEventListener("change", majIdentityBar);
+  }
+});
+
+/* ============================================================
+   NAVIGATION NIVEAUX
+   ============================================================ */
+function afficherNiveau(n) {
+  const sectionsNiveau1 = document.querySelectorAll("#section-niveau1, #section-niveau1 .bloc");
+  const sectionsNiveau2 = document.querySelectorAll("#section-niveau2, #section-niveau2 .bloc");
+
+  document.getElementById("btn-niveau1").classList.toggle("active", n === 1);
+  document.getElementById("btn-niveau2").classList.toggle("active", n === 2);
+
+  if (n === 1) {
+    sectionsNiveau1.forEach(s => s.classList.add("active"));
+    sectionsNiveau2.forEach(s => s.classList.remove("active"));
+  } else {
+    sectionsNiveau1.forEach(s => s.classList.remove("active"));
+    sectionsNiveau2.forEach(s => s.classList.add("active"));
+  }
+}
+
+/* ============================================================
+   SAUVEGARDE
+   ============================================================ */
+const indicator = document.getElementById("save-indicator");
+let saveTimer = null;
+
+function afficherIndicateur(etat) {
+  clearTimeout(saveTimer);
+  if (etat === "saving") {
+    indicator.textContent = "⏳ Sauvegarde…";
+    indicator.classList.add("show", "saving");
+  } else if (etat === "error") {
+    indicator.textContent = "⚠️ Erreur de sauvegarde";
+    indicator.classList.add("show");
+    indicator.style.background = "#ef4444";
+    saveTimer = setTimeout(() => {
+      indicator.classList.remove("show");
+      indicator.style.background = "";
+    }, 3000);
+  } else {
+    indicator.textContent = "✓ Sauvegardé";
+    indicator.classList.remove("saving");
+    indicator.style.background = "";
+    indicator.classList.add("show");
+    saveTimer = setTimeout(() => indicator.classList.remove("show"), 1500);
+  }
+}
+
+function collecterDonnees() {
+  const inputs = {};
+  const checkboxes = {};
+  const tables = {};
+
+  document.querySelectorAll("[data-save]").forEach(el => {
+    if (el.type === "checkbox") checkboxes[el.id] = el.checked;
+    else inputs[el.id] = el.value;
+  });
+
+  const tablesIds = [
+    "journal-body", "facile-body", "difficile-body", "ressources-body",
+    "auto-eval-body", "ecart-body", "alternative-body", "prochaines-body"
+  ];
+  tablesIds.forEach(id => {
+    const tbody = document.getElementById(id);
+    if (!tbody) return;
+    const rows = [];
+    tbody.querySelectorAll("tr").forEach(tr => {
+      const cells = [];
+      tr.querySelectorAll("input, textarea").forEach(input => {
+        cells.push({ value: input.value });
+      });
+      if (cells.length) rows.push(cells);
+    });
+    tables[id] = rows;
+  });
+
+  return { inputs, checkboxes, tables, media: mediaStore };
+}
+
+function sauvegarder() {
+  afficherIndicateur("saving");
+  try {
+    const data = collecterDonnees();
+    const json = JSON.stringify(data);
+    if (json.length > 4.5 * 1024 * 1024) {
+      console.warn("Données volumineuses, certains médias pourraient ne pas être sauvegardés.");
+    }
+    localStorage.setItem(STORAGE_KEY, json);
+    afficherIndicateur("saved");
+  } catch (e) {
+    console.error("Erreur sauvegarde :", e);
+    afficherIndicateur("error");
+  }
+}
+
+function restaurer() {
+  let raw = null;
+  try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  let vide = !raw;
+  if (raw) {
+    try {
+      const d = JSON.parse(raw);
+      vide = !(d.inputs && (d.inputs.fiche_nom || d.inputs.nom));
+    } catch (e) { vide = true; }
+  }
+  if (vide) raw = JSON.stringify(PRESET_DATA);
+  if (!raw) return false;
+  try {
+    const data = JSON.parse(raw);
+
+    Object.entries(data.inputs || {}).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    });
+
+    Object.entries(data.checkboxes || {}).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) el.checked = val;
+    });
+
+    Object.entries(data.tables || {}).forEach(([tableId, rows]) => {
+      const tbody = document.getElementById(tableId);
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      rows.forEach(row => {
+        const tr = document.createElement("tr");
+        row.forEach(cell => {
+          const td = document.createElement("td");
+          const input = document.createElement(cell.value.length > 60 ? "textarea" : "input");
+          input.value = cell.value;
+          input.dataset.save = "1";
+          if (input.tagName === "INPUT") input.type = "text";
+          td.appendChild(input);
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    });
+
+    if (data.media) {
+      mediaStore.preuves = data.media.preuves || [];
+      mediaStore.attestations = data.media.attestations || [];
+      renderGalerie("preuves");
+      renderGalerie("attestations");
+    }
+
+    return true;
+  } catch (e) {
+    console.warn("Restauration impossible :", e);
+    return false;
+  }
+}
+
+document.addEventListener("input", e => {
+  if (e.target.matches("[data-save]")) sauvegarder();
+});
+document.addEventListener("change", e => {
+  if (e.target.matches("[data-save]")) sauvegarder();
+});
+
+/* ============================================================
+   TABLEAUX DYNAMIQUES
+   ============================================================ */
+function creerLigneTableau(tbodyId, types) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  const tr = document.createElement("tr");
+  types.forEach(() => {
+    const td = document.createElement("td");
+    const input = document.createElement("input");
+    input.type = "text";
+    input.dataset.save = "1";
+    td.appendChild(input);
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+}
+
+function ajouterLigneTableau(tbodyId, types) {
+  creerLigneTableau(tbodyId, types);
+  sauvegarder();
+}
+
+function ajouterLigneJournal() {
+  const tbody = document.getElementById("journal-body");
+  const tr = document.createElement("tr");
+  for (let i = 0; i < 7; i++) {
+    const td = document.createElement("td");
+    const input = document.createElement("input");
+    input.type = "text";
+    input.dataset.save = "1";
+    td.appendChild(input);
+    tr.appendChild(td);
+  }
+  tbody.appendChild(tr);
+  sauvegarder();
+}
+
+function ajouterLigneAutoEval() {
+  const tbody = document.getElementById("auto-eval-body");
+  const tr = document.createElement("tr");
+  for (let i = 0; i < 4; i++) {
+    const td = document.createElement("td");
+    const input = document.createElement("input");
+    input.type = "text";
+    input.dataset.save = "1";
+    td.appendChild(input);
+    tr.appendChild(td);
+  }
+  tbody.appendChild(tr);
+  sauvegarder();
+}
+
+function initialiserTableaux() {
+  const journalBody = document.getElementById("journal-body");
+  if (journalBody && journalBody.children.length === 0) {
+    for (let i = 0; i < 12; i++) ajouterLigneJournal();
+  }
+  const facileBody = document.getElementById("facile-body");
+  if (facileBody && facileBody.children.length === 0) {
+    for (let i = 0; i < 3; i++) creerLigneTableau("facile-body", ["texte","texte"]);
+  }
+  const diffBody = document.getElementById("difficile-body");
+  if (diffBody && diffBody.children.length === 0) {
+    for (let i = 0; i < 3; i++) creerLigneTableau("difficile-body", ["texte","texte","texte"]);
+  }
+  const resBody = document.getElementById("ressources-body");
+  if (resBody && resBody.children.length === 0) {
+    for (let i = 0; i < 3; i++) creerLigneTableau("ressources-body", ["texte","texte","texte"]);
+  }
+  const autoBody = document.getElementById("auto-eval-body");
+  if (autoBody && autoBody.children.length === 0) {
+    for (let i = 0; i < 5; i++) ajouterLigneAutoEval();
+  }
+  const ecartBody = document.getElementById("ecart-body");
+  if (ecartBody && ecartBody.children.length === 0) {
+    for (let i = 0; i < 3; i++) creerLigneTableau("ecart-body", ["texte","texte","texte"]);
+  }
+  const altBody = document.getElementById("alternative-body");
+  if (altBody && altBody.children.length === 0) {
+    for (let i = 0; i < 2; i++) creerLigneTableau("alternative-body", ["texte","texte","texte"]);
+  }
+  const prochainesBody = document.getElementById("prochaines-body");
+  if (prochainesBody && prochainesBody.children.length === 0) {
+    for (let i = 0; i < 3; i++) creerLigneTableau("prochaines-body", ["texte","texte","texte"]);
+  }
+}
+
+/* ============================================================
+   CONVERSION PDF → IMAGE
+   ============================================================ */
+async function convertirPdfEnImage(file) {
+  if (typeof pdfjsLib === "undefined") {
+    console.warn("PDF.js non chargé, impossible de convertir le PDF.");
+    return null;
+  }
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const page = await pdf.getPage(1);
+
+    // Haute résolution pour un rendu net en grand
+    const viewport = page.getViewport({ scale: 2.0 });
+    const canvas = document.createElement("canvas");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const context = canvas.getContext("2d");
+
+    await page.render({ canvasContext: context, viewport }).promise;
+    return canvas.toDataURL("image/jpeg", 0.9);
+  } catch (err) {
+    console.warn("Impossible de convertir le PDF en image :", err);
+    return null;
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============================================================
+   AJOUT DE MÉDIAS
+   ============================================================ */
+async function ajouterImages(event) {
+  const files = Array.from(event.target.files);
+  event.target.value = "";
+
+  for (const file of files) {
+    if (file.size > MAX_IMAGE_SIZE) {
+      alert(`Image trop volumineuse : ${file.name} (max 5 Mo)`);
+      continue;
+    }
+    const base64 = await fileToBase64(file);
+    mediaStore.preuves.push({
+      type: "image",
+      name: file.name,
+      mime: file.type,
+      data: base64,
+      preview: base64,
+      caption: ""
+    });
+  }
+  renderGalerie("preuves");
+  sauvegarder();
+}
+
+async function ajouterFichiers(event) {
+  const files = Array.from(event.target.files);
+  event.target.value = "";
+
+  for (const file of files) {
+    if (file.size > MAX_FILE_SIZE) {
+      alert(`Fichier trop volumineux : ${file.name} (max 10 Mo)`);
+      continue;
+    }
+
+    const isPdf = file.type === "application/pdf" ||
+                  file.name.toLowerCase().endsWith(".pdf");
+
+    const tempId = "temp_" + Date.now() + "_" + Math.random();
+    const placeholder = {
+      type: isPdf ? "pdf" : "fichier",
+      name: file.name,
+      mime: file.type,
+      data: null,
+      preview: null,
+      caption: "",
+      converting: true,
+      tempId: tempId
+    };
+    mediaStore.preuves.push(placeholder);
+    renderGalerie("preuves");
+
+    const base64 = await fileToBase64(file);
+    let preview = null;
+
+    if (isPdf) {
+      preview = await convertirPdfEnImage(file);
+    } else if (file.type.startsWith("image/")) {
+      preview = base64;
+    }
+
+    const index = mediaStore.preuves.findIndex(m => m.tempId === tempId);
+    if (index !== -1) {
+      mediaStore.preuves[index] = {
+        type: isPdf ? "pdf" : (file.type.startsWith("image/") ? "image" : "fichier"),
+        name: file.name,
+        mime: file.type,
+        data: base64,
+        preview: preview,
+        caption: ""
+      };
+    }
+    renderGalerie("preuves");
+    sauvegarder();
+  }
+}
+
+async function ajouterAttestations(event) {
+  const files = Array.from(event.target.files);
+  event.target.value = "";
+
+  for (const file of files) {
+    if (file.size > MAX_FILE_SIZE) {
+      alert(`Fichier trop volumineux : ${file.name} (max 10 Mo)`);
+      continue;
+    }
+
+    const isPdf = file.type === "application/pdf" ||
+                  file.name.toLowerCase().endsWith(".pdf");
+
+    const tempId = "temp_" + Date.now() + "_" + Math.random();
+    const placeholder = {
+      type: isPdf ? "pdf" : (file.type.startsWith("image/") ? "image" : "fichier"),
+      name: file.name,
+      mime: file.type,
+      data: null,
+      preview: null,
+      caption: "",
+      converting: true,
+      tempId: tempId
+    };
+    mediaStore.attestations.push(placeholder);
+    renderGalerie("attestations");
+
+    const base64 = await fileToBase64(file);
+    let preview = null;
+
+    if (isPdf) {
+      preview = await convertirPdfEnImage(file);
+    } else if (file.type.startsWith("image/")) {
+      preview = base64;
+    }
+
+    const index = mediaStore.attestations.findIndex(m => m.tempId === tempId);
+    if (index !== -1) {
+      mediaStore.attestations[index] = {
+        type: isPdf ? "pdf" : (file.type.startsWith("image/") ? "image" : "fichier"),
+        name: file.name,
+        mime: file.type,
+        data: base64,
+        preview: preview,
+        caption: ""
+      };
+    }
+    renderGalerie("attestations");
+    sauvegarder();
+  }
+}
+
+function iconeFichier(mime, name) {
+  const ext = (name || "").split(".").pop().toLowerCase();
+  if (mime === "application/pdf" || ext === "pdf") return "📕";
+  if (ext === "doc" || ext === "docx" || ext === "odt") return "📘";
+  if (ext === "xls" || ext === "xlsx" || ext === "ods") return "📗";
+  if (ext === "zip" || ext === "rar") return "🗜️";
+  if (ext === "txt") return "📄";
+  return "📎";
+}
+
+/* ============================================================
+   GALERIE (formulaire)
+   ============================================================ */
+function renderGalerie(cible) {
+  const container = document.getElementById(
+    cible === "preuves" ? "galerie" : "galerie-attestations"
+  );
+  const items = mediaStore[cible];
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  items.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "media-item";
+
+    if (item.type === "image" && item.data) {
+      const img = document.createElement("img");
+      img.src = item.data;
+      img.alt = item.caption || item.name;
+      div.appendChild(img);
+    } else if (item.type === "pdf" && item.preview) {
+      const img = document.createElement("img");
+      img.src = item.preview;
+      img.alt = item.caption || item.name;
+      img.className = "pdf-preview";
+      div.appendChild(img);
+
+      const badge = document.createElement("div");
+      badge.className = "pdf-badge";
+      badge.textContent = "PDF";
+      div.appendChild(badge);
+    } else if (item.type === "pdf" && !item.preview && !item.converting) {
+      const iconDiv = document.createElement("div");
+      iconDiv.className = "file-icon";
+      iconDiv.textContent = "📕";
+      div.appendChild(iconDiv);
+
+      const badge = document.createElement("div");
+      badge.className = "pdf-badge";
+      badge.textContent = "PDF";
+      div.appendChild(badge);
+    } else {
+      const iconDiv = document.createElement("div");
+      iconDiv.className = "file-icon";
+      iconDiv.textContent = iconeFichier(item.mime, item.name);
+      div.appendChild(iconDiv);
+    }
+
+    if (item.converting) {
+      const spin = document.createElement("div");
+      spin.className = "converting";
+      spin.innerHTML = `<div class="mini-spinner"></div>Conversion…`;
+      div.appendChild(spin);
+    }
+
+    const caption = document.createElement("div");
+    caption.className = "caption";
+
+    const filename = document.createElement("span");
+    filename.className = "filename";
+    filename.textContent = item.name;
+    caption.appendChild(filename);
+
+    const captionInput = document.createElement("input");
+    captionInput.type = "text";
+    captionInput.placeholder = "Légende...";
+    captionInput.value = item.caption || "";
+    captionInput.oninput = e => { item.caption = e.target.value; sauvegarder(); };
+    caption.appendChild(captionInput);
+    div.appendChild(caption);
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    if (item.data) {
+      const btnDl = document.createElement("button");
+      btnDl.type = "button";
+      btnDl.className = "btn-open";
+      btnDl.textContent = "⬇️ Ouvrir";
+      btnDl.onclick = () => {
+        const link = document.createElement("a");
+        link.href = item.data;
+        link.download = item.name;
+        link.target = "_blank";
+        link.click();
+      };
+      actions.appendChild(btnDl);
+    }
+
+    const btnSuppr = document.createElement("button");
+    btnSuppr.type = "button";
+    btnSuppr.textContent = "🗑️";
+    btnSuppr.onclick = () => {
+      if (!confirm(`Supprimer "${item.name}" ?`)) return;
+      mediaStore[cible].splice(index, 1);
+      renderGalerie(cible);
+      sauvegarder();
+    };
+    actions.appendChild(btnSuppr);
+
+    div.appendChild(actions);
+    container.appendChild(div);
+  });
+}
+
+/* ============================================================
+   APERÇU
+   ============================================================ */
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? escapeHtml(el.value) : "";
+}
+
+function renderTableFromId(tbodyId, colonnes) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return "";
+  let html = `<table><thead><tr>${colonnes.map(c => `<th>${c}</th>`).join("")}</tr></thead><tbody>`;
+  let hasContent = false;
+  tbody.querySelectorAll("tr").forEach(tr => {
+    const cells = Array.from(tr.querySelectorAll("input, textarea"));
+    const values = cells.map(c => escapeHtml(c.value));
+    if (values.some(v => v.trim() !== "")) {
+      hasContent = true;
+      html += `<tr>${values.map(v => `<td>${v || "—"}</td>`).join("")}</tr>`;
+    }
+  });
+  html += "</tbody></table>";
+  return hasContent ? html : "<p><em>Non renseigné</em></p>";
+}
+
+/* ============================================================
+   RENDU MÉDIAS POUR L'APERÇU / PDF / HTML
+   - Images : grille compacte
+   - PDF    : aperçu EN GRAND (page complète)
+   - Autres : icônes
+   ============================================================ */
+function renderGaleriePourApercu(cible) {
+  const items = mediaStore[cible];
+  if (!items || items.length === 0) {
+    return "<p><em>Aucun média ajouté.</em></p>";
+  }
+
+  const images = items.filter(i => i.type === "image" && i.data);
+  const pdfs = items.filter(i => i.type === "pdf" && i.preview);
+  const pdfsSansApercu = items.filter(i => i.type === "pdf" && !i.preview);
+  const autres = items.filter(i =>
+    !(i.type === "image" && i.data) &&
+    !(i.type === "pdf")
+  );
+
+  let html = "";
+
+  // ============ IMAGES (grille compacte) ============
+  if (images.length > 0) {
+    html += `<div class="media-preview">`;
+    images.forEach(item => {
+      html += `<figure>
+        <img src="${item.data}" alt="${escapeHtml(item.caption || item.name)}">
+        <figcaption>${escapeHtml(item.caption || item.name)}</figcaption>
+      </figure>`;
+    });
+    html += `</div>`;
+  }
+
+  // ============ PDF (aperçus EN GRAND, pleine largeur) ============
+  if (pdfs.length > 0) {
+    html += `<div class="pdf-previews">`;
+    pdfs.forEach(item => {
+      const legende = item.caption || item.name;
+      html += `
+        <div class="pdf-preview-block">
+          <div class="pdf-preview-header">
+            <span class="pdf-badge-inline">PDF</span>
+            <span class="pdf-preview-name">${escapeHtml(item.name)}</span>
+          </div>
+          <div class="pdf-preview-image-wrapper">
+            <img src="${item.preview}" alt="${escapeHtml(legende)}" class="pdf-preview-large">
+          </div>
+          ${item.caption ? `<div class="pdf-preview-caption">${escapeHtml(item.caption)}</div>` : ""}
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  // ============ PDF SANS APERÇU (échec de conversion) ============
+  if (pdfsSansApercu.length > 0) {
+    html += `<div class="media-preview">`;
+    pdfsSansApercu.forEach(item => {
+      html += `<figure>
+        <div style="padding:30px 10px;text-align:center;font-size:2.5rem;">📕</div>
+        <figcaption>${escapeHtml(item.caption || item.name)}</figcaption>
+      </figure>`;
+    });
+    html += `</div>`;
+  }
+
+  // ============ AUTRES FICHIERS ============
+  if (autres.length > 0) {
+    html += `<div class="media-preview">`;
+    autres.forEach(item => {
+      html += `<figure>
+        <div style="padding:30px 10px;text-align:center;font-size:2.5rem;">
+          ${iconeFichier(item.mime, item.name)}
+        </div>
+        <figcaption>${escapeHtml(item.caption || item.name)}</figcaption>
+      </figure>`;
+    });
+    html += `</div>`;
+  }
+
+  return html;
+}
+
+function genererApercu(silencieux = false) {
+  const nom = val("nom").toUpperCase() || "—";
+  const prenom = val("prenom") || "—";
+  const classe = val("classe") || "—";
+  const option = val("option") || "—";
+  const certification = val("certification") || "—";
+  const date = val("date") || new Date().toLocaleDateString("fr-FR");
+
+  const html = `
+    <h1>Portfolio de certification – ${certification}</h1>
+    <div class="subtitle">
+      <strong>${nom} ${prenom}</strong> · ${classe} · Option <strong>${option}</strong> · ${date}
+    </div>
+
+    <h2>📁 Niveau 1 — Portfolio de preuves</h2>
+
+    <h3>1. Fiche d'identité de la certification</h3>
+    <table><tbody>
+      <tr><th>Nom exact</th><td>${val("fiche_nom") || "—"}</td></tr>
+      <tr><th>Organisme</th><td>${val("fiche_organisme") || "—"}</td></tr>
+      <tr><th>Domaine</th><td>${val("fiche_domaine") || "—"}</td></tr>
+      <tr><th>Niveau</th><td>${val("fiche_niveau") || "—"}</td></tr>
+      <tr><th>Coût total</th><td>${val("fiche_cout") || "—"} €</td></tr>
+      <tr><th>Durée de préparation</th><td>${val("fiche_duree") || "—"}</td></tr>
+      <tr><th>Format d'examen</th><td>${val("fiche_format") || "—"}</td></tr>
+      <tr><th>Durée de l'examen</th><td>${val("fiche_duree_examen") || "—"}</td></tr>
+      <tr><th>Nombre de questions</th><td>${val("fiche_nb_questions") || "—"}</td></tr>
+      <tr><th>Score minimum</th><td>${val("fiche_score_min") || "—"}</td></tr>
+      <tr><th>Validité</th><td>${val("fiche_validite") || "—"}</td></tr>
+      <tr><th>Prérequis</th><td>${val("fiche_prerequis") || "—"}</td></tr>
+      <tr><th>Reconnaissance</th><td>${val("fiche_reconnaissance") || "—"}</td></tr>
+      <tr><th>Lien BTS SIO</th><td>${val("fiche_lien_bts") || "—"}</td></tr>
+      <tr><th>Lien projet pro</th><td>${val("fiche_lien_projet") || "—"}</td></tr>
+    </tbody></table>
+
+    <h3>2. Journal de bord</h3>
+    ${renderTableFromId("journal-body", ["Sem.","Date","Heures","Action","Ressource","Difficulté","Progrès"])}
+
+    <h3>3. Preuves de réalisation</h3>
+    ${renderGaleriePourApercu("preuves")}
+    ${val("preuves_commentaire") ? `<p><strong>Commentaire :</strong> ${val("preuves_commentaire")}</p>` : ""}
+
+    <h3>4. Attestations et documents officiels</h3>
+    <p>
+      ${document.getElementById("att_inscription").checked ? "✅ Inscription · " : ""}
+      ${document.getElementById("att_mooc").checked ? "✅ MOOC · " : ""}
+      ${document.getElementById("att_certificat").checked ? "✅ Certificat · " : ""}
+      ${document.getElementById("att_score").checked ? "✅ Score · " : ""}
+      ${document.getElementById("att_facture").checked ? "✅ Facture · " : ""}
+      ${document.getElementById("att_badge").checked ? "✅ Badge · " : ""}
+    </p>
+    ${renderGaleriePourApercu("attestations")}
+    ${val("attestations_commentaire") ? `<p><strong>Commentaire :</strong> ${val("attestations_commentaire")}</p>` : ""}
+
+    <h3>5. Fiche de synthèse</h3>
+    <p><strong>Arguments :</strong></p>
+    <ul>
+      <li>${val("synth_arg1") || "—"}</li>
+      <li>${val("synth_arg2") || "—"}</li>
+      <li>${val("synth_arg3") || "—"}</li>
+    </ul>
+    <p><strong>Ce que j'ai appris :</strong> ${val("synth_appris") || "—"}</p>
+    <p><strong>Apport pour mon projet :</strong> ${val("synth_apport") || "—"}</p>
+    <p><strong>Avancement :</strong> ${val("synth_avancement") || "—"} · <strong>Prochaines étapes :</strong> ${val("synth_prochaines") || "—"} · <strong>Date prévue :</strong> ${val("synth_date_passage") || "—"}</p>
+
+    <h2>🧠 Niveau 2 — Retour d'expérience</h2>
+
+    <h3>A. Avant — Mes attentes initiales</h3>
+    <p><strong>Attentes :</strong> ${val("att_attentes") || "—"}</p>
+    <p><strong>Objectifs :</strong> ${val("att_objectifs") || "—"}</p>
+    <p><strong>Moyens prévus :</strong> ${val("att_moyens") || "—"}</p>
+    <p><strong>Doutes :</strong> ${val("att_doutes") || "—"}</p>
+
+    <h3>B. Pendant — Ce qui s'est réellement passé</h3>
+    <p><strong>Ce qui a été facile :</strong></p>
+    ${renderTableFromId("facile-body", ["Facile","Pourquoi"])}
+    <p><strong>Ce qui a été difficile :</strong></p>
+    ${renderTableFromId("difficile-body", ["Difficile","Pourquoi","Comment j'ai géré"])}
+    <p><strong>Ressources utiles :</strong></p>
+    ${renderTableFromId("ressources-body", ["Ressource","Type","Utilité"])}
+    <p><strong>Déclic :</strong> ${val("moment_declic") || "—"}</p>
+    <p><strong>Doute :</strong> ${val("moment_doute") || "—"}</p>
+    <p><strong>Fierté :</strong> ${val("moment_fierte") || "—"}</p>
+
+    <h3>C. Après — Ce que j'ai réellement acquis</h3>
+    <p><strong>Auto-évaluation avant/après :</strong></p>
+    ${renderTableFromId("auto-eval-body", ["Compétence","Avant","Après","Progression"])}
+    <p><strong>Compétences BTS renforcées :</strong> ${val("acquis_referentiel") || "—"}</p>
+    <p><strong>Ce que je n'ai pas acquis :</strong> ${val("acquis_limites") || "—"}</p>
+    <p><strong>Écart attentes / réalité :</strong></p>
+    ${renderTableFromId("ecart-body", ["Attente initiale","Réalité","Écart"])}
+
+    <h3>D. Analyse critique et projection</h3>
+    <p><strong>Pertinence :</strong> ${val("crit_pertinence_note")} — ${val("crit_pertinence_just")}</p>
+    <p><strong>Reconnaissance :</strong> ${val("crit_reconnaissance_note")} — ${val("crit_reconnaissance_just")}</p>
+    <p><strong>Coût/bénéfice :</strong> ${val("crit_cout_note")} — ${val("crit_cout_just")}</p>
+    <p><strong>Faisabilité :</strong> ${val("crit_faisabilite_note")} — ${val("crit_faisabilite_just")}</p>
+    <p><strong>Qualité :</strong> ${val("crit_qualite_note")} — ${val("crit_qualite_just")}</p>
+    <p><strong>Ce que je ferais différemment :</strong> ${val("recul_differemment") || "—"}</p>
+    <p><strong>Alternatives :</strong></p>
+    ${renderTableFromId("alternative-body", ["Alternative","Pourquoi pas","Meilleure ?"])}
+    <p><strong>Recommandation SISR :</strong> ${val("reco_sisr") || "—"}</p>
+    <p><strong>Recommandation SLAM :</strong> ${val("reco_slam") || "—"}</p>
+    <p><strong>Recommandation débutant :</strong> ${val("reco_debutant") || "—"}</p>
+    <p><strong>Prochaines étapes :</strong></p>
+    ${renderTableFromId("prochaines-body", ["Étape","Échéance","Objectif"])}
+
+    <div class="meta">
+      Document généré le ${new Date().toLocaleString("fr-FR")} — TP05 BTS SIO · Parcours de certification complémentaire<br>
+      Référentiel : arrêté du 29 avril 2019
+    </div>
+  `;
+
+  const apercu = document.getElementById("apercu");
+  apercu.innerHTML = html;
+  apercu.classList.add("visible");
+  if (!silencieux) apercu.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ============================================================
+   EXPORT PDF
+   ============================================================ */
+async function exporterPDF() {
+  const overlay = document.getElementById("pdf-overlay");
+  overlay.classList.add("show");
+
+  try {
+    genererApercu(true);
+    const apercu = document.getElementById("apercu");
+    apercu.classList.add("visible");
+
+    await new Promise(r => setTimeout(r, 400));
+
+    const canvas = await html2canvas(apercu, {
+      scale: 2, useCORS: true, backgroundColor: "#ffffff",
+      logging: false, windowWidth: apercu.scrollWidth
+    });
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const margin = 12;
+    const usableW = pageW - margin * 2;
+    const usableH = pageH - margin * 2;
+
+    const imgW = usableW;
+    const imgH = (canvas.height * imgW) / canvas.width;
+
+    if (imgH <= usableH) {
+      const imgData = canvas.toDataURL("image/jpeg", 0.95);
+      pdf.addImage(imgData, "JPEG", margin, margin, imgW, imgH);
+    } else {
+      const nbPages = Math.ceil(imgH / usableH);
+      const hauteurPageCanvas = (usableH * canvas.width) / imgW;
+
+      for (let p = 0; p < nbPages; p++) {
+        const ySrc = p * hauteurPageCanvas;
+        const hSrc = Math.min(hauteurPageCanvas, canvas.height - ySrc);
+
+        const tmp = document.createElement("canvas");
+        tmp.width = canvas.width;
+        tmp.height = hSrc;
+        const ctx = tmp.getContext("2d");
+        ctx.drawImage(canvas, 0, ySrc, canvas.width, hSrc, 0, 0, canvas.width, hSrc);
+
+        const imgData = tmp.toDataURL("image/jpeg", 0.95);
+        const hImg = (hSrc * imgW) / canvas.width;
+        if (p > 0) pdf.addPage();
+        pdf.addImage(imgData, "JPEG", margin, margin, imgW, hImg);
+      }
+    }
+
+    const nom = (document.getElementById("nom").value.trim() || "etudiant")
+      .replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_\-]/g, "");
+    const date = new Date().toISOString().slice(0, 10);
+    pdf.save(`TP05_Portfolio_Certification_${nom}_${date}.pdf`);
+
+  } catch (err) {
+    console.error("Erreur export PDF :", err);
+    alert("Une erreur est survenue lors de la génération du PDF.\n" +
+          "Réduisez le nombre d'images ou utilisez l'impression (Ctrl+P).");
+  } finally {
+    overlay.classList.remove("show");
+  }
+}
+
+/* ============================================================
+   EXPORT HTML
+   ============================================================ */
+function exporterHTML() {
+  genererApercu(true);
+  const apercu = document.getElementById("apercu");
+
+  const styles = `<style>
+    body{font-family:'Segoe UI',Roboto,sans-serif;color:#1e293b;max-width:900px;margin:40px auto;padding:0 20px;line-height:1.6;}
+    h1{color:#1e3a8a;font-size:1.6rem;border-bottom:4px solid #1e3a8a;padding-bottom:10px;}
+    h2{color:#1e3a8a;font-size:1.15rem;margin-top:28px;border-bottom:2px solid #e2e8f0;padding-bottom:6px;}
+    h3{color:#3b82f6;font-size:1rem;margin-top:20px;}
+    .subtitle{color:#64748b;font-size:.9rem;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid #e2e8f0;}
+    table{width:100%;border-collapse:collapse;margin:8px 0 16px;font-size:.85rem;}
+    th,td{padding:6px 10px;border:1px solid #e2e8f0;text-align:left;vertical-align:top;}
+    th{background:#f8fafc;color:#1e3a8a;}
+    .meta{font-size:.85rem;color:#64748b;margin-top:32px;padding-top:16px;border-top:1px solid #e2e8f0;text-align:center;}
+    ul{margin-left:20px;}
+    p{ margin: 4px 0 8px; }
+
+    /* Images en grille compacte */
+    .media-preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:10px 0;}
+    .media-preview figure{border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;background:white;margin:0;position:relative;}
+    .media-preview img{width:100%;height:100px;object-fit:cover;display:block;}
+    .media-preview figcaption{padding:4px 8px;font-size:.75rem;color:#64748b;font-style:italic;border-top:1px solid #e2e8f0;}
+
+    /* PDF en grand */
+    .pdf-previews{display:flex;flex-direction:column;gap:24px;margin:16px 0 24px;}
+    .pdf-preview-block{border:2px solid #e2e8f0;border-radius:10px;overflow:hidden;background:white;box-shadow:0 2px 12px rgba(15,23,42,.08);page-break-inside:avoid;break-inside:avoid;}
+    .pdf-preview-header{background:#fef2f2;padding:10px 16px;border-bottom:2px solid #fecaca;display:flex;align-items:center;gap:10px;}
+    .pdf-badge-inline{background:#ef4444;color:white;padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;}
+    .pdf-preview-name{font-size:.85rem;font-weight:600;color:#991b1b;word-break:break-all;}
+    .pdf-preview-image-wrapper{padding:20px;background:#f8fafc;text-align:center;}
+    .pdf-preview-large{max-width:100%;height:auto;max-height:1000px;object-fit:contain;border:1px solid #e2e8f0;border-radius:6px;box-shadow:0 2px 8px rgba(15,23,42,.1);background:white;display:inline-block;}
+    .pdf-preview-caption{padding:12px 20px;background:#f8fafc;border-top:1px solid #e2e8f0;font-size:.85rem;color:#64748b;font-style:italic;}
+  </style>`;
+
+  const nom = document.getElementById("nom").value.trim() || "etudiant";
+  const contenu = apercu.innerHTML;
+
+  const doc = `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+    <title>TP05 – Portfolio de certification – ${escapeHtml(nom)}</title>${styles}</head><body>${contenu}</body></html>`;
+
+  const blob = new Blob([doc], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `TP05_Portfolio_Certification_${nom.replace(/\s+/g, "_")}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ============================================================
+   RÉINITIALISATION
+   ============================================================ */
+function reinitialiser() {
+  if (!confirm("⚠️ Toutes vos réponses ET vos médias (images, fichiers) seront définitivement effacés.\n\nConfirmer ?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  mediaStore.preuves = [];
+  mediaStore.attestations = [];
+  location.reload();
+}
+
+/* ============================================================
+   INITIALISATION
+   ============================================================ */
+window.addEventListener("DOMContentLoaded", () => {
+  initialiserTableaux();
+  const restaure = restaurer();
+  if (!document.getElementById("date").value) {
+    document.getElementById("date").valueAsDate = new Date();
+  }
+  if (restaure) afficherIndicateur("saved");
+  majIdentityBar();
+  afficherNiveau(1);
+});
+</script>
+</body>
+</html>
