@@ -20,9 +20,8 @@
             --accent-bright: #7dd3fc;
             --accent-deep: #0284c7;
             --accent-grad: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
-            --anim-violet: #7e22ce;
-            --anim-violet-dark: #581c87;
-            --anim-violet-soft: #a855f7;
+            --violet: #9312ff;
+            --violet-bright: #c084fc;
             --glass: rgba(8, 13, 22, 0.84);
             --border-accent: rgba(56, 189, 248, 0.42);
             --border-subtle: rgba(255, 255, 255, 0.08);
@@ -51,71 +50,119 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* --- Custom Cursor (Dark Violet Animation) --- */
-        .custom-cursor-dot {
+        /* --- Custom Cursor --- */
+        .fx-cursor-core {
             position: fixed;
             top: 0;
             left: 0;
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
+            margin: -3.5px 0 0 -3.5px;
             border-radius: 50%;
-            background: var(--anim-violet-soft);
-            box-shadow: 0 0 14px var(--anim-violet);
+            background: #f3e8ff;
+            box-shadow: 0 0 12px #a020ff, 0 0 24px rgba(147, 18, 255, 0.8);
             pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-            transition: width 0.22s ease, height 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+            z-index: 10002;
+            transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
         }
 
-        .custom-cursor-ring {
+        .fx-cursor-reticle {
             position: fixed;
             top: 0;
             left: 0;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(126, 34, 206, 0.88);
-            background: rgba(88, 28, 135, 0.16);
-            box-shadow: 0 0 22px rgba(126, 34, 206, 0.4);
+            width: 40px;
+            height: 40px;
+            margin: -20px 0 0 -20px;
             pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
+            z-index: 10001;
             transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1),
                         height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.24s ease,
-                        background 0.24s ease,
-                        box-shadow 0.24s ease;
+                        margin 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.2s ease;
         }
 
-        body.cursor-hover .custom-cursor-dot {
-            width: 11px;
-            height: 11px;
-            background: #e9d5ff;
-            box-shadow: 0 0 22px var(--anim-violet-soft);
+        .fx-cursor-reticle svg {
+            width: 100%;
+            height: 100%;
+            animation: reticleSpin 9s linear infinite;
         }
 
-        body.cursor-hover .custom-cursor-ring {
+        .fx-cursor-ring-circle {
+            fill: rgba(147, 18, 255, 0.06);
+            stroke: rgba(192, 132, 252, 0.78);
+            stroke-width: 1.25;
+            transition: stroke 0.22s ease, fill 0.22s ease;
+        }
+
+        .fx-cursor-tick {
+            stroke: rgba(233, 213, 255, 0.9);
+            stroke-width: 1.35;
+            stroke-linecap: round;
+        }
+
+        body.fx-cursor-hover .fx-cursor-core {
+            transform: scale(1.45);
+            background: #ffffff;
+            box-shadow: 0 0 16px #e879f9, 0 0 30px rgba(160, 32, 255, 0.95);
+        }
+
+        body.fx-cursor-hover .fx-cursor-reticle {
             width: 56px;
             height: 56px;
-            border-color: var(--anim-violet-soft);
-            background: rgba(107, 33, 168, 0.28);
-            box-shadow: 0 0 32px rgba(126, 34, 206, 0.65);
+            margin: -28px 0 0 -28px;
         }
 
-        body.cursor-click .custom-cursor-ring {
-            width: 28px;
-            height: 28px;
-            border-color: var(--anim-violet-soft);
-            background: rgba(126, 34, 206, 0.45);
+        body.fx-cursor-hover .fx-cursor-ring-circle {
+            fill: rgba(147, 18, 255, 0.18);
+            stroke: #c084fc;
+            stroke-width: 1.65;
+        }
+
+        body.fx-cursor-down .fx-cursor-core {
+            transform: scale(0.75);
+        }
+
+        body.fx-cursor-down .fx-cursor-reticle {
+            width: 30px;
+            height: 30px;
+            margin: -15px 0 0 -15px;
+        }
+
+        .fx-click-ripple {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            margin: -6px 0 0 -6px;
+            border-radius: 50%;
+            border: 1.5px solid #c084fc;
+            box-shadow: 0 0 18px rgba(160, 32, 255, 0.85);
+            pointer-events: none;
+            z-index: 10000;
+            animation: rippleExpand 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes reticleSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                opacity: 0.95;
+                transform: scale(0.6);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3.4);
+            }
         }
 
         @media (pointer: coarse), (max-width: 768px) {
-            .custom-cursor-dot, .custom-cursor-ring {
+            .fx-cursor-core, .fx-cursor-reticle, .fx-click-ripple {
                 display: none !important;
             }
         }
 
-        /* --- Sky, Stars & Blue Planet Rim --- */
+        /* --- Sky, Stars & Violet Planet Rim --- */
         .sky-backdrop {
             position: fixed;
             inset: 0;
@@ -157,7 +204,7 @@
             height: 100%;
             object-fit: cover;
             mix-blend-mode: screen;
-            filter: hue-rotate(192deg) saturate(1.2) brightness(1.05);
+            filter: hue-rotate(0deg) saturate(1.25) brightness(1.02);
             opacity: 0;
             transition: opacity 0.8s ease;
         }
@@ -171,12 +218,11 @@
             z-index: 2;
         }
 
-        /* --- Animations (Dark Violet) --- */
+        /* --- Animations --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -193,11 +239,6 @@
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes violetPulseGlow {
-            0%, 100% { box-shadow: 0 0 18px rgba(126, 34, 206, 0.35); }
-            50% { box-shadow: 0 0 30px rgba(126, 34, 206, 0.65); }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -248,13 +289,12 @@
             justify-content: center;
             font-size: 0.95rem;
             box-shadow: 0 0 18px rgba(56, 189, 248, 0.42);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .navbar-brand:hover .brand-bolt {
-            transform: rotate(-12deg) scale(1.1);
-            border-color: var(--anim-violet-soft);
-            box-shadow: 0 0 26px rgba(126, 34, 206, 0.78);
+            transform: rotate(-10deg) scale(1.08);
+            box-shadow: 0 0 26px rgba(125, 211, 252, 0.72);
         }
 
         .nav-link {
@@ -263,18 +303,15 @@
             font-size: 0.92rem;
             padding: 8px 14px !important;
             border-radius: 50px;
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                        background-color 0.22s ease,
-                        box-shadow 0.22s ease,
-                        color 0.22s ease;
+            transition: all 0.22s ease;
             margin: 0 1px;
         }
 
         .nav-link:hover, .nav-link.active {
             color: var(--text) !important;
-            background-color: rgba(107, 33, 168, 0.24);
-            box-shadow: 0 0 18px rgba(126, 34, 206, 0.45);
-            transform: translateY(-2px);
+            background-color: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+            transform: translateY(-1px);
         }
 
         /* --- Hero --- */
@@ -293,13 +330,6 @@
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 18px;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-        }
-
-        .hero-badge:hover {
-            transform: translateY(-2px);
-            border-color: var(--anim-violet-soft);
-            box-shadow: 0 0 22px rgba(126, 34, 206, 0.55);
         }
 
         .hero h1 {
@@ -325,17 +355,15 @@
             border: 1px solid var(--border-accent);
             box-shadow: 0 0 45px rgba(56, 189, 248, 0.25), 0 25px 60px rgba(0, 0, 0, 0.85);
             animation: float 6s ease-in-out infinite;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.35s ease,
-                        border-color 0.35s ease;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
         }
 
         .hero-img:hover {
-            border-color: var(--anim-violet-soft);
-            box-shadow: 0 0 60px rgba(126, 34, 206, 0.58), 0 28px 65px rgba(0, 0, 0, 0.9);
+            border-color: var(--accent-bright);
+            box-shadow: 0 0 60px rgba(125, 211, 252, 0.45), 0 28px 65px rgba(0, 0, 0, 0.9);
         }
 
-        /* --- Buttons & Dark Violet Hover Animations --- */
+        /* --- Buttons & Hover Animations --- */
         .btn-modern {
             background: var(--accent-grad);
             color: #ffffff;
@@ -344,15 +372,13 @@
             border-radius: 50px;
             font-weight: 700;
             box-shadow: 0 6px 26px rgba(56, 189, 248, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.22s ease,
-                        filter 0.22s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, filter 0.22s ease;
         }
 
         .btn-modern:hover {
             transform: translateY(-3px) scale(1.03);
-            filter: brightness(1.08);
-            box-shadow: 0 12px 38px rgba(126, 34, 206, 0.72), 0 0 26px rgba(88, 28, 135, 0.65);
+            filter: brightness(1.12);
+            box-shadow: 0 12px 38px rgba(56, 189, 248, 0.65), 0 0 22px rgba(129, 140, 248, 0.45);
             color: #ffffff;
         }
 
@@ -367,17 +393,14 @@
             padding: 11px 28px;
             border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.22s ease,
-                        background 0.22s ease,
-                        border-color 0.22s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
         }
 
         .btn-outline-modern:hover {
-            background: rgba(107, 33, 168, 0.24);
-            border-color: var(--anim-violet-soft);
+            background: rgba(56, 189, 248, 0.16);
+            border-color: var(--accent-bright);
             color: #ffffff;
-            box-shadow: 0 0 28px rgba(126, 34, 206, 0.55);
+            box-shadow: 0 0 26px rgba(56, 189, 248, 0.36);
             transform: translateY(-3px) scale(1.02);
         }
 
@@ -394,9 +417,7 @@
             padding: 30px;
             border: 1px solid var(--border-subtle);
             box-shadow: var(--shadow-soft);
-            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.28s ease,
-                        box-shadow 0.28s ease;
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease, box-shadow 0.28s ease;
             height: 100%;
             color: var(--text);
             position: relative;
@@ -411,17 +432,12 @@
             right: 12%;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.65), transparent);
-            transition: background 0.28s ease;
         }
 
         .card-glass:hover {
             transform: translateY(-8px) scale(1.01);
-            border-color: rgba(126, 34, 206, 0.65);
-            box-shadow: 0 20px 55px rgba(126, 34, 206, 0.32), 0 25px 60px rgba(0, 0, 0, 0.85);
-        }
-
-        .card-glass:hover::before {
-            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.9), transparent);
+            border-color: var(--border-accent);
+            box-shadow: 0 20px 55px rgba(56, 189, 248, 0.18), 0 25px 60px rgba(0, 0, 0, 0.85);
         }
 
         /* --- Section Titles --- */
@@ -440,7 +456,7 @@
             width: 64px;
             height: 4px;
             background: var(--accent-grad);
-            box-shadow: 0 0 18px rgba(126, 34, 206, 0.75);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.8);
             margin: 15px auto 0;
             border-radius: 10px;
         }
@@ -460,7 +476,7 @@
             content: '';
             flex-grow: 1;
             height: 1px;
-            background: linear-gradient(90deg, rgba(126, 34, 206, 0.65), transparent);
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.45), transparent);
         }
 
         section {
@@ -483,15 +499,12 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 0 24px rgba(56, 189, 248, 0.24);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.25s ease,
-                        border-color 0.25s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .card-glass:hover .diploma-icon {
-            transform: scale(1.09) rotate(4deg);
-            border-color: var(--anim-violet-soft);
-            box-shadow: 0 0 32px rgba(126, 34, 206, 0.65);
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 0 32px rgba(125, 211, 252, 0.45);
         }
 
         /* --- Skills --- */
@@ -506,10 +519,10 @@
         .skill-progress {
             height: 100%;
             background: var(--accent-grad);
-            box-shadow: 0 0 16px rgba(126, 34, 206, 0.8);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
             border-radius: 10px;
             width: 0;
-            transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: width 1.4s ease-in-out;
         }
 
         /* --- Experience Timeline --- */
@@ -523,7 +536,7 @@
             content: '';
             position: absolute;
             width: 3px;
-            background: linear-gradient(180deg, #38bdf8, rgba(126, 34, 206, 0.35));
+            background: linear-gradient(180deg, #38bdf8, rgba(56, 189, 248, 0.15));
             top: 0;
             bottom: 0;
             left: 50%;
@@ -543,18 +556,17 @@
             width: 18px;
             height: 18px;
             right: -9px;
-            background-color: #090512;
-            border: 3px solid var(--anim-violet-soft);
-            box-shadow: 0 0 16px rgba(126, 34, 206, 0.9);
+            background-color: #050a14;
+            border: 3px solid var(--accent-bright);
+            box-shadow: 0 0 14px rgba(125, 211, 252, 0.85);
             border-radius: 50%;
             top: 22px;
             z-index: 1;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+            transition: transform 0.25s ease;
         }
 
         .timeline-item:hover::after {
-            transform: scale(1.28);
-            box-shadow: 0 0 24px rgba(168, 85, 247, 1);
+            transform: scale(1.25);
         }
 
         .left { left: 0; }
@@ -569,15 +581,13 @@
             border: 1px solid var(--border-subtle);
             border-left: 4px solid var(--accent);
             box-shadow: var(--shadow-soft);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.25s ease,
-                        box-shadow 0.25s ease;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .timeline-content:hover {
             transform: translateX(6px) translateY(-2px);
-            border-color: rgba(126, 34, 206, 0.65);
-            box-shadow: 0 14px 36px rgba(126, 34, 206, 0.3);
+            border-color: var(--border-accent);
+            box-shadow: 0 14px 36px rgba(56, 189, 248, 0.16);
         }
 
         /* --- Rapports / Accordion --- */
@@ -594,16 +604,14 @@
             border-radius: 18px;
             box-shadow: var(--shadow-soft);
             cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.25s ease,
-                        box-shadow 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
             border: 1px solid var(--border-subtle);
         }
 
         .teacher-header:hover {
             transform: translateY(-3px) scale(1.008);
-            border-color: rgba(126, 34, 206, 0.68);
-            box-shadow: 0 12px 35px rgba(126, 34, 206, 0.32);
+            border-color: var(--border-accent);
+            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.2);
         }
 
         .teacher-avatar {
@@ -619,15 +627,11 @@
             color: var(--accent-bright) !important;
             margin-right: 20px;
             flex-shrink: 0;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.25s ease,
-                        border-color 0.25s ease;
+            transition: transform 0.25s ease;
         }
 
         .teacher-header:hover .teacher-avatar {
             transform: scale(1.08);
-            border-color: var(--anim-violet-soft);
-            box-shadow: 0 0 22px rgba(126, 34, 206, 0.6);
         }
 
         .documents-container {
@@ -642,9 +646,7 @@
             border-radius: 18px;
             overflow: hidden;
             box-shadow: var(--shadow-soft);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.25s ease,
-                        box-shadow 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -652,8 +654,8 @@
 
         .document-card:hover {
             transform: translateY(-5px) scale(1.015);
-            border-color: rgba(126, 34, 206, 0.65);
-            box-shadow: 0 16px 38px rgba(126, 34, 206, 0.3);
+            border-color: var(--border-accent);
+            box-shadow: 0 16px 38px rgba(56, 189, 248, 0.18);
         }
 
         .document-img {
@@ -700,15 +702,13 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.2s ease,
-                        box-shadow 0.2s ease;
+            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn-download-sm:hover {
-            filter: brightness(1.08);
+            filter: brightness(1.12);
             transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(126, 34, 206, 0.65);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
             color: #ffffff;
         }
 
@@ -720,9 +720,8 @@
         }
 
         .btn-download-sm.alt-dl:hover {
-            border-color: var(--anim-violet-soft);
-            background: rgba(107, 33, 168, 0.26) !important;
-            box-shadow: 0 6px 20px rgba(126, 34, 206, 0.45);
+            border-color: var(--accent-bright);
+            background: rgba(56, 189, 248, 0.2) !important;
             color: #ffffff !important;
         }
 
@@ -758,7 +757,7 @@
         }
 
         .veille-table tbody tr:hover td {
-            background: rgba(107, 33, 168, 0.1) !important;
+            background: rgba(56, 189, 248, 0.06) !important;
         }
 
         .badge.bg-primary {
@@ -773,12 +772,6 @@
             color: #e4e2ea;
             border-radius: 18px;
             padding: 26px;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .alert-synth:hover {
-            border-color: rgba(126, 34, 206, 0.65);
-            box-shadow: 0 12px 32px rgba(126, 34, 206, 0.25);
         }
 
         /* --- Footer --- */
@@ -802,18 +795,14 @@
             align-items: center;
             justify-content: center;
             margin: 0 10px;
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                        background 0.22s ease,
-                        box-shadow 0.22s ease,
-                        border-color 0.22s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.22s ease, box-shadow 0.22s ease;
             text-decoration: none;
         }
 
         .social-icon-btn:hover {
-            background: linear-gradient(135deg, #7e22ce 0%, #4c1d95 100%);
-            border-color: var(--anim-violet-soft);
+            background: var(--accent-grad);
             color: #ffffff;
-            box-shadow: 0 0 24px rgba(126, 34, 206, 0.8);
+            box-shadow: 0 0 24px rgba(56, 189, 248, 0.72);
             transform: translateY(-4px) scale(1.08);
         }
 
@@ -838,11 +827,19 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar">
 
-    <!-- CUSTOM CURSOR (DARK VIOLET ANIMATION) -->
-    <div class="custom-cursor-dot" id="customCursorDot" aria-hidden="true"></div>
-    <div class="custom-cursor-ring" id="customCursorRing" aria-hidden="true"></div>
+    <!-- CUSTOM CURSOR -->
+    <div class="fx-cursor-core" id="fxCursorCore" aria-hidden="true"></div>
+    <div class="fx-cursor-reticle" id="fxCursorReticle" aria-hidden="true">
+        <svg viewBox="0 0 60 60">
+            <circle class="fx-cursor-ring-circle" cx="30" cy="30" r="21" stroke-dasharray="68 18" />
+            <line class="fx-cursor-tick" x1="30" y1="3" x2="30" y2="8.5" />
+            <line class="fx-cursor-tick" x1="30" y1="51.5" x2="30" y2="57" />
+            <line class="fx-cursor-tick" x1="3" y1="30" x2="8.5" y2="30" />
+            <line class="fx-cursor-tick" x1="51.5" y1="30" x2="57" y2="30" />
+        </svg>
+    </div>
 
-    <!-- SKY, STARS & BLUE PLANET RIM -->
+    <!-- SKY, STARS & VIOLET PLANET RIM -->
     <div class="sky-backdrop" aria-hidden="true">
         <canvas id="starCanvas"></canvas>
         <div class="planet-rim-wrap">
@@ -2590,46 +2587,88 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Custom Cursor Tracking & Dark Violet Hover Animations
-        const cursorDot = document.getElementById('customCursorDot');
-        const cursorRing = document.getElementById('customCursorRing');
+        // Custom Cursor Tracking, Magnetic Buttons & Ripple
+        (function initMetCursor() {
+            const core = document.getElementById('fxCursorCore');
+            const reticle = document.getElementById('fxCursorReticle');
+            if (!core || !reticle || !window.matchMedia('(pointer: fine)').matches) return;
 
-        if (cursorDot && cursorRing && window.matchMedia('(pointer: fine)').matches) {
-            let mouseX = -100, mouseY = -100;
-            let ringX = -100, ringY = -100;
+            let targetX = window.innerWidth / 2;
+            let targetY = window.innerHeight / 2;
+            let ringX = targetX;
+            let ringY = targetY;
+            let activeMagnet = null;
+
+            const magnetSelector = '.btn, .btn-modern, .btn-outline-modern, .social-icon-btn';
+            const hoverSelector = 'a, button, .btn, .card-glass, .teacher-header, .document-card, .timeline-content, .nav-link, .hero-badge';
 
             window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursorDot.style.left = mouseX + 'px';
-                cursorDot.style.top = mouseY + 'px';
+                const magnetEl = e.target.closest(magnetSelector);
+                if (magnetEl) {
+                    const rect = magnetEl.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const pull = 0.22;
+                    targetX = e.clientX + (centerX - e.clientX) * pull;
+                    targetY = e.clientY + (centerY - e.clientY) * pull;
+
+                    if (activeMagnet && activeMagnet !== magnetEl) {
+                        activeMagnet.style.transform = '';
+                    }
+                    activeMagnet = magnetEl;
+                    const dx = (e.clientX - centerX) * 0.14;
+                    const dy = (e.clientY - centerY) * 0.14;
+                    magnetEl.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
+                } else {
+                    if (activeMagnet) {
+                        activeMagnet.style.transform = '';
+                        activeMagnet = null;
+                    }
+                    targetX = e.clientX;
+                    targetY = e.clientY;
+                }
+
+                core.style.left = e.clientX + 'px';
+                core.style.top = e.clientY + 'px';
             });
 
-            function animateRing() {
-                ringX += (mouseX - ringX) * 0.16;
-                ringY += (mouseY - ringY) * 0.16;
-                cursorRing.style.left = ringX + 'px';
-                cursorRing.style.top = ringY + 'px';
-                requestAnimationFrame(animateRing);
+            function loop() {
+                ringX += (targetX - ringX) * 0.15;
+                ringY += (targetY - ringY) * 0.15;
+                reticle.style.left = ringX.toFixed(1) + 'px';
+                reticle.style.top = ringY.toFixed(1) + 'px';
+                requestAnimationFrame(loop);
             }
-            animateRing();
+            requestAnimationFrame(loop);
 
-            const interactiveSelector = 'a, button, .btn, .card-glass, .teacher-header, .document-card, .timeline-content, .social-icon-btn, .nav-link, .hero-badge';
             document.addEventListener('mouseover', (e) => {
-                if (e.target.closest(interactiveSelector)) {
-                    document.body.classList.add('cursor-hover');
+                if (e.target.closest(hoverSelector)) {
+                    document.body.classList.add('fx-cursor-hover');
                 }
             });
-            document.addEventListener('mouseout', (e) => {
-                if (e.target.closest(interactiveSelector)) {
-                    document.body.classList.remove('cursor-hover');
-                }
-            });
-            window.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
-            window.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
-        }
 
-        // Starfield & Blue/Indigo Planet Fallback Canvas
+            document.addEventListener('mouseout', (e) => {
+                if (e.target.closest(hoverSelector)) {
+                    document.body.classList.remove('fx-cursor-hover');
+                }
+            });
+
+            window.addEventListener('mousedown', (e) => {
+                document.body.classList.add('fx-cursor-down');
+                const ripple = document.createElement('div');
+                ripple.className = 'fx-click-ripple';
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+                document.body.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+            });
+
+            window.addEventListener('mouseup', () => {
+                document.body.classList.remove('fx-cursor-down');
+            });
+        })();
+
+        // Starfield & Violet Planet Fallback Canvas
         const starCanvas = document.getElementById('starCanvas');
         const starCtx = starCanvas.getContext('2d');
         const planetFallbackCanvas = document.getElementById('planetFallbackCanvas');
@@ -2670,10 +2709,10 @@
             const radius = 1260;
             const grad = planetCtx.createRadialGradient(cx, cy, radius - 140, cx, cy, radius + 90);
             grad.addColorStop(0.0, 'rgba(0, 0, 0, 0)');
-            grad.addColorStop(0.45, 'rgba(2, 132, 199, 0.25)');
-            grad.addColorStop(0.66, 'rgba(56, 189, 248, 0.88)');
-            grad.addColorStop(0.71, 'rgba(186, 230, 253, 0.95)');
-            grad.addColorStop(0.78, 'rgba(99, 102, 241, 0.35)');
+            grad.addColorStop(0.45, 'rgba(122, 28, 248, 0.25)');
+            grad.addColorStop(0.66, 'rgba(160, 32, 255, 0.88)');
+            grad.addColorStop(0.71, 'rgba(232, 160, 255, 0.96)');
+            grad.addColorStop(0.78, 'rgba(147, 18, 255, 0.36)');
             grad.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
             planetCtx.fillStyle = grad;
             planetCtx.fillRect(0, 0, w, h);
