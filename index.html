@@ -16,15 +16,17 @@
             --bg: #000000;
             --text: #f7f7f8;
             --muted: #8b8988;
-            --violet-dark: #6b21a8;
-            --violet-deep: #581c87;
-            --violet-glow: #7e22ce;
-            --violet-soft: #a855f7;
-            --violet-grad: linear-gradient(135deg, #7e22ce 0%, #4c1d95 100%);
-            --glass: rgba(11, 8, 18, 0.85);
-            --border-violet: rgba(126, 34, 206, 0.48);
+            --accent: #38bdf8;
+            --accent-bright: #7dd3fc;
+            --accent-deep: #0284c7;
+            --accent-grad: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+            --anim-violet: #7e22ce;
+            --anim-violet-dark: #581c87;
+            --anim-violet-soft: #a855f7;
+            --glass: rgba(8, 13, 22, 0.84);
+            --border-accent: rgba(56, 189, 248, 0.42);
             --border-subtle: rgba(255, 255, 255, 0.08);
-            --shadow-soft: 0 12px 45px rgba(0, 0, 0, 0.75);
+            --shadow-soft: 0 12px 45px rgba(0, 0, 0, 0.72);
         }
 
         html {
@@ -49,7 +51,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* --- Custom Cursor --- */
+        /* --- Custom Cursor (Dark Violet Animation) --- */
         .custom-cursor-dot {
             position: fixed;
             top: 0;
@@ -57,12 +59,12 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #c084fc;
-            box-shadow: 0 0 14px var(--violet-glow);
+            background: var(--anim-violet-soft);
+            box-shadow: 0 0 14px var(--anim-violet);
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+            transition: width 0.22s ease, height 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
         }
 
         .custom-cursor-ring {
@@ -72,9 +74,9 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border: 1.5px solid rgba(126, 34, 206, 0.85);
-            background: rgba(88, 28, 135, 0.14);
-            box-shadow: 0 0 22px rgba(107, 33, 168, 0.35);
+            border: 1.5px solid rgba(126, 34, 206, 0.88);
+            background: rgba(88, 28, 135, 0.16);
+            box-shadow: 0 0 22px rgba(126, 34, 206, 0.4);
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
@@ -89,21 +91,22 @@
             width: 11px;
             height: 11px;
             background: #e9d5ff;
-            box-shadow: 0 0 20px var(--violet-soft);
+            box-shadow: 0 0 22px var(--anim-violet-soft);
         }
 
         body.cursor-hover .custom-cursor-ring {
             width: 56px;
             height: 56px;
-            border-color: var(--violet-soft);
-            background: rgba(107, 33, 168, 0.26);
-            box-shadow: 0 0 30px rgba(126, 34, 206, 0.6);
+            border-color: var(--anim-violet-soft);
+            background: rgba(107, 33, 168, 0.28);
+            box-shadow: 0 0 32px rgba(126, 34, 206, 0.65);
         }
 
         body.cursor-click .custom-cursor-ring {
             width: 28px;
             height: 28px;
-            background: rgba(126, 34, 206, 0.42);
+            border-color: var(--anim-violet-soft);
+            background: rgba(126, 34, 206, 0.45);
         }
 
         @media (pointer: coarse), (max-width: 768px) {
@@ -112,7 +115,7 @@
             }
         }
 
-        /* --- Sky, Stars & Dark Violet Planet Rim --- */
+        /* --- Sky, Stars & Blue Planet Rim --- */
         .sky-backdrop {
             position: fixed;
             inset: 0;
@@ -154,7 +157,7 @@
             height: 100%;
             object-fit: cover;
             mix-blend-mode: screen;
-            filter: brightness(0.88) contrast(1.1);
+            filter: hue-rotate(192deg) saturate(1.2) brightness(1.05);
             opacity: 0;
             transition: opacity 0.8s ease;
         }
@@ -168,11 +171,12 @@
             z-index: 2;
         }
 
-        /* --- Animations --- */
+        /* --- Animations (Dark Violet) --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -191,6 +195,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes violetPulseGlow {
+            0%, 100% { box-shadow: 0 0 18px rgba(126, 34, 206, 0.35); }
+            50% { box-shadow: 0 0 30px rgba(126, 34, 206, 0.65); }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation: none !important;
@@ -207,7 +216,7 @@
 
         /* --- Navbar --- */
         .navbar {
-            background: rgba(7, 5, 12, 0.84) !important;
+            background: rgba(5, 9, 16, 0.82) !important;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             padding: 15px 0;
@@ -217,7 +226,7 @@
 
         .navbar-brand {
             font-weight: 800;
-            background: linear-gradient(95deg, #c084fc 0%, #7e22ce 55%, #4c1d95 100%);
+            background: linear-gradient(95deg, #bae6fd 0%, #38bdf8 55%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 1.45rem;
@@ -230,21 +239,22 @@
             width: 34px;
             height: 34px;
             border-radius: 10px;
-            background: rgba(107, 33, 168, 0.22);
-            border: 1px solid rgba(126, 34, 206, 0.55);
-            color: #c084fc;
-            -webkit-text-fill-color: #c084fc;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(125, 211, 252, 0.48);
+            color: var(--accent-bright);
+            -webkit-text-fill-color: var(--accent-bright);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 0.95rem;
-            box-shadow: 0 0 18px rgba(107, 33, 168, 0.45);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.42);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
         .navbar-brand:hover .brand-bolt {
-            transform: rotate(-10deg) scale(1.08);
-            box-shadow: 0 0 26px rgba(126, 34, 206, 0.75);
+            transform: rotate(-12deg) scale(1.1);
+            border-color: var(--anim-violet-soft);
+            box-shadow: 0 0 26px rgba(126, 34, 206, 0.78);
         }
 
         .nav-link {
@@ -253,15 +263,18 @@
             font-size: 0.92rem;
             padding: 8px 14px !important;
             border-radius: 50px;
-            transition: all 0.22s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                        background-color 0.22s ease,
+                        box-shadow 0.22s ease,
+                        color 0.22s ease;
             margin: 0 1px;
         }
 
         .nav-link:hover, .nav-link.active {
             color: var(--text) !important;
-            background-color: rgba(107, 33, 168, 0.22);
-            box-shadow: 0 0 16px rgba(107, 33, 168, 0.28);
-            transform: translateY(-1px);
+            background-color: rgba(107, 33, 168, 0.24);
+            box-shadow: 0 0 18px rgba(126, 34, 206, 0.45);
+            transform: translateY(-2px);
         }
 
         /* --- Hero --- */
@@ -272,14 +285,21 @@
 
         .hero-badge {
             display: inline-block;
-            background: rgba(107, 33, 168, 0.2);
-            color: #c084fc;
-            border: 1px solid rgba(126, 34, 206, 0.48);
+            background: rgba(56, 189, 248, 0.14);
+            color: var(--accent-bright);
+            border: 1px solid rgba(125, 211, 252, 0.4);
             border-radius: 999px;
             padding: 6px 16px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 18px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            border-color: var(--anim-violet-soft);
+            box-shadow: 0 0 22px rgba(126, 34, 206, 0.55);
         }
 
         .hero h1 {
@@ -291,8 +311,8 @@
             color: var(--text);
         }
 
-        .violet-dark-grad-text {
-            background: linear-gradient(95deg, #c084fc 0%, #7e22ce 55%, #4c1d95 100%);
+        .accent-grad-text {
+            background: linear-gradient(95deg, #bae6fd 0%, #38bdf8 55%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -302,33 +322,37 @@
             height: 340px;
             object-fit: cover;
             border-radius: 40px;
-            border: 1px solid var(--border-violet);
-            box-shadow: 0 0 45px rgba(107, 33, 168, 0.3), 0 25px 60px rgba(0, 0, 0, 0.85);
+            border: 1px solid var(--border-accent);
+            box-shadow: 0 0 45px rgba(56, 189, 248, 0.25), 0 25px 60px rgba(0, 0, 0, 0.85);
             animation: float 6s ease-in-out infinite;
-            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.35s ease,
+                        border-color 0.35s ease;
         }
 
         .hero-img:hover {
-            border-color: var(--violet-soft);
-            box-shadow: 0 0 60px rgba(126, 34, 206, 0.5), 0 28px 65px rgba(0, 0, 0, 0.9);
+            border-color: var(--anim-violet-soft);
+            box-shadow: 0 0 60px rgba(126, 34, 206, 0.58), 0 28px 65px rgba(0, 0, 0, 0.9);
         }
 
-        /* --- Buttons & Hover Animations --- */
+        /* --- Buttons & Dark Violet Hover Animations --- */
         .btn-modern {
-            background: var(--violet-grad);
+            background: var(--accent-grad);
             color: #ffffff;
-            border: 1px solid rgba(168, 85, 247, 0.35);
+            border: none;
             padding: 12px 32px;
             border-radius: 50px;
             font-weight: 700;
-            box-shadow: 0 6px 26px rgba(107, 33, 168, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, filter 0.22s ease;
+            box-shadow: 0 6px 26px rgba(56, 189, 248, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.22s ease,
+                        filter 0.22s ease;
         }
 
         .btn-modern:hover {
             transform: translateY(-3px) scale(1.03);
-            filter: brightness(1.14);
-            box-shadow: 0 12px 38px rgba(126, 34, 206, 0.72), 0 0 22px rgba(88, 28, 135, 0.55);
+            filter: brightness(1.08);
+            box-shadow: 0 12px 38px rgba(126, 34, 206, 0.72), 0 0 26px rgba(88, 28, 135, 0.65);
             color: #ffffff;
         }
 
@@ -337,20 +361,23 @@
         }
 
         .btn-outline-modern {
-            border: 1px solid rgba(126, 34, 206, 0.55);
-            background: rgba(14, 9, 24, 0.8);
+            border: 1px solid rgba(125, 211, 252, 0.48);
+            background: rgba(9, 16, 28, 0.78);
             color: var(--text);
             padding: 11px 28px;
             border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.22s ease,
+                        background 0.22s ease,
+                        border-color 0.22s ease;
         }
 
         .btn-outline-modern:hover {
             background: rgba(107, 33, 168, 0.24);
-            border-color: var(--violet-soft);
+            border-color: var(--anim-violet-soft);
             color: #ffffff;
-            box-shadow: 0 0 26px rgba(126, 34, 206, 0.42);
+            box-shadow: 0 0 28px rgba(126, 34, 206, 0.55);
             transform: translateY(-3px) scale(1.02);
         }
 
@@ -367,7 +394,9 @@
             padding: 30px;
             border: 1px solid var(--border-subtle);
             box-shadow: var(--shadow-soft);
-            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease, box-shadow 0.28s ease;
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.28s ease,
+                        box-shadow 0.28s ease;
             height: 100%;
             color: var(--text);
             position: relative;
@@ -381,13 +410,18 @@
             left: 12%;
             right: 12%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(126, 34, 206, 0.72), transparent);
+            background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.65), transparent);
+            transition: background 0.28s ease;
         }
 
         .card-glass:hover {
             transform: translateY(-8px) scale(1.01);
-            border-color: var(--border-violet);
-            box-shadow: 0 20px 55px rgba(107, 33, 168, 0.22), 0 25px 60px rgba(0, 0, 0, 0.85);
+            border-color: rgba(126, 34, 206, 0.65);
+            box-shadow: 0 20px 55px rgba(126, 34, 206, 0.32), 0 25px 60px rgba(0, 0, 0, 0.85);
+        }
+
+        .card-glass:hover::before {
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.9), transparent);
         }
 
         /* --- Section Titles --- */
@@ -405,8 +439,8 @@
             display: block;
             width: 64px;
             height: 4px;
-            background: var(--violet-grad);
-            box-shadow: 0 0 18px rgba(126, 34, 206, 0.85);
+            background: var(--accent-grad);
+            box-shadow: 0 0 18px rgba(126, 34, 206, 0.75);
             margin: 15px auto 0;
             border-radius: 10px;
         }
@@ -414,7 +448,7 @@
         .semester-title {
             font-size: 1.75rem;
             font-weight: 700;
-            color: #c084fc;
+            color: var(--accent-bright);
             margin-bottom: 28px;
             margin-top: 20px;
             display: flex;
@@ -426,7 +460,7 @@
             content: '';
             flex-grow: 1;
             height: 1px;
-            background: linear-gradient(90deg, rgba(126, 34, 206, 0.5), transparent);
+            background: linear-gradient(90deg, rgba(126, 34, 206, 0.65), transparent);
         }
 
         section {
@@ -436,10 +470,10 @@
         /* --- Diplomas --- */
         .diploma-icon {
             font-size: 2.2rem;
-            color: #c084fc;
+            color: var(--accent-bright);
             margin-bottom: 20px;
-            background: rgba(107, 33, 168, 0.2);
-            border: 1px solid rgba(126, 34, 206, 0.48);
+            background: rgba(56, 189, 248, 0.14);
+            border: 1px solid rgba(125, 211, 252, 0.4);
             width: 76px;
             height: 76px;
             display: flex;
@@ -448,13 +482,16 @@
             border-radius: 20px;
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 0 0 24px rgba(107, 33, 168, 0.28);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 0 24px rgba(56, 189, 248, 0.24);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s ease,
+                        border-color 0.25s ease;
         }
 
         .card-glass:hover .diploma-icon {
-            transform: scale(1.08) rotate(3deg);
-            box-shadow: 0 0 32px rgba(126, 34, 206, 0.5);
+            transform: scale(1.09) rotate(4deg);
+            border-color: var(--anim-violet-soft);
+            box-shadow: 0 0 32px rgba(126, 34, 206, 0.65);
         }
 
         /* --- Skills --- */
@@ -468,11 +505,11 @@
 
         .skill-progress {
             height: 100%;
-            background: var(--violet-grad);
-            box-shadow: 0 0 14px rgba(126, 34, 206, 0.75);
+            background: var(--accent-grad);
+            box-shadow: 0 0 16px rgba(126, 34, 206, 0.8);
             border-radius: 10px;
             width: 0;
-            transition: width 1.4s ease-in-out;
+            transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* --- Experience Timeline --- */
@@ -486,7 +523,7 @@
             content: '';
             position: absolute;
             width: 3px;
-            background: linear-gradient(180deg, #7e22ce, rgba(88, 28, 135, 0.18));
+            background: linear-gradient(180deg, #38bdf8, rgba(126, 34, 206, 0.35));
             top: 0;
             bottom: 0;
             left: 50%;
@@ -507,16 +544,17 @@
             height: 18px;
             right: -9px;
             background-color: #090512;
-            border: 3px solid #a855f7;
-            box-shadow: 0 0 14px rgba(126, 34, 206, 0.88);
+            border: 3px solid var(--anim-violet-soft);
+            box-shadow: 0 0 16px rgba(126, 34, 206, 0.9);
             border-radius: 50%;
             top: 22px;
             z-index: 1;
-            transition: transform 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
         }
 
         .timeline-item:hover::after {
-            transform: scale(1.25);
+            transform: scale(1.28);
+            box-shadow: 0 0 24px rgba(168, 85, 247, 1);
         }
 
         .left { left: 0; }
@@ -529,15 +567,17 @@
             backdrop-filter: blur(18px);
             border-radius: 18px;
             border: 1px solid var(--border-subtle);
-            border-left: 4px solid var(--violet-glow);
+            border-left: 4px solid var(--accent);
             box-shadow: var(--shadow-soft);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.25s ease,
+                        box-shadow 0.25s ease;
         }
 
         .timeline-content:hover {
             transform: translateX(6px) translateY(-2px);
-            border-color: var(--border-violet);
-            box-shadow: 0 14px 36px rgba(107, 33, 168, 0.2);
+            border-color: rgba(126, 34, 206, 0.65);
+            box-shadow: 0 14px 36px rgba(126, 34, 206, 0.3);
         }
 
         /* --- Rapports / Accordion --- */
@@ -554,34 +594,40 @@
             border-radius: 18px;
             box-shadow: var(--shadow-soft);
             cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.25s ease,
+                        box-shadow 0.25s ease;
             border: 1px solid var(--border-subtle);
         }
 
         .teacher-header:hover {
             transform: translateY(-3px) scale(1.008);
-            border-color: var(--border-violet);
-            box-shadow: 0 12px 35px rgba(107, 33, 168, 0.24);
+            border-color: rgba(126, 34, 206, 0.68);
+            box-shadow: 0 12px 35px rgba(126, 34, 206, 0.32);
         }
 
         .teacher-avatar {
             width: 56px;
             height: 56px;
             border-radius: 16px;
-            background: rgba(107, 33, 168, 0.2) !important;
-            border: 1px solid rgba(126, 34, 206, 0.48);
+            background: rgba(56, 189, 248, 0.14) !important;
+            border: 1px solid rgba(125, 211, 252, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            color: #c084fc !important;
+            color: var(--accent-bright) !important;
             margin-right: 20px;
             flex-shrink: 0;
-            transition: transform 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s ease,
+                        border-color 0.25s ease;
         }
 
         .teacher-header:hover .teacher-avatar {
             transform: scale(1.08);
+            border-color: var(--anim-violet-soft);
+            box-shadow: 0 0 22px rgba(126, 34, 206, 0.6);
         }
 
         .documents-container {
@@ -591,12 +637,14 @@
         }
 
         .document-card {
-            background: rgba(10, 7, 17, 0.92);
+            background: rgba(7, 13, 22, 0.92);
             border: 1px solid var(--border-subtle);
             border-radius: 18px;
             overflow: hidden;
             box-shadow: var(--shadow-soft);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.25s ease,
+                        box-shadow 0.25s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -604,21 +652,21 @@
 
         .document-card:hover {
             transform: translateY(-5px) scale(1.015);
-            border-color: var(--border-violet);
-            box-shadow: 0 16px 38px rgba(107, 33, 168, 0.22);
+            border-color: rgba(126, 34, 206, 0.65);
+            box-shadow: 0 16px 38px rgba(126, 34, 206, 0.3);
         }
 
         .document-img {
             height: 155px;
             object-fit: cover;
             width: 100%;
-            background: #07050e;
+            background: #060a12;
         }
 
         .document-img-container {
             height: 155px;
             overflow: hidden;
-            background: #07050e;
+            background: #060a12;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -639,9 +687,9 @@
 
         .btn-download-sm {
             width: 100%;
-            background: var(--violet-grad);
+            background: var(--accent-grad);
             color: #ffffff;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            border: none;
             padding: 8px 12px;
             border-radius: 10px;
             font-size: 0.84rem;
@@ -652,13 +700,15 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.2s ease,
+                        box-shadow 0.2s ease;
         }
 
         .btn-download-sm:hover {
-            filter: brightness(1.14);
+            filter: brightness(1.08);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(126, 34, 206, 0.5);
+            box-shadow: 0 6px 22px rgba(126, 34, 206, 0.65);
             color: #ffffff;
         }
 
@@ -670,8 +720,9 @@
         }
 
         .btn-download-sm.alt-dl:hover {
-            border-color: var(--violet-soft);
-            background: rgba(107, 33, 168, 0.24) !important;
+            border-color: var(--anim-violet-soft);
+            background: rgba(107, 33, 168, 0.26) !important;
+            box-shadow: 0 6px 20px rgba(126, 34, 206, 0.45);
             color: #ffffff !important;
         }
 
@@ -690,11 +741,11 @@
         }
 
         .veille-table thead th {
-            background: rgba(107, 33, 168, 0.24) !important;
-            color: #e9d5ff !important;
+            background: rgba(56, 189, 248, 0.18) !important;
+            color: #bae6fd !important;
             padding: 18px;
             font-weight: 600;
-            border-bottom: 1px solid var(--border-violet) !important;
+            border-bottom: 1px solid var(--border-accent) !important;
         }
 
         .veille-table tbody td {
@@ -707,26 +758,32 @@
         }
 
         .veille-table tbody tr:hover td {
-            background: rgba(107, 33, 168, 0.08) !important;
+            background: rgba(107, 33, 168, 0.1) !important;
         }
 
         .badge.bg-primary {
-            background: var(--violet-grad) !important;
+            background: var(--accent-grad) !important;
             color: #ffffff !important;
             font-weight: 700;
         }
 
         .alert-synth {
             background: var(--glass);
-            border: 1px solid var(--border-violet);
+            border: 1px solid var(--border-accent);
             color: #e4e2ea;
             border-radius: 18px;
             padding: 26px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .alert-synth:hover {
+            border-color: rgba(126, 34, 206, 0.65);
+            box-shadow: 0 12px 32px rgba(126, 34, 206, 0.25);
         }
 
         /* --- Footer --- */
         footer {
-            background: rgba(6, 4, 11, 0.94);
+            background: rgba(5, 8, 15, 0.94);
             border-top: 1px solid var(--border-subtle);
             color: var(--text);
             padding: 60px 0 35px;
@@ -739,27 +796,31 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: rgba(107, 33, 168, 0.2);
-            border: 1px solid rgba(126, 34, 206, 0.48);
+            background: rgba(56, 189, 248, 0.14);
+            border: 1px solid rgba(125, 211, 252, 0.4);
             color: #ffffff;
             align-items: center;
             justify-content: center;
             margin: 0 10px;
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.22s ease, box-shadow 0.22s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                        background 0.22s ease,
+                        box-shadow 0.22s ease,
+                        border-color 0.22s ease;
             text-decoration: none;
         }
 
         .social-icon-btn:hover {
-            background: var(--violet-grad);
+            background: linear-gradient(135deg, #7e22ce 0%, #4c1d95 100%);
+            border-color: var(--anim-violet-soft);
             color: #ffffff;
-            box-shadow: 0 0 24px rgba(126, 34, 206, 0.75);
+            box-shadow: 0 0 24px rgba(126, 34, 206, 0.8);
             transform: translateY(-4px) scale(1.08);
         }
 
         .modal-content {
-            background: #0a0712;
+            background: #070e1a;
             color: var(--text);
-            border: 1px solid var(--border-violet);
+            border: 1px solid var(--border-accent);
         }
 
         @media (max-width: 768px) {
@@ -777,11 +838,11 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar">
 
-    <!-- CUSTOM CURSOR -->
+    <!-- CUSTOM CURSOR (DARK VIOLET ANIMATION) -->
     <div class="custom-cursor-dot" id="customCursorDot" aria-hidden="true"></div>
     <div class="custom-cursor-ring" id="customCursorRing" aria-hidden="true"></div>
 
-    <!-- SKY, STARS & DARK VIOLET PLANET RIM -->
+    <!-- SKY, STARS & BLUE PLANET RIM -->
     <div class="sky-backdrop" aria-hidden="true">
         <canvas id="starCanvas"></canvas>
         <div class="planet-rim-wrap">
@@ -825,7 +886,7 @@
                 <div class="row align-items-center flex-column-reverse flex-lg-row">
                     <div class="col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
                         <span class="hero-badge">Portfolio BTS SIO</span>
-                        <h1><span class="violet-dark-grad-text">Romain Jacquet</span></h1>
+                        <h1><span class="accent-grad-text">Romain Jacquet</span></h1>
                         <p class="lead mb-4" style="color: var(--muted);">Étudiant passionné par l'infrastructure, les réseaux et la cybersécurité. En route vers l'excellence technique.</p>
                         <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap">
                             <a href="#contact" class="btn btn-modern">Me contacter</a>
@@ -854,12 +915,12 @@
                         <div class="card-glass">
                             <h3 class="fw-bold mb-4">Infos Personnelles</h3>
                             <ul class="list-unstyled" style="color: #e2e0ea;">
-                                <li class="mb-3"><i class="fas fa-birthday-cake me-3" style="color:#c084fc;"></i> 18 ans</li>
-                                <li class="mb-3"><i class="fas fa-phone me-3" style="color:#c084fc;"></i> 06.31.57.22.39</li>
-                                <li class="mb-3"><i class="fas fa-envelope me-3" style="color:#c084fc;"></i> romain.jacquet1412@orange.fr</li>
-                                <li class="mb-3"><i class="fas fa-map-marker-alt me-3" style="color:#c084fc;"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</li>
-                                <li class="mb-3"><i class="fas fa-car me-3" style="color:#c084fc;"></i> Permis B</li>
-                                <li><i class="fas fa-check-circle me-3" style="color:#c084fc;"></i> Disponibilité Immédiate</li>
+                                <li class="mb-3"><i class="fas fa-birthday-cake me-3" style="color:var(--accent-bright);"></i> 18 ans</li>
+                                <li class="mb-3"><i class="fas fa-phone me-3" style="color:var(--accent-bright);"></i> 06.31.57.22.39</li>
+                                <li class="mb-3"><i class="fas fa-envelope me-3" style="color:var(--accent-bright);"></i> romain.jacquet1412@orange.fr</li>
+                                <li class="mb-3"><i class="fas fa-map-marker-alt me-3" style="color:var(--accent-bright);"></i> 2 Chemin du Moulin Villeneuve, 05500 Poligny</li>
+                                <li class="mb-3"><i class="fas fa-car me-3" style="color:var(--accent-bright);"></i> Permis B</li>
+                                <li><i class="fas fa-check-circle me-3" style="color:var(--accent-bright);"></i> Disponibilité Immédiate</li>
                             </ul>
                         </div>
                     </div>
@@ -875,7 +936,7 @@
                         <div class="card-glass text-center">
                             <div class="diploma-icon"><i class="fas fa-graduation-cap"></i></div>
                             <h5 class="mt-3">BAC PRO SN (ARED)</h5>
-                            <p class="small fw-bold" style="color:#c084fc;">2025 - Mention Bien</p>
+                            <p class="small fw-bold" style="color:var(--accent-bright);">2025 - Mention Bien</p>
                             <p class="small mb-0" style="color:var(--muted);">Systèmes Numériques, Audiovisuel, Réseaux</p>
                         </div>
                     </div>
@@ -883,7 +944,7 @@
                         <div class="card-glass text-center">
                             <div class="diploma-icon"><i class="fas fa-certificate"></i></div>
                             <h5 class="mt-3">SST</h5>
-                            <p class="small fw-bold" style="color:#c084fc;">2023 - Lycée Poutrain</p>
+                            <p class="small fw-bold" style="color:var(--accent-bright);">2023 - Lycée Poutrain</p>
                             <p class="small mb-0" style="color:var(--muted);">Sauveteur Secouriste du Travail</p>
                         </div>
                     </div>
@@ -891,7 +952,7 @@
                         <div class="card-glass text-center">
                             <div class="diploma-icon"><i class="fas fa-bolt"></i></div>
                             <h5 class="mt-3">Habilitation B1</h5>
-                            <p class="small fw-bold" style="color:#c084fc;">2023 - Lycée Poutrain</p>
+                            <p class="small fw-bold" style="color:var(--accent-bright);">2023 - Lycée Poutrain</p>
                             <p class="small mb-0" style="color:var(--muted);">Travaux d'ordre électrique</p>
                         </div>
                     </div>
@@ -899,7 +960,7 @@
                         <div class="card-glass text-center">
                             <div class="diploma-icon"><i class="fas fa-school"></i></div>
                             <h5 class="mt-3">Brevet des Collèges</h5>
-                            <p class="small fw-bold" style="color:#c084fc;">2022</p>
+                            <p class="small fw-bold" style="color:var(--accent-bright);">2022</p>
                             <p class="small mb-0" style="color:var(--muted);">Collège de Saint Bonnet</p>
                         </div>
                     </div>
@@ -913,21 +974,21 @@
                 <div class="row g-5">
                     <div class="col-lg-6">
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between fw-bold"><span>Application des procédures</span><span style="color:#c084fc;">90%</span></div>
+                            <div class="d-flex justify-content-between fw-bold"><span>Application des procédures</span><span style="color:var(--accent-bright);">90%</span></div>
                             <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
                         </div>
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between fw-bold"><span>Adaptation</span><span style="color:#c084fc;">85%</span></div>
+                            <div class="d-flex justify-content-between fw-bold"><span>Adaptation</span><span style="color:var(--accent-bright);">85%</span></div>
                             <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between fw-bold"><span>Organisation</span><span style="color:#c084fc;">80%</span></div>
+                            <div class="d-flex justify-content-between fw-bold"><span>Organisation</span><span style="color:var(--accent-bright);">80%</span></div>
                             <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
                         </div>
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between fw-bold"><span>Autonomie</span><span style="color:#c084fc;">95%</span></div>
+                            <div class="d-flex justify-content-between fw-bold"><span>Autonomie</span><span style="color:var(--accent-bright);">95%</span></div>
                             <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
                         </div>
                     </div>
@@ -936,14 +997,14 @@
                 <div class="row mt-5 justify-content-center g-4">
                     <div class="col-md-5 text-center">
                         <div class="card-glass h-100">
-                            <i class="fas fa-laptop-code fa-3x mb-3" style="color:#c084fc;"></i>
+                            <i class="fas fa-laptop-code fa-3x mb-3" style="color:var(--accent-bright);"></i>
                             <h4>Informatique</h4>
                             <p class="mb-0" style="color:var(--muted);">Passionné par les réseaux et la cybersécurité</p>
                         </div>
                     </div>
                     <div class="col-md-5 text-center">
                         <div class="card-glass h-100">
-                            <i class="fas fa-running fa-3x mb-3" style="color:#c084fc;"></i>
+                            <i class="fas fa-running fa-3x mb-3" style="color:var(--accent-bright);"></i>
                             <h4>Sport</h4>
                             <p class="mb-0" style="color:var(--muted);">Activités physiques régulières pour maintenir la forme</p>
                         </div>
@@ -2349,24 +2410,24 @@
                 <div class="row g-4 mb-5">
                     <div class="col-lg-4">
                         <div class="card-glass h-100">
-                            <h4 class="mb-4" style="color:#c084fc;"><i class="fas fa-tools me-2"></i>Outils de Veille</h4>
+                            <h4 class="mb-4" style="color:var(--accent-bright);"><i class="fas fa-tools me-2"></i>Outils de Veille</h4>
                             <ul class="list-unstyled">
                                 <li class="mb-3 d-flex align-items-center">
-                                    <i class="fas fa-rss-square fa-lg me-3" style="color:#c084fc;"></i>
+                                    <i class="fas fa-rss-square fa-lg me-3" style="color:var(--accent-bright);"></i>
                                     <div>
                                         <strong>Flux RSS & Agrégateurs</strong>
                                         <div class="small" style="color:var(--muted);">Feedly (IT Connect, Le Monde Informatique)</div>
                                     </div>
                                 </li>
                                 <li class="mb-3 d-flex align-items-center">
-                                    <i class="fab fa-x-twitter fa-lg me-3" style="color:#c084fc;"></i>
+                                    <i class="fab fa-x-twitter fa-lg me-3" style="color:var(--accent-bright);"></i>
                                     <div>
                                         <strong>Réseaux Sociaux</strong>
                                         <div class="small" style="color:var(--muted);">X (Twitter) & LinkedIn (Comptes experts Cyber/Système)</div>
                                     </div>
                                 </li>
                                 <li class="d-flex align-items-center">
-                                    <i class="fas fa-robot fa-lg me-3" style="color:#c084fc;"></i>
+                                    <i class="fas fa-robot fa-lg me-3" style="color:var(--accent-bright);"></i>
                                     <div>
                                         <strong>Synthèse IA</strong>
                                         <div class="small" style="color:var(--muted);">ChatGPT & Claude (Analyse et vulgarisation technique)</div>
@@ -2378,32 +2439,32 @@
 
                     <div class="col-lg-8">
                         <div class="card-glass h-100">
-                            <h4 class="mb-4 text-white"><i class="fas fa-project-diagram me-2" style="color:#c084fc;"></i>Tendances Clés (Sept 2025 - Nov 2026)</h4>
+                            <h4 class="mb-4 text-white"><i class="fas fa-project-diagram me-2" style="color:var(--accent-bright);"></i>Tendances Clés (Sept 2025 - Nov 2026)</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-brain me-2" style="color:#c084fc;"></i>
+                                        <i class="fas fa-brain me-2" style="color:var(--accent-bright);"></i>
                                         <span class="fw-bold">Reasoning Models (CoT)</span>
                                     </div>
                                     <p class="small mb-0" style="color:var(--muted);">Généralisation des modèles capables de raisonner logiquement sur des infrastructures SI entières et de corriger des failles réseaux.</p>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-network-wired me-2" style="color:#c084fc;"></i>
+                                        <i class="fas fa-network-wired me-2" style="color:var(--accent-bright);"></i>
                                         <span class="fw-bold">Agents Autonomes SysAdmin</span>
                                     </div>
                                     <p class="small mb-0" style="color:var(--muted);">Déploiement d'agents IA gérant des cycles de vie complets : configuration de serveurs, gestion DHCP et Active Directory.</p>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-cloud-shield me-2" style="color:#c084fc;"></i>
+                                        <i class="fas fa-cloud-shield me-2" style="color:var(--accent-bright);"></i>
                                         <span class="fw-bold">IA Souveraine On-Premise</span>
                                     </div>
                                     <p class="small mb-0" style="color:var(--muted);">Déploiement massif de LLM locaux sécurisés (sans cloud) pour éviter les fuites de données dans les entreprises.</p>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-shield-alt me-2" style="color:#c084fc;"></i>
+                                        <i class="fas fa-shield-alt me-2" style="color:var(--accent-bright);"></i>
                                         <span class="fw-bold">Cyberattaques IA vs EDR IA</span>
                                     </div>
                                     <p class="small mb-0" style="color:var(--muted);">Lutte entre des malwares adaptatifs pilotés par l'IA et de nouveaux systèmes de détection "Zero Trust" intelligents.</p>
@@ -2485,7 +2546,7 @@
                 </div>
 
                 <div class="alert-synth">
-                    <h5 class="fw-bold mb-2" style="color:#c084fc;"><i class="fas fa-lightbulb me-2"></i>Synthèse de Veille (2025 - 2026)</h5>
+                    <h5 class="fw-bold mb-2" style="color:var(--accent-bright);"><i class="fas fa-lightbulb me-2"></i>Synthèse de Veille (2025 - 2026)</h5>
                     <p class="mb-0">
                         Depuis l'arrivée des modèles de raisonnement fin 2025 jusqu'à fin 2026, nous observons une transition majeure : l'IA ne se contente plus de générer du contenu, elle <strong>raisonne</strong> et <strong>agit de manière autonome</strong> sur les infrastructures. Pour un administrateur réseau (profil SISR), l'enjeu s'est déplacé : il s'agit désormais d'orchestrer et de cloisonner les privilèges de ces agents IA (automatisation AD, remédiation d'incidents, configurations serveurs) tout en sécurisant les flux face à de nouvelles menaces cybernétiques dynamiques pilotées, elles aussi, par l'IA.
                     </p>
@@ -2529,7 +2590,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Custom Cursor Tracking & Hover Animations
+        // Custom Cursor Tracking & Dark Violet Hover Animations
         const cursorDot = document.getElementById('customCursorDot');
         const cursorRing = document.getElementById('customCursorRing');
 
@@ -2553,7 +2614,7 @@
             }
             animateRing();
 
-            const interactiveSelector = 'a, button, .btn, .card-glass, .teacher-header, .document-card, .timeline-content, .social-icon-btn, .nav-link';
+            const interactiveSelector = 'a, button, .btn, .card-glass, .teacher-header, .document-card, .timeline-content, .social-icon-btn, .nav-link, .hero-badge';
             document.addEventListener('mouseover', (e) => {
                 if (e.target.closest(interactiveSelector)) {
                     document.body.classList.add('cursor-hover');
@@ -2568,7 +2629,7 @@
             window.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
         }
 
-        // Starfield & Dark Violet Planet Fallback Canvas
+        // Starfield & Blue/Indigo Planet Fallback Canvas
         const starCanvas = document.getElementById('starCanvas');
         const starCtx = starCanvas.getContext('2d');
         const planetFallbackCanvas = document.getElementById('planetFallbackCanvas');
@@ -2609,10 +2670,10 @@
             const radius = 1260;
             const grad = planetCtx.createRadialGradient(cx, cy, radius - 140, cx, cy, radius + 90);
             grad.addColorStop(0.0, 'rgba(0, 0, 0, 0)');
-            grad.addColorStop(0.45, 'rgba(76, 29, 149, 0.28)');
-            grad.addColorStop(0.66, 'rgba(107, 33, 168, 0.88)');
-            grad.addColorStop(0.71, 'rgba(192, 132, 252, 0.92)');
-            grad.addColorStop(0.78, 'rgba(88, 28, 135, 0.36)');
+            grad.addColorStop(0.45, 'rgba(2, 132, 199, 0.25)');
+            grad.addColorStop(0.66, 'rgba(56, 189, 248, 0.88)');
+            grad.addColorStop(0.71, 'rgba(186, 230, 253, 0.95)');
+            grad.addColorStop(0.78, 'rgba(99, 102, 241, 0.35)');
             grad.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
             planetCtx.fillStyle = grad;
             planetCtx.fillRect(0, 0, w, h);
